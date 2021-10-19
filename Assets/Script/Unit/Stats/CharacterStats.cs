@@ -4,28 +4,35 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    public int itemCount;
+    public int itemStack;
     public int score;
+    public int money;
     public float speed;
     public UnitStats stats;
     private void Start()
     {
         speed = stats.speed;
     }
-
-    public void getStack(int itemScore)
+    public void getMoney(int money)
     {
-        itemCount++;
+        this.money += money;
+    }
+    public void getStack(int itemScore, int stack, int price)
+    {
+        money -= price;
+        itemStack += stack;
         score += itemScore;
     }
     public void dropStack(int loseScore)
     {
-        if (itemCount <= 0) return;
+        if (itemStack <= 0) return;
 
-        itemCount--;
-        score -= loseScore;
+        /*물건 떨구는 구문*/
 
-        if(score < 0)
-            score = 0;
+        //itemCount--;
+        //score -= loseScore;
+
+        //if(score < 0)
+        //    score = 0;
     }
 }
