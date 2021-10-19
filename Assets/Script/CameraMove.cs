@@ -13,7 +13,7 @@ public class CameraMove : MonoBehaviour
         //초기카메라위치설정
         transform.position = player.position - Vector3.forward * offsetZ + Vector3.up * offsetY;
     }
-    private void Update()
+    private void LateUpdate()
     {
         transform.position = player.position - Vector3.forward * offsetZ + Vector3.up * offsetY;
         transform.LookAt(player);

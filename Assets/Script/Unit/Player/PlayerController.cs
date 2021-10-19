@@ -6,27 +6,47 @@ public class PlayerController : MonoBehaviour
 {
     public MultiTouch multiTouch;
     public CharacterStats stats;
-    public int stack;
+    public Animator animator;
+
     private void Start()
     {
-        
+        stats = GetComponent<CharacterStats>();
+        animator = GetComponentInChildren<Animator>();
     }
     private void Update()
     {
-        if (stats == null)
-            stats = GetComponent<CharacterStats>();
-
         Move();
 
     }
 
     public void Move()
     {
+        //이동 및 회전
         var joystick = multiTouch.Joystick;
         var direction = new Vector3(joystick.x, 0, joystick.y);
-        transform.position += direction * stats.speed * Time.deltaTime;
+
         if (direction != Vector3.zero)
+        {
+            direction = Vector3.Lerp(transform.forward, direction, 5.0f * Time.deltaTime);
+            transform.position += direction * stats.speed * Time.deltaTime;
+            //var lerp = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(direction);
-        //Debug.Log(joystick);
+        }
+        
+        //애니
+        if(direction == Vector3.zero)
+        {
+            if(stats.itemStack == 0)
+                animator.SetTrigger("JustIdle");
+            else
+                animator.SetTrigger("Lift");
+        }
+        else
+        {
+            if (stats.itemStack == 0)
+                animator.SetTrigger("JustRun");
+            else
+                animator.SetTrigger("LiftRun");
+        }
     }
 }

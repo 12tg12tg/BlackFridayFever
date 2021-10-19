@@ -19,7 +19,7 @@ public class MultiTouch : MonoBehaviour
     public float maxZoomInch = 0.5f;
 
     // JoyStick
-    private float minMoveInch = 0.1f;
+    private float minMoveInch = 0.05f;
     private float minMovePixels;
 
     public Vector2 TapPosition
