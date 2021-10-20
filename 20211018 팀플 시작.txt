@@ -25,11 +25,21 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 
 
 <20211020 - 수>
+0. 물건올리기 :  O
+	매개변수 enum 아직 프리펩(에셋)준비안되서 일단 0번보냄. O
+	 나중에 이걸 enum말고 ItemInfo를 주는 방향으로 바꾸자. --------------------- ★
+	UI 위치 수정 O
 1. AI코드 빨리짜기
-	- 상태 두가지 : FindMoney, FindItem, Stuned
-	- 돈줍기
-	- (bool 변수로 게임시작이면)템줍기
-	- 애니메이션 커넥
+	- 상태 : FindMoney, FindItem, StunedO
+		돈줍기.  O
+		일정시간 후 문대기.
+		스크립트로 추가할 속성
+			목표돈
+			목표개수
+				
+	- 돈줍기 O
+	- (bool 변수로 게임시작이면) 템줍기
+	- 애니메이션 커넥 O 
 2. Unit간 충돌
 	- 충돌하면 짐 떨어뜨리기
 	- 바닥에 넘어지는 애니메이션
@@ -37,7 +47,7 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 	- 시작을알리는 타이머
 	- 
 4. 트럭에 물건올리기
-5. 
++. 멀티터치 약간 부자연스럽.
 
 
 

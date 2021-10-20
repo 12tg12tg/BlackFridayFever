@@ -14,6 +14,12 @@ public class LiftLoad : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+
+    }
+
+    public void LiftPurchased(ItemValue value)
+    {
         var maxY = 0f;
         mesh = GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < mesh.Length; i++)
@@ -24,18 +30,15 @@ public class LiftLoad : MonoBehaviour
             maxY = maxY > y ? maxY : y;
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            var newgo = Instantiate(prefab, transform);
-            var pos = transform.position;
-            if(maxY != 0)
-                pos.y = maxY;
-            newgo.transform.position = pos;
-        }
+        var newgo = Instantiate(prefab, transform);
+        var pos = transform.position;
+        if (maxY != 0)
+            pos.y = maxY;
+        newgo.transform.position = pos;
 
-        var pos2 = transform.position;
-        pos2.y = maxY;
-        Debug.DrawLine(transform.position, pos2);
+        //var pos2 = transform.position;
+        //pos2.y = maxY;
+        //Debug.DrawLine(transform.position, pos2);
 
     }
 

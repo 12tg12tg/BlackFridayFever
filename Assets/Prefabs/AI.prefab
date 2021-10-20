@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 1689547326721900674}
   - component: {fileID: 1689547326721900672}
   - component: {fileID: 1689547326721900673}
+  - component: {fileID: 1252465198}
   - component: {fileID: 1689547326721900686}
+  - component: {fileID: 1252465199}
   m_Layer: 8
   m_Name: AI
   m_TagString: Player
@@ -101,7 +103,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &1689547326721900673
 CapsuleCollider:
@@ -117,6 +119,28 @@ CapsuleCollider:
   m_Height: 1.95
   m_Direction: 1
   m_Center: {x: 0, y: 0.96, z: 0}
+--- !u!195 &1252465198
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689547326721900679}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 180
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &1689547326721900686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +157,21 @@ MonoBehaviour:
   score: 0
   money: 0
   speed: 0
-  stats: {fileID: 11400000, guid: 4abe3e72cfa412348a5528cfb05b14b2, type: 2}
+  stats: {fileID: 11400000, guid: 10d160808b28e8043b1cf478987944ae, type: 2}
+--- !u!114 &1252465199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689547326721900679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b775f9cbfb0c7149ac7699c1c6b8498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneySpots: {fileID: 0}
+  itemSpots: {fileID: 0}
 --- !u!1 &1689547327725215333
 GameObject:
   m_ObjectHideFlags: 0

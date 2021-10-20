@@ -5,12 +5,13 @@ using UnityEngine;
 public class CreateMoney : MonoBehaviour
 {
     public GameObject moneyPrefab;
+    public GameObject[] moneySpots;
     private void Start()
     {
-        var transforms = GameObject.FindGameObjectsWithTag("Money");
-        for (int i = 0; i < transforms.Length; i++)
+        moneySpots = GameObject.FindGameObjectsWithTag("Money");
+        for (int i = 0; i < moneySpots.Length; i++)
         {
-            Instantiate(moneyPrefab, transforms[i].transform);
+            Instantiate(moneyPrefab, moneySpots[i].transform);
         }
     }
 }

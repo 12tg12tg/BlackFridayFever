@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //점수
+    //점수 & 상품
     public bool ItemCollsion(CharacterStats unit, ItemInfo item)
     {
         //돈 체크
@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
                 stack = 1;
 
             unit.getStack(item.itemScore, stack, item.price);//점수올리기
+            unit.GetComponentInChildren<LiftLoad>().LiftPurchased(0); //물건올리기
             //item.SetActive(false);  //비활성화
 
             if (unit.tag == "Player")

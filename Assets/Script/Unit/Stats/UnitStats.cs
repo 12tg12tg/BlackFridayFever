@@ -6,4 +6,6 @@ using UnityEngine;
 public class UnitStats : ScriptableObject
 {
     public float speed;
+    public int maximumMoney;
+    public int maximumScore;
 }
