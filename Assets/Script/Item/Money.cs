@@ -8,6 +8,7 @@ public class Money : MonoBehaviour
     private MeshRenderer mesh;
     private new Collider collider;
     private Rigidbody rigid;
+    private float respawnTime = 3f;
     private bool cantake;
     public bool CanTake
     {
@@ -22,13 +23,13 @@ public class Money : MonoBehaviour
             {
                 mesh.enabled = true;
                 collider.enabled = true;
-                rigid.useGravity = true;
+                //rigid.useGravity = true;
             }
             else
             {
                 mesh.enabled = false;
                 collider.enabled = false;
-                rigid.useGravity = false;
+                //rigid.useGravity = false;
             }
         }
     }
@@ -36,15 +37,15 @@ public class Money : MonoBehaviour
     {
         mesh = GetComponent<MeshRenderer>();
         collider = GetComponent<Collider>();
-        rigid = GetComponent<Rigidbody>();
+        //rigid = GetComponent<Rigidbody>();
         CanTake = true;
     }
-    private float respawnTime = 3f;
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Unit"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Unit") && 
+            other.GetComponent<CharacterStats>().belongings.Count == 0)
         {
-            var stats = collision.gameObject.GetComponent<CharacterStats>();
+            var stats = other.gameObject.GetComponent<CharacterStats>();
             GameManager.GM.MoneyCollision(stats, this);
             StartCoroutine(WaitRespawn());
         }

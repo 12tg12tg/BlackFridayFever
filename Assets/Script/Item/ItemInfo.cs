@@ -6,7 +6,7 @@ public enum ItemValue
 {
     Low,
     Mid,
-    Hight        
+    High        
 }
 
 [CreateAssetMenu(fileName = "ItemInfo.asset", menuName = "Item/ItemInfo")]

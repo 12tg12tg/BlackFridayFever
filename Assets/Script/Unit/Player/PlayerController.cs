@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     {
         stats = GetComponent<CharacterStats>();
         animator = GetComponentInChildren<Animator>();
+        transform.position = stats.truck.dokingSpot.position;
     }
     private void Update()
     {

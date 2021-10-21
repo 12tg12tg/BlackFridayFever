@@ -9,6 +9,9 @@ TagManager:
   - MidItem
   - HighItem
   - AI
+  - Door
+  - Purchased
+  - Truck
   layers:
   - Default
   - TransparentFX
@@ -21,9 +24,9 @@ TagManager:
   - Unit
   - Purchased
   - Money
-  - 
-  - 
-  - 
+  - Door
+  - Tray
+  - Item
   - 
   - 
   - 

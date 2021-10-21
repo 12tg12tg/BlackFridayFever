@@ -6,17 +6,6 @@ public class LiftLoad : MonoBehaviour
 {
     public MeshRenderer[] mesh;
     public GameObject prefab;
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-
-
-    }
 
     public void LiftPurchased(ItemValue value)
     {
@@ -30,16 +19,35 @@ public class LiftLoad : MonoBehaviour
             maxY = maxY > y ? maxY : y;
         }
 
-        var newgo = Instantiate(prefab, transform);
         var pos = transform.position;
         if (maxY != 0)
             pos.y = maxY;
-        newgo.transform.position = pos;
 
-        //var pos2 = transform.position;
-        //pos2.y = maxY;
-        //Debug.DrawLine(transform.position, pos2);
+        GameObject go = null;
 
+        switch (value)
+        {
+            case ItemValue.Low:
+                go = BoxPool.Instance.GetLowValueBox();
+                break;
+            case ItemValue.Mid:
+                go = BoxPool.Instance.GetMidValueBox();
+                break;
+            case ItemValue.High:
+                go = BoxPool.Instance.GetHighValueBox();
+                break;
+        }
+
+        go.SetActive(true);
+        go.transform.SetParent(transform);
+        go.transform.position = pos;
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Tray") &&
+            GetComponent<Collider>().GetHashCode() < collision.collider.GetHashCode())
+        {
+            GameManager.GM.DecideTrayCollision(collision.collider, GetComponent<Collider>());
+        }
+    }
 }

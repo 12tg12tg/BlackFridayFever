@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: AI_baby
   m_EditorClassIdentifier: 
   speed: 5
-  maximumMoney: 100
-  maximumScore: 120
+  maximumMoney: 20
+  maximumScore: 20
+  lowValueProp: 0.6
+  midValueProp: 0.3
