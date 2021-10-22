@@ -400,8 +400,6 @@ MonoBehaviour:
   AIs: []
   door: {fileID: 0}
   trucks: []
-  startDelay: 0
-  goalScore: 0
 --- !u!4 &410981905
 Transform:
   m_ObjectHideFlags: 0
@@ -996,6 +994,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1691244850}
   - component: {fileID: 1691244851}
+  - component: {fileID: 1691244852}
   m_Layer: 0
   m_Name: BoxPool
   m_TagString: Untagged
@@ -1032,6 +1031,21 @@ MonoBehaviour:
   lowValueBoxPrefab: {fileID: 3190824682940811919, guid: 3887f8734b7b8a9498903d70c4f87008, type: 3}
   midValueBoxPrefab: {fileID: 3190824682940811919, guid: 3887f8734b7b8a9498903d70c4f87008, type: 3}
   highValueBoxPrefab: {fileID: 3190824682940811919, guid: 3887f8734b7b8a9498903d70c4f87008, type: 3}
+--- !u!114 &1691244852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691244849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be362d592507c647833a233935daeb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowBoxPrefab: {fileID: 7814157388599768068, guid: e925d31cc4f22a04fa5762ce34a77c73, type: 3}
+  midBoxPrefab: {fileID: 2647770682899696638, guid: bf086279c4d91924cac3fe843701be71, type: 3}
+  highBoxPrefab: {fileID: 9144545601510063759, guid: a84be35c812724c4783c4504693317e8, type: 3}
 --- !u!1 &1730633332
 GameObject:
   m_ObjectHideFlags: 0

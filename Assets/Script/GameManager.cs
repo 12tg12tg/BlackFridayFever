@@ -142,7 +142,10 @@ public class GameManager : MonoBehaviour
                 //문열기
                 startTimer += Time.deltaTime;
                 if (startTimer > startDelay)
+                {
                     State = GameState.Play;
+                    Debug.Log("문이열렸다.");
+                }
                 break;
 
             case GameState.Play:

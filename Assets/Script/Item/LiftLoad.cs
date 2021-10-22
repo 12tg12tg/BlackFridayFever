@@ -50,4 +50,6 @@ public class LiftLoad : MonoBehaviour
             GameManager.GM.DecideTrayCollision(collision.collider, GetComponent<Collider>());
         }
     }
+
+
 }

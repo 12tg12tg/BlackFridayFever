@@ -65,11 +65,12 @@ public class CharacterStats : MonoBehaviour
                     break;
             }
             belongings.RemoveAt(0);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.5f);
         }
 
         itemStack = 0;
     }
+
     public void DropItem()
     {
         //모든 아이템을 부모를 null로
@@ -81,13 +82,26 @@ public class CharacterStats : MonoBehaviour
         }
 
         //stats의 존재하는 수치 조정하기
+        belongings.Clear();
+        score = 0;
+        itemStack = 0;
 
-
-        //3초후에 해당위치에 아이템으로 변화시키고 끄기.
+        //일정 시간 후에 해당위치에 아이템으로 변화시키고 끄기.
+        StartCoroutine(CoBoxToItem(temp));
+        
 
 
         //본체 에이전트 끄고 AddForce하기.
 
 
+
+    }
+    private IEnumerator CoBoxToItem(List<Collider> cols)
+    {
+        yield return new WaitForSeconds(1.5f);
+        foreach (var col in cols)
+        {
+            //oxPool.Instance.Return
+        }
     }
 }
