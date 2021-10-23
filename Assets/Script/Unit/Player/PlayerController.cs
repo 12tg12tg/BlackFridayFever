@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public MultiTouch multiTouch;
     public CharacterStats stats;
     public Animator animator;
+    public float stunTimer;
 
     private void Start()
     {
@@ -16,10 +17,19 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        Move();
+        if(!stats.isStuned)
+            Move();
+        else
+        {
+            stunTimer += Time.deltaTime;
+            if(stunTimer > stats.stats.stunTime)
+            {
+                stunTimer = 0f;
+                stats.isStuned = false;
+            }
+        }
 
     }
-
     public void Move()
     {
         //이동 및 회전
@@ -52,8 +62,6 @@ public class PlayerController : MonoBehaviour
     }
     public void CrushInit()
     {
-        //플레이어 이 함수 만들고
-        //상자 AddForce 시도해보고
-        //게임 시작/끝 만들자.
+        animator.SetTrigger("Stumble");
     }
 }

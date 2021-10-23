@@ -997,7 +997,7 @@ GameObject:
   - component: {fileID: 1691244850}
   - component: {fileID: 1691244852}
   m_Layer: 0
-  m_Name: BoxPool
+  m_Name: ObjectPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1029,9 +1029,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be362d592507c647833a233935daeb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyPrefab: {fileID: 3008900317477143969, guid: aec3bbd3c4ec61748b0a25270e25ff43, type: 3}
   lowBoxPrefab: {fileID: 1050495249296263753, guid: 45b3769cc48cb224fa96ace7ad8e0e17, type: 3}
   midBoxPrefab: {fileID: 2647770682899696638, guid: bf086279c4d91924cac3fe843701be71, type: 3}
   highBoxPrefab: {fileID: 9144545601510063759, guid: a84be35c812724c4783c4504693317e8, type: 3}
+  item_Low_Donut_Prefab: {fileID: 1174550526422166440, guid: 596664bd23af1c24a98a6ce0998b1c47, type: 3}
+  item_Low_Hamburger_Prefab: {fileID: 6670506983347252201, guid: 920f8f7149f7f104391a7a6d3d8e6eae, type: 3}
+  item_Mid_Dog_Prefab: {fileID: 2711254026441277918, guid: 835c0a344e53233438786b79cb4686e2, type: 3}
+  item_Mid_Cat_Prefab: {fileID: 3625363094208366345, guid: 04560c29fccfe4f48ad09eff02476771, type: 3}
+  item_High_Ring_Prefab: {fileID: 4712246608054615585, guid: cde00e8362c65384da3bf67c8007765a, type: 3}
+  item_High_Necklace_Prefab: {fileID: 5130976959297038082, guid: ebf3adabbd32560489d1d7dbe3c71006, type: 3}
 --- !u!1 &1730633332
 GameObject:
   m_ObjectHideFlags: 0

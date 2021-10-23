@@ -15,15 +15,17 @@ public enum AIState
 
 public class AiBehaviour : MonoBehaviour
 {
-    public CreateMoney moneySpots;
-    public CreateItem itemSpots;
+    public GameObject[] moneys;
+    public GameObject[] LowItems;
+    public GameObject[] MidItems;
+    public GameObject[] HighItems;
     public NavMeshAgent agent;
     private Animator animator;
     private CharacterStats stats;
     private float searchDistance = 8.5f;
     private bool isTarget = false;
-    private Money targetMoney;
-    private ItemScript targetItem;
+    private SpawnObject targetMoney;
+    private SpawnObject targetItem;
     private AIState state;
     private AIState prevState;
 
@@ -113,6 +115,11 @@ public class AiBehaviour : MonoBehaviour
         stats = GetComponent<CharacterStats>();
         State = prevState = AIState.FindMoney;
         transform.position = stats.truck.dokingSpot.position;
+
+        moneys = GameObject.FindGameObjectsWithTag("Money");
+        LowItems = GameObject.FindGameObjectsWithTag("LowItem");
+        MidItems = GameObject.FindGameObjectsWithTag("MidItem");
+        HighItems = GameObject.FindGameObjectsWithTag("HighItem");
     }
     private void Update()
     {
@@ -171,8 +178,8 @@ public class AiBehaviour : MonoBehaviour
             }
 
             var index =  Random.Range(0, cols.Length);
-            targetMoney = cols[index].GetComponent<Money>();
-            if (!targetMoney.CanTake)
+            targetMoney = cols[index].GetComponentInParent<SpawnObject>();
+            if (targetMoney.myObject == null)
             {
                 State = AIState.Idle;
                 return;
@@ -184,7 +191,7 @@ public class AiBehaviour : MonoBehaviour
 
         /*상시 확인*/
         //3. 비활성화라면 다른 타겟 결정
-        if(!targetMoney.CanTake || Vector3.Distance(transform.position, agent.destination) < 1f)
+        if(targetMoney.myObject == null || Vector3.Distance(transform.position, agent.destination) < 1f)
         {
             State = AIState.Idle;
         }
@@ -239,13 +246,23 @@ public class AiBehaviour : MonoBehaviour
             //1. 타겟결정 : 모든 아이템 정보를 받아옵시다. & 우선도를 따라서 & 타겟의 activate 항상 체크
             var seed = Random.Range(0f, 1f);
             if (seed < stats.stats.lowValueProp)
-                targetItem = itemSpots.lowItem[Random.Range(0, itemSpots.lowItem.Length)].GetComponentInChildren<ItemScript>();
+                targetItem = LowItems[Random.Range(0, LowItems.Length)].GetComponent<SpawnObject>();
             else if (seed < stats.stats.lowValueProp + stats.stats.midValueProp)
-                targetItem = itemSpots.midItem[Random.Range(0, itemSpots.midItem.Length)].GetComponentInChildren<ItemScript>();
+                targetItem = MidItems[Random.Range(0, MidItems.Length)].GetComponent<SpawnObject>();
             else
-                targetItem = itemSpots.HighItem[Random.Range(0, itemSpots.HighItem.Length)].GetComponentInChildren<ItemScript>();
+                targetItem = HighItems[Random.Range(0, HighItems.Length)].GetComponent<SpawnObject>();
 
-            if (!targetItem.CanTake || stats.money < targetItem.info.price)
+            //if(targetItem == null)
+            //    Debug.Log($"{seed} / 타겟이 null이에요");
+            //if (targetItem.GetComponentInChildren<ItemScript>() == null)
+            //{
+            //    Debug.Log($"{seed} / 아이템스크립트가 없어요");
+            //    Debug.Log($"{targetItem.tag}");
+            //}
+            //if (targetItem.GetComponentInChildren<ItemScript>().info == null)
+            //    Debug.Log($"{seed} / 아이템인포가 없어요");
+
+            if (targetItem.myObject == null || stats.money < targetItem.GetComponentInChildren<ItemScript>().info.price)
             {
                 State = AIState.Idle;
                 return;
@@ -258,7 +275,7 @@ public class AiBehaviour : MonoBehaviour
 
         /*상시 확인*/
         //3. 비활성화라면 다른 타겟 결정
-        if (!targetItem.CanTake)
+        if (targetItem.myObject == null)
         {
             State = AIState.Idle;
         }

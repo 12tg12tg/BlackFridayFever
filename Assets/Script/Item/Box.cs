@@ -6,7 +6,7 @@ public class Box : MonoBehaviour
 {
     [SerializeField] private bool backToPool;
     [SerializeField] private float timer;
-    [SerializeField] private float disableTime = 1.5f;
+    [SerializeField] private float disableTime = 2.5f;
 
     public ItemInfo itemInfo;
     private void Update()
@@ -36,6 +36,8 @@ public class Box : MonoBehaviour
                 }
                 
                 //item ¸®½ºÆù
+
+
 
             }
         }
