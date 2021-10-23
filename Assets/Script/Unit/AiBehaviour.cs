@@ -8,7 +8,7 @@ public enum AIState
     Idle,
     FindMoney,
     FindItem,
-    Standby,
+    //Standby,
     GoTruck,
     Stuned,
 }
@@ -17,7 +17,7 @@ public class AiBehaviour : MonoBehaviour
 {
     public CreateMoney moneySpots;
     public CreateItem itemSpots;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private Animator animator;
     private CharacterStats stats;
     private float searchDistance = 8.5f;
@@ -26,7 +26,6 @@ public class AiBehaviour : MonoBehaviour
     private ItemScript targetItem;
     private AIState state;
     private AIState prevState;
-    public GameObject door;
 
     private float timer;
 
@@ -58,14 +57,15 @@ public class AiBehaviour : MonoBehaviour
                     agent.isStopped = false;
                     setMoveAnimation();
                     break;
-                case AIState.Standby:
-                    agent.isStopped = false;
-                    break;
+                //case AIState.Standby:
+                //    agent.isStopped = false;
+                //    break;
                 case AIState.GoTruck:
                     agent.isStopped = false;
                     setMoveAnimation();
                     break;
                 case AIState.Stuned:
+                    timer = 0f;
                     break;
             }
         }  
@@ -127,14 +127,14 @@ public class AiBehaviour : MonoBehaviour
             case AIState.FindItem:
                 FindItemUpdate();
                 break;
-            case AIState.Standby:
-                StanbyUpdate();
-                break;
+            //case AIState.Standby:
+            //    StanbyUpdate();
+            //    break;
             case AIState.GoTruck:
                 GoTruckUpdate();
                 break;
             case AIState.Stuned:
-
+                SutnedUpdate();
                 break;
         }
         //Debug.Log($"{state}, {prevState}");
@@ -160,6 +160,16 @@ public class AiBehaviour : MonoBehaviour
         {
             //1. 타겟결정 : 일정 범위내의 오브젝트로 합시다.  & 타겟의 activate 항상 체크
             var cols = Physics.OverlapSphere(transform.position, searchDistance, LayerMask.GetMask("Money"));
+
+            //범위내 돈이 없다면
+            if(cols.Length == 0)
+            {
+                var noMoney = GameObject.FindGameObjectWithTag("NoMoney");
+                agent.destination = noMoney.transform.position;
+                isTarget = true;
+                return;
+            }
+
             var index =  Random.Range(0, cols.Length);
             targetMoney = cols[index].GetComponent<Money>();
             if (!targetMoney.CanTake)
@@ -174,40 +184,42 @@ public class AiBehaviour : MonoBehaviour
 
         /*상시 확인*/
         //3. 비활성화라면 다른 타겟 결정
-        if(!targetMoney.CanTake)
+        if(!targetMoney.CanTake || Vector3.Distance(transform.position, agent.destination) < 1f)
         {
             State = AIState.Idle;
         }
 
-        //일정 금액이상 모이면, 현재 게임 상태 확인 후 상태변경 출입문앞으로 대기
+        //일정 금액이상 모이면, 아이템 찾으러
         if(stats.money > stats.stats.maximumMoney)
         {
-            if (GameManager.GM.State != GameManager.GameState.Play)
-                State = AIState.Standby;
-            else
-                State = AIState.FindItem;
-        }
-    }
-    private void StanbyUpdate()
-    {
-        //문과 가까워지기
-        var dis = Vector3.Distance(door.transform.position, transform.position);
-        if (dis > 1.5f)
-        {
-            agent.isStopped = false;
-            agent.destination = door.transform.position;
-            setMoveAnimation();
-        }
-        else
-        {
-            agent.isStopped = true;
-            setIdleAnimation();
-        }
-
-        //게임시작이면 아이템줍는상태로
-        if (GameManager.GM.State == GameManager.GameState.Play)
+            //if (GameManager.GM.State != GameManager.GameState.Play)
+            //    State = AIState.Standby;
+            //else
             State = AIState.FindItem;
+        }
     }
+
+    //private void StanbyUpdate()
+    //{
+    //    //문과 가까워지기
+    //    var dis = Vector3.Distance(door.transform.position, transform.position);
+    //    if (dis > 1.5f)
+    //    {
+    //        agent.isStopped = false;
+    //        agent.destination = door.transform.position;
+    //        setMoveAnimation();
+    //    }
+    //    else
+    //    {
+    //        agent.isStopped = true;
+    //        setIdleAnimation();
+    //    }
+
+    //    //게임시작이면 아이템줍는상태로
+    //    if (GameManager.GM.State == GameManager.GameState.Play)
+    //        State = AIState.FindItem;
+    //}
+
     private void FindItemUpdate()
     {
         /*탈출조건*/
@@ -254,6 +266,7 @@ public class AiBehaviour : MonoBehaviour
         setMoveAnimation();
 
     }
+
     private void GoTruckUpdate()
     {
         agent.destination = stats.truck.GetComponent<TruckScript>().dokingSpot.position;
@@ -263,8 +276,37 @@ public class AiBehaviour : MonoBehaviour
         }
     }
 
-    private void AiDance()
+    public void CrushInit()
     {
+        state = AIState.Stuned;
+        agent.enabled = false;
+        animator.SetTrigger("Stumble");
+    }
 
+    public void SutnedUpdate()
+    {
+        timer += Time.deltaTime;
+        if (timer > stats.stats.stunTime)
+        {
+            stats.isStuned = false;
+            agent.enabled = true;
+            DecideState();
+        }
+    }
+
+    public void DecideState()
+    {
+        if (stats.score > stats.stats.maximumScore)
+        {
+            State = AIState.GoTruck;
+        }
+        else if (stats.money > stats.stats.maximumMoney)
+        {
+            State = AIState.FindItem;
+        }
+        else
+        {
+            State = AIState.FindMoney;
+        }
     }
 }

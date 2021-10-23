@@ -23,8 +23,8 @@ public class GameObjectPool : MonoBehaviour
     public GameObject highBoxPrefab;
 
     //Dictionary로 풀 관리
-    public Dictionary<PoolTag, Queue<GameObject>> pool;
-    public Dictionary<PoolTag, GameObject> prefabs;
+    public Dictionary<PoolTag, Queue<GameObject>> pool = new Dictionary<PoolTag, Queue<GameObject>>();
+    public Dictionary<PoolTag, GameObject> prefabs = new Dictionary<PoolTag, GameObject>();
     private void Awake()
     {
         Instance = this;

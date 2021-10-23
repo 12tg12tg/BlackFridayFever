@@ -12,6 +12,8 @@ TagManager:
   - Door
   - Purchased
   - Truck
+  - Stage
+  - NoMoney
   layers:
   - Default
   - TransparentFX

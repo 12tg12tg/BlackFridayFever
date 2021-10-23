@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //스테이지에 필요한 객체들
+    public int goalScore;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public CharacterStats[] Ais;
+    public TruckScript[] trucks;
 }

@@ -13,3 +13,8 @@ MonoBehaviour:
   m_Name: player
   m_EditorClassIdentifier: 
   speed: 5.5
+  stunTime: 3
+  maximumMoney: 0
+  maximumScore: 0
+  lowValueProp: 0
+  midValueProp: 0

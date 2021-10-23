@@ -45,7 +45,7 @@ public class ItemScript : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Unit"))
         {
             var stats = other.gameObject.GetComponent<CharacterStats>();
-            if (GameManager.GM.ItemCollsion(stats, info))
+            if (!stats.isStuned && GameManager.GM.ItemCollsion(stats, info))
                 StartCoroutine(WaitRespawn());
         }
     }

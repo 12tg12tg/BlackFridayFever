@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class GameManager : MonoBehaviour
 {
     public enum GameState
     {
         Idle,   //시작 UI 예정
         Start,  //게임씬 로드
-        Play,   //출발신호 - Door 열기
+        Play,   //게임중. 승리조건 확인.
         End,    //종료UI 예정
     }
     //Singleton
@@ -35,8 +36,7 @@ public class GameManager : MonoBehaviour
                 case GameState.Start:
                     break;
                 case GameState.Play:
-                    //문열기
-                    door.OpenDoor();
+                    //문열기 - 취소
                     break;
                 case GameState.End:
                     break;
@@ -53,84 +53,77 @@ public class GameManager : MonoBehaviour
     //Player
     public GameObject player;
 
-    //Ai
-    public List<CharacterStats> AIs;
-
-    //Door
-    public DoorScript door;
-
-    //Trucks
-    public List<TruckScript> trucks;
-
     //스테이지마다의 정보 불러오기 : ScriptableObject를 이용하여 씬을 불러올 때 변수 초기화 할 것.
-    //Timer
-    private float startDelay = 10f;
-    private float startTimer;
-    private int goalScore = 100;
-
-
+    private Stage curStage;
 
     private void Awake()
     {
+        Debug.Log($"GameManager Awake : {Time.time}");
+    }
+    private void Start()
+    {
         //싱글톤 및 상태 초기화 : 일단 Idle로 초기화 하지 않음. 
         instance = this;
-        State = GameState.Start;
+        State = GameState.Play;
 
         //플레이어 찾기
         player = GameObject.FindGameObjectWithTag("Player");
 
-        //현재 활동 씬에서 필요한 오브젝트 찾기         //SceneManager.GetActiveScene().GetRootGameObjects();
-        //1. Door 찾기
-        Scene curScene = SceneManager.GetActiveScene();
-        //Debug.Log(temp.name);
-        var gos = curScene.GetRootGameObjects();
-        foreach (var go in gos)
-        {
-            if(go.tag == "Door")
-            {
-                door = go.GetComponent<DoorScript>();
-            }
-        }
+        StartLevel();
 
-        //2. Truck 찾기
-        foreach (var go in gos)
-        {
-            var truckScripts = go.GetComponentsInChildren<TruckScript>();
-            foreach (var truck in truckScripts)
-            {
-                trucks.Add(truck);
-            }
-        }
 
-        //3. AI 찾기
-        foreach (var go in gos)
-        {
-            if (go.tag == "AI")
-            {
-                AIs.Add(go.GetComponent<CharacterStats>());
-            }
-        }
 
-        //시작작업
+    }
+
+    private void StartLevel()
+    {
+        //버튼이 눌리면, 해당 스테이지 시작.
+        curStage = GameObject.FindGameObjectWithTag("Stage").GetComponent<Stage>();
+
+        //==== 현재 활동 씬에서 필요한 오브젝트 찾기 - 보류 ====
+        //Scene curScene = SceneManager.GetActiveScene();
+        //var gos = curScene.GetRootGameObjects();
+
+        //1. Truck 찾기
+        //foreach (var go in gos)
+        //{
+        //    var truckScripts = go.GetComponentsInChildren<TruckScript>();
+        //    foreach (var truck in truckScripts)
+        //    {
+        //        trucks.Add(truck);
+        //    }
+        //}
+
+        //2. AI 찾기
+        //foreach (var go in gos)
+        //{
+        //    if (go.tag == "AI")
+        //    {
+        //        AIs.Add(go.GetComponent<CharacterStats>());
+        //    }
+        //}
+
+        /*시작작업*/
         //Truck - Unit 연결.
-        var playerTruck = Random.Range(0, trucks.Count);
-        player.GetComponent<CharacterStats>().truck = trucks[playerTruck];
-        trucks.RemoveAt(playerTruck);
+        var trucks = curStage.trucks;
+        var AIs = curStage.Ais;
 
-        for (int i = 0; i < trucks.Count; i++)
+        for (int i = 0; i < trucks.Length; i++)
         {
-            int rnd = Random.Range(0, trucks.Count);
+            int rnd = Random.Range(0, trucks.Length);
             var temp = trucks[i];
             trucks[i] = trucks[rnd];
             trucks[rnd] = temp;
         }
 
-        for (int i = 0; i < AIs.Count; i++)
-        {
-            AIs[i].truck = trucks[i];
-        }
+        player.GetComponent<CharacterStats>().truck = trucks[0]; //0번트럭은 플레이어, 1, 2, 3번은 AI
 
+        for (int i = 0; i < AIs.Length; i++)
+        {
+            AIs[i].truck = trucks[i+1];            
+        }
     }
+
     private void Update()
     {
         switch (State)
@@ -139,13 +132,6 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.Start:
-                //문열기
-                startTimer += Time.deltaTime;
-                if (startTimer > startDelay)
-                {
-                    State = GameState.Play;
-                    Debug.Log("문이열렸다.");
-                }
                 break;
 
             case GameState.Play:
@@ -177,8 +163,8 @@ public class GameManager : MonoBehaviour
         //돈 체크
         if (unit.money >= item.price)
         {
-            unit.getStack(item);//점수올리기
-            unit.GetComponentInChildren<LiftLoad>().LiftPurchased(0); //물건올리기
+            unit.getStack(item);//Character의 Stats 점수올리기
+            unit.GetComponentInChildren<LiftLoad>().LiftPurchased(item); //Character의 물건올리기
             //item.SetActive(false);  //비활성화
 
             if (unit.tag == "Player")
@@ -195,7 +181,7 @@ public class GameManager : MonoBehaviour
 
     public bool IsEnd(CharacterStats unit)
     {
-        if(unit.truck.currentScore >= goalScore)
+        if(unit.truck.currentScore >= curStage.goalScore)
         {
             //종료 점수에 도달했다면 게임매니저의 상태를 End로 바꾸면서 현재 우승자 AI 보내기? → 카메라우승자로 이동 → 플레이어로 이동.
             State = GameState.End;
@@ -209,37 +195,43 @@ public class GameManager : MonoBehaviour
         var aStat = a.gameObject.GetComponentInParent<CharacterStats>();
         var bStat = b.gameObject.GetComponentInParent<CharacterStats>();
 
-        if(aStat.belongings.Count == 0 && bStat.belongings.Count == 0)
+        if (aStat.isStuned || bStat.isStuned)
+            return;
+
+        var forceToA = (aStat.transform.position - bStat.transform.position).normalized;
+        var forceToB = (bStat.transform.position - aStat.transform.position).normalized;
+
+        if(aStat.itemStack == 0 && bStat.itemStack == 0)
         {
             //Nothing
             //Debug.Log("낫띵");
         }
-        else if(aStat.belongings.Count == 0)
+        else if(aStat.itemStack == 0)
         {
             //a가 돈을 흘리는 함수 호출
             Debug.Log("a가 돈을 흘림");
         }
-        else if (bStat.belongings.Count == 0)
+        else if (bStat.itemStack == 0)
         {
             //a가 돈을 흘리는 함수 호출
             Debug.Log("b가 돈을 흘림");
         }
-        else if (aStat.belongings.Count == bStat.belongings.Count)
+        else if (aStat.itemStack == bStat.itemStack)
         {
             //아무일도없다
             Debug.Log("같아서 아무일도 일어나지 않아요");
         }
-        else if (aStat.belongings.Count > bStat.belongings.Count)
+        else if (aStat.itemStack > bStat.itemStack)
         {
             //b가 상자를 흘림
             //Debug.Log("a가 더 많다");
-            bStat.DropItem();
+            bStat.DropItem(forceToB);
         }
         else
         {
             //a가 상자를 흘림.
             //Debug.Log("b가 더 많다");
-            aStat.DropItem();
+            aStat.DropItem(forceToA);
         }
 
     }

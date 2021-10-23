@@ -43,7 +43,7 @@ public class Money : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Unit") && 
-            other.GetComponent<CharacterStats>().belongings.Count == 0)
+            other.GetComponent<CharacterStats>().itemStack == 0)
         {
             var stats = other.gameObject.GetComponent<CharacterStats>();
             GameManager.GM.MoneyCollision(stats, this);

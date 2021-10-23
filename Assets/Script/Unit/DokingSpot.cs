@@ -11,7 +11,7 @@ public class DokingSpot : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Unit"))
         {
             var stats = other.gameObject.GetComponentInChildren<CharacterStats>();
-            if (stats.belongings.Count > 0 && stats.truck == truck)
+            if (stats.itemStack > 0 && stats.truck == truck)
             {
                 //Debug.Log("µµÅ·2");
                 other.GetComponent<CharacterStats>().LoadUp();

@@ -50,4 +50,10 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("LiftRun");
         }
     }
+    public void CrushInit()
+    {
+        //플레이어 이 함수 만들고
+        //상자 AddForce 시도해보고
+        //게임 시작/끝 만들자.
+    }
 }

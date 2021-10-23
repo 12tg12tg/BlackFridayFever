@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    public List<ItemInfo> belongings;
     public int itemStack;
     public int score;
     public int money;
     public float speed;
-    public UnitStats stats;
     public float loadUpTimer;
+    public bool isStuned;
+    public UnitStats stats;
     public TruckScript truck;
+    private Rigidbody rigid;
+
     private void Start()
     {
         speed = stats.speed;
+        rigid = GetComponent<Rigidbody>();
     }
     public void getMoney(int money)
     {
@@ -25,83 +28,90 @@ public class CharacterStats : MonoBehaviour
         money -= item.price;
         itemStack += (int)item.value + 1;
         score += item.itemScore;
-        belongings.Add(item);
     }
     public void LoadUp()
     {
         GetComponentInChildren<Animator>().SetTrigger("Push");
         StartCoroutine(CoLoadUp());
     }
-    private IEnumerator CoLoadUp()
+    private IEnumerator CoLoadUp() //차에 싣기.
     {
-        //yield return new WaitForSeconds(1f);
+        //점수반영
+        truck.SavePurchased(score);
+        score = 0;
 
-        while (belongings.Count != 0)
+
+        //짐 Freeze해제
+        LiftLoad liftLoads = GetComponentInChildren<LiftLoad>();
+        var purchasedList = liftLoads.purchaseds;
+
+        for (int i = 0; i < purchasedList.Count; i++)
         {
-            var item = belongings[0];
-            truck.SavePurchased(item);
-            score -= item.itemScore;
+            var rigid = purchasedList[i].GetComponent<Rigidbody>();
+            rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+        }
 
-            List<Collider> temp = new List<Collider>();
-            GetComponentsInChildren<Collider>(temp);
-            for (int i = 0; i < temp.Count; )
-            {
-                if (temp[i].tag != "Purchased")
-                    temp.RemoveAt(i);
-                else
-                    ++i;
-            }
+        //하나씩 저장(Pool로 되돌려주기)
+        while (purchasedList.Count != 0)
+        {
+            var removeItem = purchasedList[0];
 
-            switch (belongings[0].value)
+            switch (removeItem.GetComponent<Box>().itemInfo.value)
             {
                 case ItemValue.Low:
-                    BoxPool.Instance.ReturnLowValue(temp[0].gameObject);
+                    GameObjectPool.Instance.ReturnObject(PoolTag.Box_Low, removeItem.gameObject);
                     break;
                 case ItemValue.Mid:
-                    BoxPool.Instance.ReturnMidValue(temp[0].gameObject);
+                    GameObjectPool.Instance.ReturnObject(PoolTag.Box_Mid, removeItem.gameObject);
                     break;
                 case ItemValue.High:
-                    BoxPool.Instance.ReturnHighValue(temp[0].gameObject);
+                    GameObjectPool.Instance.ReturnObject(PoolTag.Box_High, removeItem.gameObject);
                     break;
             }
-            belongings.RemoveAt(0);
-            yield return new WaitForSeconds(0.5f);
+            removeItem.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            purchasedList.RemoveAt(0);
+            yield return new WaitForSeconds(0.2f);
         }
 
         itemStack = 0;
     }
 
-    public void DropItem()
+    public void DropItem(Vector3 forceFoward)
     {
-        //모든 아이템을 부모를 null로
-        List<Collider> temp = new List<Collider>();
-        GetComponentsInChildren<Collider>(temp);
-        foreach (var col in temp)
+        //짐 Freeze해제 및 부모 null
+        LiftLoad liftLoads = GetComponentInChildren<LiftLoad>();
+        var purchasedList = liftLoads.purchaseds;
+        for (int i = 0; i < purchasedList.Count; i++)
         {
-            col.transform.SetParent(null);
+            //짐 Freeze해제
+            var rigid = purchasedList[i].GetComponent<Rigidbody>();
+            rigid.constraints = RigidbodyConstraints.None;
+            //부모 null
+            purchasedList[i].transform.SetParent(null);
+            //Box의 일정 시간 후 아이템으로 치환되며 사라지는 함수 호출.
+            var box = purchasedList[i].GetComponent<Box>();
+            box.BoxToItem();
         }
 
-        //stats의 존재하는 수치 조정하기
-        belongings.Clear();
+        //CharacterStats의 존재하는 수치 조정하기
         score = 0;
         itemStack = 0;
 
-        //일정 시간 후에 해당위치에 아이템으로 변화시키고 끄기.
-        StartCoroutine(CoBoxToItem(temp));
-        
-
-
         //본체 에이전트 끄고 AddForce하기.
-
-
-
-    }
-    private IEnumerator CoBoxToItem(List<Collider> cols)
-    {
-        yield return new WaitForSeconds(1.5f);
-        foreach (var col in cols)
+        var ai = GetComponent<AiBehaviour>();
+        if (ai == null)
         {
-            //oxPool.Instance.Return
+            //플레이어
+            var player = GetComponent<PlayerController>();
+            player.CrushInit();
         }
+        else
+        {
+            //Ai
+            ai.CrushInit();
+        }
+        transform.rotation = Quaternion.LookRotation(-forceFoward);
+        rigid.AddForce(forceFoward * 7f, ForceMode.Impulse);
+        isStuned = true;
     }
 }

@@ -80,19 +80,44 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 	
 <20211022 금>
 1. 심판(템떨구기, 돈떨구기)
-	부딫힌 이후 더이상 AI가 템을 줍지 못함. (AI에 부딫히는 애니메이션 후 다시 상태되돌아가는 함수)
-	상자자리에 1.5초 후 삭제가 아니고 되돌려주기 아이템 생성.
+	부딫힌 이후 더이상 AI가 템을 줍지 못함. (AI에 부딫히는 애니메이션 후 다시 상태되돌아가는 함수) O
+	상자자리에 1.5초 후 삭제가 아니고 되돌려주기 아이템 생성. 
+
+	아이템프리펩 생성되는 높이 수정. O
+	아이템 생성 적용 
+
+	<질문두개>
+	스테이지버튼을 누르면 다음씬이 로드되야됨. 그럼 그때 게임매니저가 받아서 연결해야됨.
+	로드씬 두번째매개변수 additive모드
 	
+	
+	게임매니저는 너무 과하지않은 일만 하게 하자.
+
+	<버그1>
+	StackPos가 부모를 잃고 증발됨 해결 O
+	날라가는방향 캐릭터 by 캐릭터로 하자.  O
+	날라갈때 템못줍게하자. : IsStuned 사용. AI는 Stun상태풀릴때 false로바꾸는데 O 플레이어는 아직임. 
+
+8시4시4시4시4시4시4시4시4시4시4시4시4시4시
+4시4시4시4시4시4시4시4시4시4시4시4시4시
+4시4시4시4시4시4시4시4시4시4시4시4시
+4시4시4시4시4시4시4시4시4시4시4시
+4시4시4시4시4시4시4시4시4시4시
+4시4시4시4시4시4시4시4시4시
+4시4시4시4시4시4시4시4시
+4시4시4시4시4시4시8시
+
+
 
 
 1+. 플레이어 Save 이후 애니메이션 안바뀜. 
 2. 엔딩씬(춤추기, 카메라이동)
 3. Pool 일반화
-4. 게임오브젝트에서 씬오브젝트찾아오자 태그로!!	
+4. 게임오브젝트에서 씬오브젝트찾아오자 태그로!!
+5. 애니메이션뜯기
 
 
-
-
+캐릭터 Stat의 추가할 요소 : 힘. 스턴시간.
 
 
 
@@ -102,7 +127,7 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 
 우선할거
 1. GameObjectPool : Dictionary(키값)기반 	O
-2. Box 프리펩에 스크립트 만들기 : 		
+2. Box 프리펩에 스크립트 만들기 : 		O
 
 
 
@@ -131,3 +156,13 @@ AiBehaviour : AiDance애니메이션함수
 
 
 	새우에 새우추가
+
+Freeze
+X만 프리즌
+오브젝트.rigidbody.constraints=RigidbodyConstraints.FreezePositionX;
+
+X, Z 프리즌하기
+오브젝트.rigidbody.constraints=RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+
+X 빼고 프리즌하기
+오브젝트.rigidbody.constraints=RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;

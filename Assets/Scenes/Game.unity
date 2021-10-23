@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -397,9 +397,6 @@ MonoBehaviour:
   stack: {fileID: 2147064336}
   gauage: {fileID: 28407804}
   player: {fileID: 0}
-  AIs: []
-  door: {fileID: 0}
-  trucks: []
 --- !u!4 &410981905
 Transform:
   m_ObjectHideFlags: 0
@@ -899,12 +896,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1689547326721900686, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
   m_PrefabInstance: {fileID: 1689547327892621716}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1495892109}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 869fe1c515df52c4393ece25fe141f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1495892109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1689547326721900679, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
+  m_PrefabInstance: {fileID: 1689547327892621716}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1622785355
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +995,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1691244850}
-  - component: {fileID: 1691244851}
   - component: {fileID: 1691244852}
   m_Layer: 0
   m_Name: BoxPool
@@ -1016,21 +1017,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1691244851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1691244849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d1cc5fe1e6ed1d4990c7bd0bab36642, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lowValueBoxPrefab: {fileID: 3190824682940811919, guid: 3887f8734b7b8a9498903d70c4f87008, type: 3}
-  midValueBoxPrefab: {fileID: 3190824682940811919, guid: 3887f8734b7b8a9498903d70c4f87008, type: 3}
-  highValueBoxPrefab: {fileID: 3190824682940811919, guid: 3887f8734b7b8a9498903d70c4f87008, type: 3}
 --- !u!114 &1691244852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1043,7 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be362d592507c647833a233935daeb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowBoxPrefab: {fileID: 7814157388599768068, guid: e925d31cc4f22a04fa5762ce34a77c73, type: 3}
+  lowBoxPrefab: {fileID: 1050495249296263753, guid: 45b3769cc48cb224fa96ace7ad8e0e17, type: 3}
   midBoxPrefab: {fileID: 2647770682899696638, guid: bf086279c4d91924cac3fe843701be71, type: 3}
   highBoxPrefab: {fileID: 9144545601510063759, guid: a84be35c812724c4783c4504693317e8, type: 3}
 --- !u!1 &1730633332
@@ -1600,5 +1586,17 @@ PrefabInstance:
       propertyPath: multiTouch
       value: 
       objectReference: {fileID: 1730633336}
+    - target: {fileID: 1689547327725215328, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
+      propertyPath: unit
+      value: 
+      objectReference: {fileID: 1495892109}
+    - target: {fileID: 1689547327725215335, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
+      propertyPath: m_Size.y
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1689547327725215335, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
+      propertyPath: m_Center.y
+      value: -0.24
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}

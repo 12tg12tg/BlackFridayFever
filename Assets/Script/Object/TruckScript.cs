@@ -11,9 +11,9 @@ public class TruckScript : MonoBehaviour
     {
 
     }
-    public void SavePurchased(ItemInfo item)
+    public void SavePurchased(int score)
     {
-        currentScore += item.itemScore;
+        currentScore += score;
         //Debug.Log("Save!");
     }
 }
