@@ -16,7 +16,14 @@ public class ItemScript : MonoBehaviour
         {
             var stats = other.gameObject.GetComponent<CharacterStats>();
             if (!stats.isStuned && GameManager.GM.ItemCollsion(stats, info))
-                GetComponentInParent<SpawnObject>().SleepObject();
+            {
+                var spawn = GetComponentInParent<SpawnObject>();
+                if (spawn != null)
+                    spawn.SleepObject();
+                else
+                    GameObjectPool.Instance.ReturnObject(info.poolTag, gameObject);
+            }
+
         }
     }
 }

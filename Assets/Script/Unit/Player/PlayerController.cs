@@ -13,11 +13,11 @@ public class PlayerController : MonoBehaviour
     {
         stats = GetComponent<CharacterStats>();
         animator = GetComponentInChildren<Animator>();
-        transform.position = stats.truck.dokingSpot.position;
+        transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
     }
     private void Update()
     {
-        if(!stats.isStuned)
+        if(!stats.isStuned || !animator.GetCurrentAnimatorStateInfo(0).IsName("Push"))
             Move();
         else
         {

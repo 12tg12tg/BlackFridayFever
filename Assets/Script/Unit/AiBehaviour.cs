@@ -114,7 +114,7 @@ public class AiBehaviour : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         stats = GetComponent<CharacterStats>();
         State = prevState = AIState.FindMoney;
-        transform.position = stats.truck.dokingSpot.position;
+        transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
 
         moneys = GameObject.FindGameObjectsWithTag("Money");
         LowItems = GameObject.FindGameObjectsWithTag("LowItem");

@@ -120,9 +120,9 @@ public class GameObjectPool : MonoBehaviour
     public void ReturnObject(PoolTag key, GameObject go)
     {
         var queue = pool[key];
-        go.SetActive(false);
         go.transform.SetParent(transform);
         queue.Enqueue(go);
+        go.SetActive(false);
     }
 
 }

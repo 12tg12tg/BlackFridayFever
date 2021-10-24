@@ -6,7 +6,7 @@ public class Box : MonoBehaviour
 {
     [SerializeField] private bool backToPool;
     [SerializeField] private float timer;
-    [SerializeField] private float disableTime = 2.5f;
+    private float disableTime = 5f;
 
     public ItemInfo itemInfo;
     private void Update()
@@ -21,6 +21,11 @@ public class Box : MonoBehaviour
                 backToPool = false;
                 timer = 0f;
 
+                //item 리스폰
+                var go = GameObjectPool.Instance.GetObject(itemInfo.poolTag);
+                go.transform.position = transform.position;
+
+
                 //Pool로 되돌리기
                 switch (itemInfo.value)
                 {
@@ -34,11 +39,6 @@ public class Box : MonoBehaviour
                         GameObjectPool.Instance.ReturnObject(PoolTag.Box_High, gameObject);
                         break;
                 }
-                
-                //item 리스폰
-
-
-
             }
         }
     }

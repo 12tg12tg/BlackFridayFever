@@ -1039,6 +1039,12 @@ MonoBehaviour:
   item_Mid_Cat_Prefab: {fileID: 3625363094208366345, guid: 04560c29fccfe4f48ad09eff02476771, type: 3}
   item_High_Ring_Prefab: {fileID: 4712246608054615585, guid: cde00e8362c65384da3bf67c8007765a, type: 3}
   item_High_Necklace_Prefab: {fileID: 5130976959297038082, guid: ebf3adabbd32560489d1d7dbe3c71006, type: 3}
+  LowMin: 0
+  LowMax: 0
+  MidMin: 0
+  MidMax: 0
+  HighMin: 0
+  HighMax: 0
 --- !u!1 &1730633332
 GameObject:
   m_ObjectHideFlags: 0

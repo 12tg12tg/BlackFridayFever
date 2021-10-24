@@ -15,4 +15,5 @@ MonoBehaviour:
   itemScore: 8
   itemName: Necklace
   value: 2
+  poolTag: 9
   price: 5

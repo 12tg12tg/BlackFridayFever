@@ -78,14 +78,25 @@ public class CharacterStats : MonoBehaviour
 
     public void DropItem(Vector3 forceFoward)
     {
-        //짐 Freeze해제 및 부모 null
+        //상자 Freeze해제 및 부모 null 및 AddForce
         LiftLoad liftLoads = GetComponentInChildren<LiftLoad>();
         var purchasedList = liftLoads.purchaseds;
         for (int i = 0; i < purchasedList.Count; i++)
         {
-            //짐 Freeze해제
+            //짐 Freeze해제 
             var rigid = purchasedList[i].GetComponent<Rigidbody>();
             rigid.constraints = RigidbodyConstraints.None;
+
+
+            //AddForce
+            var forceFoward2 = Quaternion.Euler(0f, 0f, 90f) * forceFoward;
+            var minRot = Quaternion.Euler(0f, -30f, 0f) * forceFoward2;
+            var maxRot = Quaternion.Euler(0f, 30f, 0f) * forceFoward2;
+            var force = Vector3.Lerp(minRot, maxRot, Random.Range(0f, 1f)).normalized;
+
+            rigid.AddForce(force * 7f, ForceMode.Impulse);
+
+
             //부모 null
             purchasedList[i].transform.SetParent(null);
             //Box의 일정 시간 후 아이템으로 치환되며 사라지는 함수 호출.
@@ -96,6 +107,7 @@ public class CharacterStats : MonoBehaviour
         //CharacterStats의 존재하는 수치 조정하기
         score = 0;
         itemStack = 0;
+        purchasedList.Clear();
 
         //본체 에이전트 끄고 AddForce하기.
         var ai = GetComponent<AiBehaviour>();

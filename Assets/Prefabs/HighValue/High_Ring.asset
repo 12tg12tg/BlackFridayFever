@@ -15,4 +15,5 @@ MonoBehaviour:
   itemScore: 8
   itemName: Ring
   value: 2
+  poolTag: 8
   price: 5

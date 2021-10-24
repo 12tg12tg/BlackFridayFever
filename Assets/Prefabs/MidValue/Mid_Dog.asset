@@ -15,4 +15,5 @@ MonoBehaviour:
   itemScore: 4
   itemName: Dog
   value: 1
+  poolTag: 6
   price: 3
