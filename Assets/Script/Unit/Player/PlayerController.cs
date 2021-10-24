@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if(!stats.isStuned || !animator.GetCurrentAnimatorStateInfo(0).IsName("Push"))
+        if(!stats.isStuned && !animator.GetCurrentAnimatorStateInfo(0).IsName("Push"))
             Move();
         else
         {
