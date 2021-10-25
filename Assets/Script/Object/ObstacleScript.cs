@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ObstacleScript : MonoBehaviour
 {
-    private MeshRenderer mesh;
-    private Color originalColor;
-    private void Start()
+    public MeshRenderer mesh;
+    private Material original;
+    public Material transParent;
+    private void Awake()
     {
-        mesh = GetComponent<MeshRenderer>();
-        originalColor = mesh.material.color;
+        original = mesh.material;
     }
     private void Update()
     {
@@ -21,12 +21,11 @@ public class ObstacleScript : MonoBehaviour
         {
             if (hit.transform.gameObject == gameObject)
             {
-                var color = mesh.material.color;
-                color.a = 0.2f;
-                mesh.material.color = color;
+                mesh.material = transParent;
+                Debug.Log("메테리얼 바뀜");
             }
             else
-                mesh.material.color = originalColor;
+                mesh.material = original;
         }
     }
 }

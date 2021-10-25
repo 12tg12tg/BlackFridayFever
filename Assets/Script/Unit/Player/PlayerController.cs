@@ -9,12 +9,18 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public float stunTimer;
 
-    private void Start()
+    public void Init()
     {
         stats = GetComponent<CharacterStats>();
         animator = GetComponentInChildren<Animator>();
         transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
     }
+    //private void Start()
+    //{
+    //    stats = GetComponent<CharacterStats>();
+    //    animator = GetComponentInChildren<Animator>();
+    //    transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
+    //}
     private void Update()
     {
         if(!stats.isStuned && !animator.GetCurrentAnimatorStateInfo(0).IsName("Push"))
@@ -28,7 +34,6 @@ public class PlayerController : MonoBehaviour
                 stats.isStuned = false;
             }
         }
-
     }
     public void Move()
     {
@@ -38,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
         if (direction != Vector3.zero)
         {
-            direction = Vector3.Lerp(transform.forward, direction, 5.0f * Time.deltaTime);
+            direction = Vector3.Lerp(transform.forward, direction, 8.0f * Time.deltaTime);
             transform.position += direction * stats.speed * Time.deltaTime;
             //var lerp = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(direction);

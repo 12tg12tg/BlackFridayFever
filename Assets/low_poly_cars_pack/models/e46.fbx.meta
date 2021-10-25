@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: 72ec94303597aad43a97585756e42b2e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: e46_body
+    100004: e46_brakedisk_FL
+    100006: e46_brakedisk_FR
+    100008: e46_tuning_1
+    100010: e46_tuning_wheel_FL
+    100012: e46_tuning_wheel_FR
+    100014: e46_tuning_wheel_RL
+    100016: e46_tuning_wheel_RR
+    100018: e46_wheel_FL
+    100020: e46_wheel_FR
+    100022: e46_wheel_RL
+    100024: e46_wheel_RR
+    400000: //RootNode
+    400002: e46_body
+    400004: e46_brakedisk_FL
+    400006: e46_brakedisk_FR
+    400008: e46_tuning_1
+    400010: e46_tuning_wheel_FL
+    400012: e46_tuning_wheel_FR
+    400014: e46_tuning_wheel_RL
+    400016: e46_tuning_wheel_RR
+    400018: e46_wheel_FL
+    400020: e46_wheel_FR
+    400022: e46_wheel_RL
+    400024: e46_wheel_RR
+    2100000: e46_color
+    2100002: e46_mat
+    2300000: e46_body
+    2300002: e46_brakedisk_FL
+    2300004: e46_brakedisk_FR
+    2300006: e46_tuning_1
+    2300008: e46_tuning_wheel_FL
+    2300010: e46_tuning_wheel_FR
+    2300012: e46_tuning_wheel_RL
+    2300014: e46_tuning_wheel_RR
+    2300016: e46_wheel_FL
+    2300018: e46_wheel_FR
+    2300020: e46_wheel_RL
+    2300022: e46_wheel_RR
+    3300000: e46_body
+    3300002: e46_brakedisk_FL
+    3300004: e46_brakedisk_FR
+    3300006: e46_tuning_1
+    3300008: e46_tuning_wheel_FL
+    3300010: e46_tuning_wheel_FR
+    3300012: e46_tuning_wheel_RL
+    3300014: e46_tuning_wheel_RR
+    3300016: e46_wheel_FL
+    3300018: e46_wheel_FR
+    3300020: e46_wheel_RL
+    3300022: e46_wheel_RR
+    4300000: e46_body
+    4300002: e46_brakedisk_FL
+    4300004: e46_wheel_FL
+    4300006: e46_tuning_wheel_FL
+    4300008: e46_wheel_RL
+    4300010: e46_brakedisk_FR
+    4300012: e46_wheel_FR
+    4300014: e46_tuning_wheel_FR
+    4300016: e46_wheel_RR
+    4300018: e46_tuning_1
+    4300020: e46_tuning_wheel_RL
+    4300022: e46_tuning_wheel_RR
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: e46_color
+    second: {fileID: 2100000, guid: 5beece030fd34b243b19ba19304506ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: e46_mat
+    second: {fileID: 2100000, guid: b43e78a53a48a644e82303aadcf34953, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

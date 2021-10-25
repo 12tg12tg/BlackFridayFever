@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
     public enum GameState
     {
         Idle,   //시작 UI 예정
-        Start,  //게임씬 로드
+        Start,  //게임씬 로드.
         Play,   //게임중. 승리조건 확인.
-        End,    //종료UI 예정
+        End,    //종료UI 예정. - 버튼 눌리기 전까지 스테이지씬은 남아있는다.
     }
+
     //Singleton
     private static GameManager instance;
     public static GameManager GM
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     }
 
     //GameState
-    private GameState gameState;
+    [SerializeField] private GameState gameState;
     public GameState State
     {
         get { return gameState; }
@@ -54,59 +55,67 @@ public class GameManager : MonoBehaviour
     public GameObject player;
 
     //스테이지마다의 정보 불러오기 : ScriptableObject를 이용하여 씬을 불러올 때 변수 초기화 할 것.
-    private Stage curStage;
+    private Stage curStageInfo;
 
     private void Awake()
     {
-        Debug.Log($"GameManager Awake : {Time.time}");
+        //Debug.Log($"GameManager Awake : {Time.time}");
+        //싱글톤 및 상태 초기화 : 일단 Idle로 초기화 하지 않음. 
+        instance = this;
+
     }
     private void Start()
     {
-        //싱글톤 및 상태 초기화 : 일단 Idle로 초기화 하지 않음. 
-        instance = this;
-        State = GameState.Play;
+        State = GameState.Idle;
 
-        //플레이어 찾기
-        player = GameObject.FindGameObjectWithTag("Player");
-
+        //Ai와 플레이어의 상호 연결
         StartLevel();
+        Debug.Log($"씬 준비 완료.");
 
+        //플레이어활성화
+        player.SetActive(true);
 
+        //트럭관련 Init
+        player.GetComponent<PlayerController>().Init();
+        for (int i = 0; i < curStageInfo.Ais.Length; i++)
+        {
+            curStageInfo.Ais[i].GetComponent<AiBehaviour>().Init();
+        }
 
+        //카메라 활성화
+        Camera.main.GetComponent<CameraMove>().Init();
+
+        //게임매니저 상태 변경
+        State = GameState.Play;
+    }
+
+    private void Update()
+    {
+        switch (State)
+        {
+            case GameState.Idle:
+                break;
+            case GameState.Start:
+                break;
+            case GameState.Play:
+                break;
+            case GameState.End:
+                EndLevel();
+                break;
+            default:
+                break;
+        }
     }
 
     private void StartLevel()
     {
         //버튼이 눌리면, 해당 스테이지 시작.
-        curStage = GameObject.FindGameObjectWithTag("Stage").GetComponent<Stage>();
-
-        //==== 현재 활동 씬에서 필요한 오브젝트 찾기 - 보류 ====
-        //Scene curScene = SceneManager.GetActiveScene();
-        //var gos = curScene.GetRootGameObjects();
-
-        //1. Truck 찾기
-        //foreach (var go in gos)
-        //{
-        //    var truckScripts = go.GetComponentsInChildren<TruckScript>();
-        //    foreach (var truck in truckScripts)
-        //    {
-        //        trucks.Add(truck);
-        //    }
-        //}
-
-        //2. AI 찾기
-        //foreach (var go in gos)
-        //{
-        //    if (go.tag == "AI")
-        //    {
-        //        AIs.Add(go.GetComponent<CharacterStats>());
-        //    }
-        //}
+        curStageInfo = GameObject.FindGameObjectWithTag("Stage").GetComponent<Stage>();
 
         /*시작작업*/
         //Truck - Unit 연결.
-        var trucks = curStage.trucks;
-        var AIs = curStage.Ais;
+        var trucks = curStageInfo.trucks;
+        var AIs = curStageInfo.Ais;
 
         for (int i = 0; i < trucks.Length; i++)
         {
@@ -120,27 +129,25 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < AIs.Length; i++)
         {
-            AIs[i].truck = trucks[i+1];            
+            AIs[i].truck = trucks[i+1];
         }
     }
 
-    private void Update()
+    private void EndLevel()
     {
-        switch (State)
-        {
-            case GameState.Idle:
-                break;
-
-            case GameState.Start:
-                break;
-
-            case GameState.Play:
-                break;
-
-            case GameState.End:
-                break;
-        }
+        SceneManager.LoadScene(0);
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -181,7 +188,7 @@ public class GameManager : MonoBehaviour
 
     public bool IsEnd(CharacterStats unit)
     {
-        if(unit.truck.currentScore >= curStage.goalScore)
+        if(unit.truck.currentScore >= curStageInfo.goalScore)
         {
             //종료 점수에 도달했다면 게임매니저의 상태를 End로 바꾸면서 현재 우승자 AI 보내기? → 카메라우승자로 이동 → 플레이어로 이동.
             State = GameState.End;

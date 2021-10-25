@@ -101,18 +101,16 @@ public class AiBehaviour : MonoBehaviour
         }
 
     }
-
-
-
-
-
-
-
-    private void Start()
+    private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponentInChildren<Animator>();
         stats = GetComponent<CharacterStats>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = stats.stats.speed;
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    public void Init()
+    {
         State = prevState = AIState.FindMoney;
         transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
 
@@ -121,6 +119,7 @@ public class AiBehaviour : MonoBehaviour
         MidItems = GameObject.FindGameObjectsWithTag("MidItem");
         HighItems = GameObject.FindGameObjectsWithTag("HighItem");
     }
+
     private void Update()
     {
         switch (state)
@@ -191,7 +190,7 @@ public class AiBehaviour : MonoBehaviour
 
         /*상시 확인*/
         //3. 비활성화라면 다른 타겟 결정
-        if(targetMoney.myObject == null || Vector3.Distance(transform.position, agent.destination) < 1f)
+        if(targetMoney?.myObject == null || Vector3.Distance(transform.position, agent.destination) < 1f)
         {
             State = AIState.Idle;
         }
