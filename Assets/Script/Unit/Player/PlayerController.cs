@@ -23,16 +23,29 @@ public class PlayerController : MonoBehaviour
     //}
     private void Update()
     {
-        if(!stats.isStuned && !animator.GetCurrentAnimatorStateInfo(0).IsName("Push"))
-            Move();
-        else
+        switch (GameManager.GM.State)
         {
-            stunTimer += Time.deltaTime;
-            if(stunTimer > stats.stats.stunTime)
-            {
-                stunTimer = 0f;
-                stats.isStuned = false;
-            }
+            case GameManager.GameState.Idle:
+                break;
+            case GameManager.GameState.Start:
+                break;
+            case GameManager.GameState.Play:
+
+                if (!stats.isStuned && !animator.GetCurrentAnimatorStateInfo(0).IsName("Push"))
+                    Move();
+                else
+                {
+                    stunTimer += Time.deltaTime;
+                    if (stunTimer > stats.stats.stunTime)
+                    {
+                        stunTimer = 0f;
+                        stats.isStuned = false;
+                    }
+                }
+
+                break;
+            case GameManager.GameState.End:
+                break;
         }
     }
     public void Move()
@@ -68,5 +81,13 @@ public class PlayerController : MonoBehaviour
     public void CrushInit()
     {
         animator.SetTrigger("Stumble");
+    }
+    public void SetWinAnimation()
+    {
+        animator.SetTrigger("Dance");
+    }
+    public void SetDeafeatAnimation()
+    {
+        animator.SetTrigger("Defeated");
     }
 }

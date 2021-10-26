@@ -27,6 +27,10 @@ public class Box : MonoBehaviour
 
 
                 //Pool로 되돌리기
+                //짐 Freeze해제 
+                var rigid = GetComponent<Rigidbody>();
+                rigid.constraints = RigidbodyConstraints.FreezeAll;
+
                 switch (itemInfo.value)
                 {
                     case ItemValue.Low:

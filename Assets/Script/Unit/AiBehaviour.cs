@@ -19,15 +19,18 @@ public class AiBehaviour : MonoBehaviour
     public GameObject[] LowItems;
     public GameObject[] MidItems;
     public GameObject[] HighItems;
+
     public NavMeshAgent agent;
     private Animator animator;
     private CharacterStats stats;
+
     private float searchDistance = 8.5f;
     private bool isTarget = false;
+
     private SpawnObject targetMoney;
     private SpawnObject targetItem;
-    private AIState state;
-    private AIState prevState;
+    public AIState state;
+    public AIState prevState;
 
     private float timer;
 
@@ -75,31 +78,32 @@ public class AiBehaviour : MonoBehaviour
 
     void setMoveAnimation()
     {
-        if (stats.score > 0)
-        {
-            animator.SetTrigger("LiftRun");
-            //Debug.Log($"{stats.score}, LiftRun");
-        }
-        else
-        {
-            animator.SetTrigger("JustRun");
-            //Debug.Log($"{stats.score}, JustRun");
-        }
+        //if (stats.score > 0)
+        //{
+        //    animator.SetTrigger("LiftRun");
+        //    //Debug.Log($"{stats.score}, LiftRun");
+        //}
+        //else
+        //{
+        //    animator.SetTrigger("JustRun");
+        //    //Debug.Log($"{stats.score}, JustRun");
+        //}
+        animator.SetFloat("Speed", 1f);
     }
 
     void setIdleAnimation()
     {
-        if (stats.score > 0)
-        {
-            animator.SetTrigger("Lift");
-            //Debug.Log($"★{stats.score}, Lift");
-        }
-        else
-        {
-            animator.SetTrigger("JustIdle");
-            //Debug.Log($"★{stats.score}, JustIdle");
-        }
-
+        //if (stats.score > 0)
+        //{
+        //    animator.SetTrigger("Lift");
+        //    //Debug.Log($"★{stats.score}, Lift");
+        //}
+        //else
+        //{
+        //    animator.SetTrigger("JustIdle");
+        //    //Debug.Log($"★{stats.score}, JustIdle");
+        //}
+        animator.SetFloat("Speed", 0f);
     }
     private void Awake()
     {
@@ -111,7 +115,8 @@ public class AiBehaviour : MonoBehaviour
 
     public void Init()
     {
-        State = prevState = AIState.FindMoney;
+        State = AIState.Idle;
+        prevState = AIState.FindMoney;
         transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
 
         moneys = GameObject.FindGameObjectsWithTag("Money");
@@ -122,7 +127,30 @@ public class AiBehaviour : MonoBehaviour
 
     private void Update()
     {
-        switch (state)
+        switch (GameManager.GM.State)
+        {
+            case GameManager.GameState.Idle:
+            case GameManager.GameState.Start:
+                break;
+            case GameManager.GameState.Play:
+                StateUpdate();
+                break;
+            case GameManager.GameState.End:
+                break;
+        }
+
+        //Debug.Log($"{state}, {prevState}");
+
+        //애니메이션
+        animator.SetInteger("Stack", stats.itemStack);
+    }
+
+
+
+
+    private void StateUpdate()
+    {
+        switch (State)
         {
             case AIState.Idle:
                 IdleUpdate();
@@ -143,13 +171,7 @@ public class AiBehaviour : MonoBehaviour
                 SutnedUpdate();
                 break;
         }
-        //Debug.Log($"{state}, {prevState}");
     }
-
-
-
-
-
 
 
     public void IdleUpdate()
@@ -203,28 +225,14 @@ public class AiBehaviour : MonoBehaviour
             //else
             State = AIState.FindItem;
         }
+
+        //아이템을 주워서 돈을 먹을 수 없게 되었다면?
+        if(stats.itemStack != 0)
+        {
+            State = AIState.GoTruck;
+        }
     }
 
-    //private void StanbyUpdate()
-    //{
-    //    //문과 가까워지기
-    //    var dis = Vector3.Distance(door.transform.position, transform.position);
-    //    if (dis > 1.5f)
-    //    {
-    //        agent.isStopped = false;
-    //        agent.destination = door.transform.position;
-    //        setMoveAnimation();
-    //    }
-    //    else
-    //    {
-    //        agent.isStopped = true;
-    //        setIdleAnimation();
-    //    }
-
-    //    //게임시작이면 아이템줍는상태로
-    //    if (GameManager.GM.State == GameManager.GameState.Play)
-    //        State = AIState.FindItem;
-    //}
 
     private void FindItemUpdate()
     {
@@ -294,7 +302,7 @@ public class AiBehaviour : MonoBehaviour
 
     public void CrushInit()
     {
-        state = AIState.Stuned;
+        State = AIState.Stuned;
         agent.enabled = false;
         animator.SetTrigger("Stumble");
     }
@@ -305,6 +313,7 @@ public class AiBehaviour : MonoBehaviour
         if (timer > stats.stats.stunTime)
         {
             stats.isStuned = false;
+            //agent.destination = true;
             agent.enabled = true;
             DecideState();
         }
@@ -324,5 +333,21 @@ public class AiBehaviour : MonoBehaviour
         {
             State = AIState.FindMoney;
         }
+    }
+
+    private void AIStop()
+    {
+        agent.enabled = false;
+    }
+    public void SetWinAnimation()
+    {
+        AIStop();
+        animator.SetTrigger("Dance");
+    }
+    public void SetDeafeatAnimation()
+    {
+        AIStop();
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Stumble"))
+            animator.SetTrigger("Defeated");
     }
 }

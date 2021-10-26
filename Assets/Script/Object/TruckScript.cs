@@ -6,6 +6,7 @@ public class TruckScript : MonoBehaviour
 {
     public int currentScore;
     public Transform dokingSpot;
+    public Transform[] camPosForSave;
 
     private void Start()
     {

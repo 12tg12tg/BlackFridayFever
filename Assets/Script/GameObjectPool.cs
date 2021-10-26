@@ -20,7 +20,7 @@ public enum PoolTag
 
 public class GameObjectPool : MonoBehaviour
 {
-    private int poolCount = 30;
+    private int poolCount = 5;
     public static GameObjectPool Instance;
     public GameObject moneyPrefab;
     public GameObject lowBoxPrefab;

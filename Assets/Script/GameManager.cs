@@ -55,7 +55,10 @@ public class GameManager : MonoBehaviour
     public GameObject player;
 
     //스테이지마다의 정보 불러오기 : ScriptableObject를 이용하여 씬을 불러올 때 변수 초기화 할 것.
-    private Stage curStageInfo;
+    public Stage curStageInfo;
+
+    //엔딩씬
+    private bool canEnd;
 
     private void Awake()
     {
@@ -86,7 +89,7 @@ public class GameManager : MonoBehaviour
         Camera.main.GetComponent<CameraMove>().Init();
 
         //게임매니저 상태 변경
-        State = GameState.Play;
+        State = GameState.Start;
     }
 
     private void Update()
@@ -100,9 +103,7 @@ public class GameManager : MonoBehaviour
             case GameState.Play:
                 break;
             case GameState.End:
-                EndLevel();
-                break;
-            default:
+                EndUpdate();
                 break;
         }
     }
@@ -133,12 +134,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void EndLevel()
+    private void EndUpdate()
     {
-        SceneManager.LoadScene(0);
+        if(canEnd)
+            SceneManager.LoadScene(0);
     }
 
+    public void EndingScene(CharacterStats winner)
+    {
+        var playerStats = player.GetComponent<CharacterStats>();
+        var Ais = curStageInfo.Ais;
 
+        //애니바꾸고,
+        playerStats.EndAnimation(playerStats == winner);
+        for (int i = 0; i < Ais.Length; i++)
+        {
+            Ais[i].EndAnimation(Ais[i] == winner);
+        }
+
+        //카메라이동
+
+
+        //(카메라이동 끝나거나) 몇초후
+
+
+        //유아이띄우기
+
+
+        //버튼눌리면 엔드씬 ㄱㄱ
+
+
+    }
 
 
 
@@ -191,6 +217,12 @@ public class GameManager : MonoBehaviour
         if(unit.truck.currentScore >= curStageInfo.goalScore)
         {
             //종료 점수에 도달했다면 게임매니저의 상태를 End로 바꾸면서 현재 우승자 AI 보내기? → 카메라우승자로 이동 → 플레이어로 이동.
+
+            /*종료시 호출할 함수들*/
+            EndingScene(unit);
+
+
+
             State = GameState.End;
             return true;
         }

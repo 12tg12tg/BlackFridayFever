@@ -392,11 +392,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3885698eb0024584b93d9ef13e1a72df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 0
   score: {fileID: 476981462}
   money: {fileID: 1622785357}
   stack: {fileID: 2147064336}
   gauage: {fileID: 28407804}
   player: {fileID: 1495892109}
+  curStageInfo: {fileID: 0}
 --- !u!4 &410981905
 Transform:
   m_ObjectHideFlags: 0
@@ -907,11 +909,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1689547326721900679, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
   m_PrefabInstance: {fileID: 1689547327892621716}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1495892115 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1689547326721900684, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
-  m_PrefabInstance: {fileID: 1689547327892621716}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1622785355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,7 +1126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730633332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1164,9 +1161,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8d33d2cbcb773428dffe0a253cf582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1495892115}
+  player: {fileID: 1494410349}
   offsetZ: 15
   offsetY: 15
+  camPos: []
+  camLook: []
+  scanTime: 2
+  toPlayerTime: 0
+  timer: 0
+  lookPlayer: 0
+  savePath: []
 --- !u!1 &1888815562
 GameObject:
   m_ObjectHideFlags: 0

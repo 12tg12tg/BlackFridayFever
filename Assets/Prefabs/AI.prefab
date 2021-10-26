@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1689547326721900679}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.7, y: 0.3399999, z: -49.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 6931741096284199279}
   - {fileID: 1689547327725215334}
@@ -102,7 +102,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1689547326721900673
 CapsuleCollider:
@@ -152,13 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869fe1c515df52c4393ece25fe141f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  belongings: []
   itemStack: 0
   score: 0
   money: 0
   speed: 0
-  stats: {fileID: 11400000, guid: 10d160808b28e8043b1cf478987944ae, type: 2}
   loadUpTimer: 0
+  isStuned: 0
+  stats: {fileID: 11400000, guid: 10d160808b28e8043b1cf478987944ae, type: 2}
   truck: {fileID: 0}
 --- !u!114 &1252465199
 MonoBehaviour:
@@ -172,9 +172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b775f9cbfb0c7149ac7699c1c6b8498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneySpots: {fileID: 0}
-  itemSpots: {fileID: 0}
-  door: {fileID: 0}
+  moneys: []
+  LowItems: []
+  MidItems: []
+  HighItems: []
+  agent: {fileID: 0}
+  state: 0
+  prevState: 0
 --- !u!1 &1689547327725215333
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: []
-  prefab: {fileID: 3190824682940811919, guid: 3887f8734b7b8a9498903d70c4f87008, type: 3}
+  stackPosCol: {fileID: 0}
+  purchaseds: []
 --- !u!54 &2892499509914721370
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -251,6 +256,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1246969045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931741096283768077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b63bda676edf847a48dec0f839c42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 1689547326721900686}
 --- !u!1001 &1689547326605805727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,8 +324,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stickman_heads_sphere
       objectReference: {fileID: 0}
+    - target: {fileID: 8592876449711865404, guid: 6b5d591dbb72ac04a80d42bbb710cb7a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6dd8c37d59b47ba4b9f2e97c2d6c6107, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b5d591dbb72ac04a80d42bbb710cb7a, type: 3}
+--- !u!1 &6931741096283768077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8592876449704463762, guid: 6b5d591dbb72ac04a80d42bbb710cb7a, type: 3}
+  m_PrefabInstance: {fileID: 1689547326605805727}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6931741096284199279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8592876449704432112, guid: 6b5d591dbb72ac04a80d42bbb710cb7a, type: 3}

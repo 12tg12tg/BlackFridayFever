@@ -13,6 +13,9 @@ public class ObstacleScript : MonoBehaviour
     }
     private void Update()
     {
+        if (GameManager.GM.State != GameManager.GameState.Play)
+            return;
+
         var playerPos = GameManager.GM.player.transform.position;
         var playerViewport = Camera.main.WorldToViewportPoint(playerPos);
         Ray ray = Camera.main.ViewportPointToRay(playerViewport);
@@ -22,7 +25,7 @@ public class ObstacleScript : MonoBehaviour
             if (hit.transform.gameObject == gameObject)
             {
                 mesh.material = transParent;
-                Debug.Log("메테리얼 바뀜");
+                //Debug.Log("메테리얼 바뀜");
             }
             else
                 mesh.material = original;

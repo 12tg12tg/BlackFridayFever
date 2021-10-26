@@ -14,7 +14,7 @@ public class CharacterStats : MonoBehaviour
     public TruckScript truck;
     private Rigidbody rigid;
 
-    private void Start()
+    private void Awake()
     {
         speed = stats.speed;
         rigid = GetComponent<Rigidbody>();
@@ -31,7 +31,12 @@ public class CharacterStats : MonoBehaviour
     }
     public void LoadUp()
     {
-        GetComponentInChildren<Animator>().SetTrigger("Push");
+        GetComponentInChildren<Animator>().SetTrigger("Push");          //애니실행하세요
+        var lookTruckPos = truck.transform.position - transform.position;
+        lookTruckPos.y = transform.position.y;
+        transform.rotation = Quaternion.LookRotation(lookTruckPos);     //트럭쳐다보세요
+        if(GetComponent<PlayerController>() != null)
+            Camera.main.GetComponent<CameraMove>().StartSaveLoadCamMove();  //카메라무브
         StartCoroutine(CoLoadUp());
     }
     private IEnumerator CoLoadUp() //차에 싣기.
@@ -125,5 +130,42 @@ public class CharacterStats : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(-forceFoward);
         rigid.AddForce(forceFoward * 7f, ForceMode.Impulse);
         isStuned = true;
+    }
+
+    //승리 애니메이션바꾸기
+    public void EndAnimation(bool isWin)
+    {
+        var ai = GetComponent<AiBehaviour>();
+        if (isWin)
+        {
+            if (ai == null)
+            {
+                //플레이어
+                var player = GetComponent<PlayerController>();
+                player.SetWinAnimation();
+            }
+            else
+            {
+                //Ai
+                ai.CrushInit();
+                ai.SetWinAnimation();
+            }
+        }
+        else
+        {
+            //본체 에이전트 끄고 AddForce하기.
+            if (ai == null)
+            {
+                //플레이어
+                var player = GetComponent<PlayerController>();
+                player.SetDeafeatAnimation();
+            }
+            else
+            {
+                //Ai
+                ai.CrushInit();
+                ai.SetDeafeatAnimation();
+            }
+        }
     }
 }
