@@ -8,27 +8,26 @@ public enum AIState
     Idle,
     FindMoney,
     FindItem,
-    //Standby,
     GoTruck,
     Stuned,
 }
 
-public class AiBehaviour : MonoBehaviour
+public class AiBehaviour : UnitBehaviour
 {
+    [Header("(Inspector 수정 불필요)")]
     public GameObject[] moneys;
     public GameObject[] LowItems;
     public GameObject[] MidItems;
     public GameObject[] HighItems;
 
     public NavMeshAgent agent;
-    private Animator animator;
-    private CharacterStats stats;
 
     private float searchDistance = 8.5f;
     private bool isTarget = false;
 
     private SpawnObject targetMoney;
     private SpawnObject targetItem;
+
     public AIState state;
     public AIState prevState;
 
@@ -62,9 +61,6 @@ public class AiBehaviour : MonoBehaviour
                     agent.isStopped = false;
                     setMoveAnimation();
                     break;
-                //case AIState.Standby:
-                //    agent.isStopped = false;
-                //    break;
                 case AIState.GoTruck:
                     agent.isStopped = false;
                     setMoveAnimation();
@@ -76,35 +72,6 @@ public class AiBehaviour : MonoBehaviour
         }  
     }
 
-    void setMoveAnimation()
-    {
-        //if (stats.score > 0)
-        //{
-        //    animator.SetTrigger("LiftRun");
-        //    //Debug.Log($"{stats.score}, LiftRun");
-        //}
-        //else
-        //{
-        //    animator.SetTrigger("JustRun");
-        //    //Debug.Log($"{stats.score}, JustRun");
-        //}
-        animator.SetFloat("Speed", 1f);
-    }
-
-    void setIdleAnimation()
-    {
-        //if (stats.score > 0)
-        //{
-        //    animator.SetTrigger("Lift");
-        //    //Debug.Log($"★{stats.score}, Lift");
-        //}
-        //else
-        //{
-        //    animator.SetTrigger("JustIdle");
-        //    //Debug.Log($"★{stats.score}, JustIdle");
-        //}
-        animator.SetFloat("Speed", 0f);
-    }
     private void Awake()
     {
         stats = GetComponent<CharacterStats>();
@@ -113,17 +80,17 @@ public class AiBehaviour : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    public void Init()
+    public override void Init()
     {
         State = AIState.Idle;
         prevState = AIState.FindMoney;
         transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
         GetComponentInChildren<SkinnedMeshRenderer>().material.color = stats.truck.bodyColor;
 
-        moneys = GameObject.FindGameObjectsWithTag("Money");
-        LowItems = GameObject.FindGameObjectsWithTag("LowItem");
-        MidItems = GameObject.FindGameObjectsWithTag("MidItem");
-        HighItems = GameObject.FindGameObjectsWithTag("HighItem");
+        moneys = Stage.Instance.moneys;
+        LowItems = Stage.Instance.LowItems;
+        MidItems = Stage.Instance.MidItems;
+        HighItems = Stage.Instance.HighItems;
     }
 
     private void Update()
@@ -234,7 +201,6 @@ public class AiBehaviour : MonoBehaviour
         }
     }
 
-
     private void FindItemUpdate()
     {
         /*탈출조건*/
@@ -301,13 +267,6 @@ public class AiBehaviour : MonoBehaviour
         }
     }
 
-    public void CrushInit()
-    {
-        State = AIState.Stuned;
-        agent.enabled = false;
-        animator.SetTrigger("Stumble");
-    }
-
     public void SutnedUpdate()
     {
         timer += Time.deltaTime;
@@ -318,6 +277,13 @@ public class AiBehaviour : MonoBehaviour
             agent.enabled = true;
             DecideState();
         }
+    }
+
+    public new void CrushInit()
+    {
+        base.CrushInit();
+        State = AIState.Stuned;
+        agent.enabled = false;
     }
 
     public void DecideState()
@@ -340,15 +306,15 @@ public class AiBehaviour : MonoBehaviour
     {
         agent.enabled = false;
     }
-    public void SetWinAnimation()
+    public new void SetWinAnimation()
     {
+        base.SetWinAnimation();
         AIStop();
-        animator.SetTrigger("Dance");
     }
-    public void SetDeafeatAnimation()
+    public new void SetDeafeatAnimation()
     {
         AIStop();
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Stumble"))
-            animator.SetTrigger("Defeated");
+            base.SetDeafeatAnimation();
     }
 }

@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    [Header("(Inspector 수정 : 1개)")]
     public int itemStack;
     public int score;
     public int money;
     public float speed;
     public float loadUpTimer;
     public bool isStuned;
-    public UnitStats stats;
     public TruckScript truck;
     private Rigidbody rigid;
+    [Header("(Inspector 연결) Unit → Stats 생성해서 넣기!")] public UnitStats stats;
 
     private void Awake()
     {
         speed = stats.speed;
         rigid = GetComponent<Rigidbody>();
     }
+
     public void getMoney(int money)
     {
         this.money += money;
@@ -124,7 +126,7 @@ public class CharacterStats : MonoBehaviour
         {
             //플레이어
             var player = GetComponent<PlayerController>();
-            player.CrushInit();
+            player?.CrushInit();
         }
         else
         {

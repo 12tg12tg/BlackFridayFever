@@ -235,7 +235,7 @@ public class GameManager : MonoBehaviour
         if (unit.money >= item.price)
         {
             unit.getStack(item);//Character의 Stats 점수올리기
-            unit.GetComponentInChildren<LiftLoad>().LiftPurchased(item); //Character의 물건올리기
+            unit.GetComponentInChildren<LiftLoad>()?.LiftPurchased(item); //Character의 물건올리기
             //item.SetActive(false);  //비활성화
 
             if (unit.tag == "Player")

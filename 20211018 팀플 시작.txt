@@ -192,63 +192,73 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 3. UIUIUIUI
 	1) EndingUI
 
+4. 렉돌 충돌			O
+5. 이펙트 / 사운드 / 아이템 회전
+6. AI 개성 창조
+
+
+
+
+
+
+
+
+
+
 
 
 +) 고정형 오브젝트 Static 체크하는거 고려해봅시다.
 
 +) 아이템이펙트, 아이템표식
 +) AI 개성
- 
 
 
 
+<배치정리>
+[Header("(Inspector 수정 불필요)")]
+[Header("(Inspector 연결) Unit → Stats 생성해서 넣기!")] 
 
+1. AI배치
+	- 연결
+		1) Unit - Stats 생성해서 적용시키기.
+		2) StageManager의 Stage 스크립트에 Ais에 AI 드래그 드랍으로 넣기.
+2. Stage 정보 구성
+	- 연결
+		1) Ais, Tucks, StartCamPos, StartCameLook
+3. ItemSpot / ParkingSpot : 스폰위치 심어두기.
 
+4. SaleStand : 
+	- 연결
+		1) Mesh : 투명화 시킬 MeshRenderer
+		2) Transparent : 위 mesh에 적용시킬 Transparent모드의 Material
 
+5. Truck
+	- 연결
+		1) bodyMesh : BodyMesh에 차량 색에 해당하는 파츠의 MeshRenderer 연결
+		2) StageManager에 차량 4종 연결시키기.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-AiBehaviour : AiDance애니메이션함수
+6. Front(정면입국 벽) - 다른맵 입구와도 공동으로 사용할 수 있을런지 모르겠음.
+	- 연결 
+		1) 모든 파츠들의 MeshRenderer와 Transparent용 Material을 연결한다.
 
 
 
 	새우에 새우추가
 
-Freeze
+cf) Freeze
 X만 프리즌
 오브젝트.rigidbody.constraints=RigidbodyConstraints.FreezePositionX;
-
 X, Z 프리즌하기
 오브젝트.rigidbody.constraints=RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
-
 X 빼고 프리즌하기
 오브젝트.rigidbody.constraints=RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
 
-
-
-3.Active Scene설정
+cf) Active Scene설정
 SceneManager.LoadScene("Scene2", LoadSceneMode.Additive); //씬불러오기
-
 출처: https://unitytip.tistory.com/49 [Unity Tip 모음 by dnrkckzk]
  Additive모드로 씬을 불러오게 되면 원래 있던 씬이 Active Scene이 됩니다. (정확히는 Active Scene이던 게 계속 가는 거겠죠.) 이런 상황에서 Instatiate라든가 어떤 동적인 생성을 하게 되면 오브젝트들은 Active씬에 귀속되게 됩니다. 그래서 불려온 Scene이 되돌아가도 사라지지 않고 부른 씬에 남아있게 됩니다. 그런 상황을 방지하기 위해서는 Active Scene을 코드로 수정을 해줘야 합니다. 설정 방법은 간단합니다.
-
 SceneManager.SetActiveScene(SceneManager.GetSceneByName("Scene2"))
  //이렇게 설정해주면 Active Scene을 불러온 씬으로 설정해주고 생성된 오브젝트들도 불려온 Scene에 귀속되게 됩니다.
 
-
-일단 하다가 막혔던 것 중에 기억나는 내용은 다 적었습니다. 혹시나 빠뜨렸던게 생각나면 추가 수정하도록 하겠습니다.
-
-1. 색넣기 - 파란색
-2. 문닫기
+cf) 무료 사운드 에셋
+https://www.youtube.com/watch?v=UGJ6T1g1BZk&t=19s&ab_channel=%EA%B3%A8%EB%93%9C%EB%A9%94%ED%83%88

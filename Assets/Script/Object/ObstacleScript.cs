@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ObstacleScript : MonoBehaviour
 {
-    public MeshRenderer mesh;
     private Material original;
-    public Material transParent;
+    [Header("(Inspector 모두 연결 필요)")]
+    public MeshRenderer mesh;
+    public Material transparent;
     private void Awake()
     {
         original = mesh.material;
@@ -24,7 +25,7 @@ public class ObstacleScript : MonoBehaviour
         {
             if (hit.transform.gameObject == gameObject)
             {
-                mesh.material = transParent;
+                mesh.material = transparent;
                 //Debug.Log("메테리얼 바뀜");
             }
             else

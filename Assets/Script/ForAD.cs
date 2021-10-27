@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ForAD : MonoBehaviour
 {
+    [Header("(광고용 스크립트)")]
     public MultiTouch mt;
     public Collider Door;
     public GameObject Bar;

@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : UnitBehaviour
 {
+    //터치입력
     public MultiTouch multiTouch;
-    public CharacterStats stats;
-    public Animator animator;
+
+    //스턴시 이동제한을 걸기 위함.
     public float stunTimer;
     private Vector3 direction;
 
-    public void Init()
+    private void Awake()
     {
         stats = GetComponent<CharacterStats>();
         animator = GetComponentInChildren<Animator>();
+    }
+
+    public override void Init()
+    {
         transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
         GetComponentInChildren<SkinnedMeshRenderer>().material.color = stats.truck.bodyColor;
     }
-    //private void Start()
-    //{
-    //    stats = GetComponent<CharacterStats>();
-    //    animator = GetComponentInChildren<Animator>();
-    //    transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
-    //}
+
     private void Update()
     {
         switch (GameManager.GM.State)
@@ -68,22 +68,10 @@ public class PlayerController : MonoBehaviour
     {
         //애니
         if (direction == Vector3.zero)
-            animator.SetFloat("Speed", 0f);
+            setIdleAnimation();
         else
-            animator.SetFloat("Speed", 1f);
+            setMoveAnimation();
 
         animator.SetInteger("Stack", stats.itemStack);
-    }
-    public void CrushInit()
-    {
-        animator.SetTrigger("Stumble");
-    }
-    public void SetWinAnimation()
-    {
-        animator.SetTrigger("Dance");
-    }
-    public void SetDeafeatAnimation()
-    {
-        animator.SetTrigger("Defeated");
     }
 }
