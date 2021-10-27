@@ -32,18 +32,22 @@ public class CharacterStats : MonoBehaviour
     public void LoadUp()
     {
         GetComponentInChildren<Animator>().SetTrigger("Push");          //애니실행하세요
-        var lookTruckPos = truck.transform.position - transform.position;
-        lookTruckPos.y = transform.position.y;
+        var target = truck.transform.position;
+        target.y = transform.position.y;
+        var lookTruckPos = target - transform.position;
         transform.rotation = Quaternion.LookRotation(lookTruckPos);     //트럭쳐다보세요
         if(GetComponent<PlayerController>() != null)
             Camera.main.GetComponent<CameraMove>().StartSaveLoadCamMove();  //카메라무브
         StartCoroutine(CoLoadUp());
     }
-    private IEnumerator CoLoadUp() //차에 싣기.
+    private IEnumerator CoLoadUp() //점수더하기. 차에 싣기.
     {
         //점수반영
         truck.SavePurchased(score);
         score = 0;
+
+        //종료인지 검사
+        GameManager.GM.IsEnd(GetComponent<CharacterStats>());
 
 
         //짐 Freeze해제
@@ -168,4 +172,26 @@ public class CharacterStats : MonoBehaviour
             }
         }
     }
+
+    public void BoxUnFreeze()
+    {
+        //상자 Freeze해제 및 부모 null 및 AddForce
+        LiftLoad liftLoads = GetComponentInChildren<LiftLoad>();
+        var boxArr = liftLoads.purchaseds;
+        for (int i = 0; i < boxArr.Count; i++)
+        {
+            //짐 Freeze해제 
+            var rigid = boxArr[i].GetComponent<Rigidbody>();
+            rigid.constraints = RigidbodyConstraints.None;
+            var randomX = Random.Range(-3f, 3f);
+            var randomZ = Random.Range(-3f, 3f);
+            var force = new Vector3(randomX, 5, randomZ);
+            rigid.AddForce(force.normalized * 20, ForceMode.Impulse);
+            //Debug.Log("힘 개방!");
+        }
+
+        //liftload 콜라이더 해제
+        liftLoads.GetComponent<Collider>().enabled = false;
+    }
 }
+

@@ -54,11 +54,18 @@ public class GameManager : MonoBehaviour
     //Player
     public GameObject player;
 
+    //Camera
+    public CameraMove mainCam;
+
     //스테이지마다의 정보 불러오기 : ScriptableObject를 이용하여 씬을 불러올 때 변수 초기화 할 것.
     public Stage curStageInfo;
 
     //엔딩씬
-    private bool canEnd;
+    private CharacterStats winner;
+
+    //엔딩이후 UI
+    private float endUITimer;
+    private bool endSceneAdded;
 
     private void Awake()
     {
@@ -86,7 +93,8 @@ public class GameManager : MonoBehaviour
         }
 
         //카메라 활성화
-        Camera.main.GetComponent<CameraMove>().Init();
+        mainCam = Camera.main.GetComponent<CameraMove>();
+        mainCam.Init();
 
         //게임매니저 상태 변경
         State = GameState.Start;
@@ -103,7 +111,16 @@ public class GameManager : MonoBehaviour
             case GameState.Play:
                 break;
             case GameState.End:
-                EndUpdate();
+                if(mainCam.isSecondWinnerMoveEnd)
+                {
+                    //2초후 유아이띄우기
+                    endUITimer += Time.deltaTime;
+                    if (!endSceneAdded && endUITimer > 2f)
+                    {
+                        GoEndUi();
+                        endSceneAdded = true;
+                    }
+                }
                 break;
         }
     }
@@ -134,37 +151,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void EndUpdate()
+    private void GoToMain()
     {
-        if(canEnd)
-            SceneManager.LoadScene(0);
+        SceneManager.LoadScene("main");
     }
-
-    public void EndingScene(CharacterStats winner)
+    private void GoNextLevel()
     {
-        var playerStats = player.GetComponent<CharacterStats>();
-        var Ais = curStageInfo.Ais;
-
-        //애니바꾸고,
-        playerStats.EndAnimation(playerStats == winner);
-        for (int i = 0; i < Ais.Length; i++)
-        {
-            Ais[i].EndAnimation(Ais[i] == winner);
-        }
-
-        //카메라이동
-
-
-        //(카메라이동 끝나거나) 몇초후
-
-
-        //유아이띄우기
-
-
-        //버튼눌리면 엔드씬 ㄱㄱ
-
 
     }
+    private void GoEndUi()
+    {
+        SceneManager.LoadScene("EndUi", LoadSceneMode.Additive);
+    }
+
+    public void EndingScene(CharacterStats winner) //1회 호출.
+    {
+        //승리자설정
+        this.winner = winner;
+
+        //엔딩 루트로 카메라이동
+        mainCam.EndingInit(winner);
+    }
+
 
 
 
@@ -179,6 +187,33 @@ public class GameManager : MonoBehaviour
 
 
     /*=========================외부 호출용 함수=========================*/
+    //승리모션
+    public void LetsDance()
+    {
+        winner.EndAnimation(true);
+    }
+
+    public void LetsDeafeated()
+    {
+        var playerStats = player.GetComponent<CharacterStats>();
+        var Ais = curStageInfo.Ais;
+
+        if (winner != playerStats)
+        {
+            playerStats.EndAnimation(false);
+            playerStats.BoxUnFreeze();
+        }
+        for (int i = 0; i < Ais.Length; i++)
+        {
+            if (winner != Ais[i])
+            {
+                Ais[i].EndAnimation(false);
+                Ais[i].BoxUnFreeze();
+            }
+        }
+    }
+
+
     //돈 : 돈을 습득한 경우 → 1) 보유 돈 증가 함수 호출, 2) UI Text 업데이트
     public void MoneyCollision(CharacterStats unit, Money money)
     {
@@ -193,6 +228,9 @@ public class GameManager : MonoBehaviour
     //점수 & 상품 : 아이템을 습득한 경우 → 0) 돈 확인, 1) 보유 아이템 정보 변경 함수 호출, 2) UI Text 업데이트
     public bool ItemCollsion(CharacterStats unit, ItemInfo item)
     {
+        //플레이중이 아닐 땐, 아이템먹지않기
+        if (GameManager.GM.State != GameState.Play) return false;
+
         //돈 체크
         if (unit.money >= item.price)
         {
@@ -212,6 +250,7 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    //끝나면 카메라랑 연동해서 엔딩 연출 나오도록 하는 함수.
     public bool IsEnd(CharacterStats unit)
     {
         if(unit.truck.currentScore >= curStageInfo.goalScore)
@@ -219,16 +258,17 @@ public class GameManager : MonoBehaviour
             //종료 점수에 도달했다면 게임매니저의 상태를 End로 바꾸면서 현재 우승자 AI 보내기? → 카메라우승자로 이동 → 플레이어로 이동.
 
             /*종료시 호출할 함수들*/
+            State = GameState.End;
+
             EndingScene(unit);
 
 
-
-            State = GameState.End;
             return true;
         }
         return false;
     }
 
+    //쟁반끼리 부딫혔을때 판단하는 함수.
     public void DecideTrayCollision(Collider a, Collider b)
     {
         var aStat = a.gameObject.GetComponentInParent<CharacterStats>();
@@ -265,12 +305,22 @@ public class GameManager : MonoBehaviour
             //b가 상자를 흘림
             //Debug.Log("a가 더 많다");
             bStat.DropItem(forceToB);
+            if(aStat.stats.type == UnitType.Player || bStat.stats.type == UnitType.Player)
+            {
+                Camera.main.GetComponent<CameraMove>().ShakeCamera(1.5f, 0.5f, 0.2f);
+                //Debug.Log("흔들림을 지시함");
+            }
         }
         else
         {
             //a가 상자를 흘림.
             //Debug.Log("b가 더 많다");
             aStat.DropItem(forceToA);
+            if (aStat.stats.type == UnitType.Player || bStat.stats.type == UnitType.Player)
+            {
+                Camera.main.GetComponent<CameraMove>().ShakeCamera(1.5f, 0.5f, 0.2f);
+                //Debug.Log("흔들림을 지시함");
+            }
         }
 
     }

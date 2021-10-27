@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438683113369988832}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.05, y: 6.9800005, z: -2.2299957}
+  m_LocalPosition: {x: 12.4, y: 13.64, z: -2.2299957}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1748838400583640062}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5981890117671643028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.99, y: 14.15, z: 8.870003}
+  m_LocalPosition: {x: 6.99, y: 19.6, z: 17.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1748838400583640062}
@@ -233,6 +233,8 @@ MonoBehaviour:
   - {fileID: 2919671218985607428}
   - {fileID: 8518316957620974406}
   - {fileID: 3968714615390503034}
+  bodyMesh: {fileID: 7365310201373396941}
+  bodyColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &9074987124709061742
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8508533087424191413}
   - component: {fileID: 1132181836070174632}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: ColBoxLarge
   m_TagString: Truck
   m_Icon: {fileID: 0}
@@ -342,5 +344,10 @@ PrefabInstance:
 --- !u!4 &7365310201371102509 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1586703877481801372, guid: 6dd0e47c233a00145b8d38e39cc7a415, type: 3}
+  m_PrefabInstance: {fileID: 8085030468484901809}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7365310201373396941 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1586703877484094588, guid: 6dd0e47c233a00145b8d38e39cc7a415, type: 3}
   m_PrefabInstance: {fileID: 8085030468484901809}
   m_PrefabAsset: {fileID: 0}

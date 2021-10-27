@@ -8,12 +8,14 @@ public class PlayerController : MonoBehaviour
     public CharacterStats stats;
     public Animator animator;
     public float stunTimer;
+    private Vector3 direction;
 
     public void Init()
     {
         stats = GetComponent<CharacterStats>();
         animator = GetComponentInChildren<Animator>();
         transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
+        GetComponentInChildren<SkinnedMeshRenderer>().material.color = stats.truck.bodyColor;
     }
     //private void Start()
     //{
@@ -42,7 +44,7 @@ public class PlayerController : MonoBehaviour
                         stats.isStuned = false;
                     }
                 }
-
+                AnimationUpdate();
                 break;
             case GameManager.GameState.End:
                 break;
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         //이동 및 회전
         var joystick = multiTouch.Joystick;
-        var direction = new Vector3(joystick.x, 0, joystick.y);
+        direction = new Vector3(joystick.x, 0, joystick.y);
 
         if (direction != Vector3.zero)
         {
@@ -61,22 +63,16 @@ public class PlayerController : MonoBehaviour
             //var lerp = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(direction);
         }
-        
+    }
+    public void AnimationUpdate()
+    {
         //애니
-        if(direction == Vector3.zero)
-        {
-            if(stats.itemStack == 0)
-                animator.SetTrigger("JustIdle");
-            else
-                animator.SetTrigger("Lift");
-        }
+        if (direction == Vector3.zero)
+            animator.SetFloat("Speed", 0f);
         else
-        {
-            if (stats.itemStack == 0)
-                animator.SetTrigger("JustRun");
-            else
-                animator.SetTrigger("LiftRun");
-        }
+            animator.SetFloat("Speed", 1f);
+
+        animator.SetInteger("Stack", stats.itemStack);
     }
     public void CrushInit()
     {

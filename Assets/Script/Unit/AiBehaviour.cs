@@ -118,6 +118,7 @@ public class AiBehaviour : MonoBehaviour
         State = AIState.Idle;
         prevState = AIState.FindMoney;
         transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
+        GetComponentInChildren<SkinnedMeshRenderer>().material.color = stats.truck.bodyColor;
 
         moneys = GameObject.FindGameObjectsWithTag("Money");
         LowItems = GameObject.FindGameObjectsWithTag("LowItem");
