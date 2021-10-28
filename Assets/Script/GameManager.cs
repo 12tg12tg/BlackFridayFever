@@ -253,6 +253,8 @@ public class GameManager : MonoBehaviour
     //끝나면 카메라랑 연동해서 엔딩 연출 나오도록 하는 함수.
     public bool IsEnd(CharacterStats unit)
     {
+        if (State == GameState.End) return false;
+
         if(unit.truck.currentScore >= curStageInfo.goalScore)
         {
             //종료 점수에 도달했다면 게임매니저의 상태를 End로 바꾸면서 현재 우승자 AI 보내기? → 카메라우승자로 이동 → 플레이어로 이동.
@@ -307,7 +309,7 @@ public class GameManager : MonoBehaviour
             bStat.DropItem(forceToB);
             if(aStat.stats.type == UnitType.Player || bStat.stats.type == UnitType.Player)
             {
-                Camera.main.GetComponent<CameraMove>().ShakeCamera(1.5f, 0.5f, 0.2f);
+                Camera.main.GetComponent<CameraMove>().ShakeCamera(1.5f, 0.4f, 0.2f);
                 //Debug.Log("흔들림을 지시함");
             }
         }
@@ -318,7 +320,7 @@ public class GameManager : MonoBehaviour
             aStat.DropItem(forceToA);
             if (aStat.stats.type == UnitType.Player || bStat.stats.type == UnitType.Player)
             {
-                Camera.main.GetComponent<CameraMove>().ShakeCamera(1.5f, 0.5f, 0.2f);
+                Camera.main.GetComponent<CameraMove>().ShakeCamera(1.5f, 0.4f, 0.2f);
                 //Debug.Log("흔들림을 지시함");
             }
         }

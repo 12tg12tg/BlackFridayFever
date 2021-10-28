@@ -15,6 +15,9 @@ public class RoamingAiBehaviour : UnitBehaviour
     private bool isTarget;
     SpawnObject target;
 
+    public GameObject stickman;
+    public AiRagdoll ragdoll;
+
     private bool isKnockDown;
 
     private void Awake()
@@ -89,16 +92,29 @@ public class RoamingAiBehaviour : UnitBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(!isKnockDown && collision.gameObject.layer == LayerMask.NameToLayer("Unit"))
+        if(!isKnockDown && collision.gameObject.tag == "Player" &&
+            collision.gameObject.GetComponent<CharacterStats>().itemStack > 5)
         {
             isKnockDown = true;
 
             var direction = transform.position - collision.transform.position;
+            direction = direction.normalized * 400;
+            direction.y += 500f;
 
-            var rigid = GetComponent<Rigidbody>();
-            rigid.constraints = RigidbodyConstraints.None;
-            rigid.AddForce(direction * 1000f, ForceMode.Impulse);
-            //이거 더 뻥 날라가게만들고 렉돌로 치환.
+
+
+            ragdoll = GameObjectPool.Instance.GetObject(PoolTag.Ragdoll).GetComponent<AiRagdoll>();
+            ragdoll.transform.position = transform.position;
+            ragdoll.transform.rotation = transform.rotation;
+            ragdoll.spine.AddForce(direction, ForceMode.Impulse);
+
+            var colliders = ragdoll.GetComponentsInChildren<Collider>();
+            foreach (var item in colliders)
+            {
+                item.isTrigger = true;
+            }
+
+            gameObject.SetActive(false);  //해제
         }
     }
 }
