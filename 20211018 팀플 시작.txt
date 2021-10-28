@@ -190,12 +190,16 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 +10) 랙돌 문제점 : 시원하게 날라가지 않음O. 갑자기 형체가 사라짐 O. 아이템과 접촉해버림. O
 
 3. UIUIUIUI
-	1) EndingUI
+	1) EndingUI 1/2/3
+	2) Main
+	3) Game
+	4) Skin
+	5) Skin pop up
 
 4. 렉돌 충돌			O
 5. 이펙트 / 사운드 / 아이템 회전
 6. AI 개성 창조
-
+7. 흰색애들 스폰지점 및 증식시키자. 흰색애들 움직이는거 없애자.
 
 
 
