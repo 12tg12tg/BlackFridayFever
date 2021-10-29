@@ -211,6 +211,7 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 
 
 
+
 +) 고정형 오브젝트 Static 체크하는거 고려해봅시다.
 
 +) 아이템이펙트, 아이템표식
@@ -266,3 +267,10 @@ SceneManager.SetActiveScene(SceneManager.GetSceneByName("Scene2"))
 
 cf) 무료 사운드 에셋
 https://www.youtube.com/watch?v=UGJ6T1g1BZk&t=19s&ab_channel=%EA%B3%A8%EB%93%9C%EB%A9%94%ED%83%88
+
+cf) 3D 오브젝트  UI 이미지화 하기
+New Rendered Texture 만들고
+새 카메라에 TargetTExture에 방금 만든거 넣고
+RawImage에도 방금 만든거 넣고
+카메라 레이어를 3DUI로 지정하고
+기존카메라에서 3DUI 빼고

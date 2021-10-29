@@ -113,9 +113,9 @@ public class GameManager : MonoBehaviour
             case GameState.End:
                 if(mainCam.isSecondWinnerMoveEnd)
                 {
-                    //2초후 유아이띄우기
+                    //3초후 유아이띄우기
                     endUITimer += Time.deltaTime;
-                    if (!endSceneAdded && endUITimer > 2f)
+                    if (!endSceneAdded && endUITimer > 3f)
                     {
                         GoEndUi();
                         endSceneAdded = true;
@@ -161,7 +161,8 @@ public class GameManager : MonoBehaviour
     }
     private void GoEndUi()
     {
-        SceneManager.LoadScene("EndUi", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("EndUi", LoadSceneMode.Additive);
+        WindowManager.Instance.Open(Windows.Win);
     }
 
     public void EndingScene(CharacterStats winner) //1회 호출.
