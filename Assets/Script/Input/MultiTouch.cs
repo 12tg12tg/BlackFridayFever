@@ -19,6 +19,7 @@ public class MultiTouch : MonoBehaviour
     public float maxZoomInch = 0.5f;
 
     // JoyStick
+    private Vector2 center;
     private float minMoveInch = 0.05f;
     private float minMovePixels;
 
@@ -167,15 +168,20 @@ public class MultiTouch : MonoBehaviour
         }
 
         //Joystick
-        if(touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+        if (touch.phase == TouchPhase.Began)
+            center = touch.position;
+        if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
         {
-            var prevPos = touch.position - touch.deltaPosition;
-            var dir = touch.position - prevPos;
-            if (dir.magnitude > minMovePixels)
-            {
-                dir = dir.normalized;
-                Joystick = dir;
-            }
+            var dir = touch.position - center;
+            Joystick = dir.normalized;
+
+            //var prevPos = touch.position - touch.deltaPosition;
+            //var dir = touch.position - prevPos;
+            //if (dir.magnitude > minMovePixels)
+            //{
+            //    dir = dir.normalized;
+            //    Joystick = dir;
+            //}
         }
         else
         {

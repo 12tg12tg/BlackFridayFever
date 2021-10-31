@@ -11,7 +11,7 @@ public class SpawnObject : MonoBehaviour
     private float timer;
 
 
-    private void Start()
+    private void Awake()
     {
         SpawnNewItem();
     }

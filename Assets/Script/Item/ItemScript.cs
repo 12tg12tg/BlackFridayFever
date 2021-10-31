@@ -12,7 +12,8 @@ public class ItemScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Unit"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Unit") &&
+            other.GetComponent<RoamingAiBehaviour>() == null)
         {
             var stats = other.gameObject.GetComponent<CharacterStats>();
             if (!stats.isStuned && GameManager.GM.ItemCollsion(stats, info))

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128a3291bc25bdc40ae5086ac17e400f, type: 3}
   m_Name: AI_baby
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 8.5
   stunTime: 3
   maximumMoney: 20
   maximumScore: 20

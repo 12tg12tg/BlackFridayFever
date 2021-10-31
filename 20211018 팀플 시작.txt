@@ -111,7 +111,7 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 
 
 1+. 플레이어 Save 이후 애니메이션 안바뀜. : Save중 못움직이게 하자.
-2. 엔딩씬(춤추기, 카메라이동)
+2. 엔딩씬(춤추기, 카메라이동) 
 3. Pool 일반화 O
 4. 게임오브젝트에서 씬오브젝트찾아오자 태그로!! O
 5. 애니메이션뜯기
@@ -130,17 +130,76 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 
 
 <20211024 일>
-0. 에셋적용, 2배
+0. 에셋적용, 2배 O
 1. 상자 자리에 5초 후 이전 아이템 생성시키기. O 상자에 addForce 조금 더 O
 5. 디테일 : 케릭터 시작위치 조금 더 앞으로 O
-3. 엔딩씬 ( 춤추기, 카메라이동)
-4. 시작씬 ( 카메라 드래그 )
-7. 스테이지버튼을 누르면 다음씬이 로드되야됨. 그럼 그때 게임매니저가 받아서 연결해야됨.
-　로드씬 두번째매개변수 additive모드.
+4. 시작씬 ( 카메라 드래그 )		O	
+7. 스테이지버튼을 누르면 다음씬이 로드되야됨. 그럼 그때 게임매니저가 받아서 연결해야됨. O
+　로드씬 두번째매개변수 additive모드. O
+8. 이동 및 속도 조정 O
+9. 시야막 O
 
 <후순위>
-6. 애니메이션 컨트롤러 재구성
-2. 플레이어 Save 이후 애니메이션 안바뀜 : Save 중 못움직이게 하자.
+2. 플레이어 Save 이후 애니메이션 안바뀜 : Save 중 못움직이게 하자. O
+
+<쌤께여쭤볼꺼>
+1. 에셋 투명도 적용 : 메테리얼 두개로 번갈아서 사용.		O
+2. 활성화안되는이유
+	SceneManager.SetActiveScene(SceneManager.GetSceneAt(stage + 1));
+3. Tag로 못찾는 이유 : 다음프레임에 찾을 수 있을거라고 하시더라 O
+
+<현준님여쭤볼꺼>
+1. 차O, 돈O, 투명도O
+
+
+
+
+
+<20211026 화>
+1. 애니메이션 컨트롤러 재구성				O
+	Int Stack : 짐을 들 것인가 말것인가 결정		O
+	Speed : 이동중일때 1, 이동중이 아닐때 0.		O
+	
+	Trigger : Push, Dance, Defeated, Stumble		O
+
+	+ 넘어지고 템주웠을때, goTruck으로 가게된다. 근데 이때 한번더 부딫히면 넘어지는 애니는 재생되는데 agent는 비활성화가 안되는듯?						O
+		왜 부딫혔는데 FindMoney가되느냐		O
+		원래 FindMoney로 가는 분기점은 : 		O
+
++) 상자 잔속 버그 수정 : O
+
+2. 엔딩씬 ( 춤추기, 카메라이동 )
++1) 트럭에 짐 실을때 카메라회전?	O
+	Truck
+		ColBox : Truck태그 / 디폴트레이어 / BoxCollider / TruckScript(X)		O
+		doking : 태그레이어없음. Box Collider / DokingSpot(본인Truck연결)	O
+
+	새벽을깨울때 할일
+		Truck시점 조금더 다듬어볼까?	O
+		엔딩씬 빠르게 끝낼건데, 짐 넣을때 미리 끝낫는지 조사해서 끝났으면 해당 AI 중심으로 Truck시점 재생하고O
+		춤시작하자마자 플레이어위치로 카메라 옮겨서 좌절 담자.		O
+
++2) 상자높이가 입구보다 높을때 입구늘려버리기? 		X
++3) 트럭색, unit색 맞추기					O
++4) 유리벽 길막기 					O
++5) 뒷쪽 가판대 콜라이더 잡기				O
++6) 충돌시 카메라흔들기					O
++7) 플레이어 애니메이터 새로만든걸로 수정			O
++8) 짐을 차에 실을때 공중에 떠오르지않게해보기		O
++9) 짐 던져버리기.						O
++10) 랙돌 문제점 : 시원하게 날라가지 않음O. 갑자기 형체가 사라짐 O. 아이템과 접촉해버림. O
+
+3. UIUIUIUI
+	1) EndingUI 1/2/3
+	2) Main
+	3) Game
+	4) Skin
+	5) Skin pop up
+
+4. 렉돌 충돌			O
+5. 이펙트 / 사운드 / 아이템 회전
+6. AI 개성 창조
+7. 흰색애들 스폰지점 및 증식시키자. 흰색애들 움직이는거 없애자.
 
 
 
@@ -153,24 +212,65 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 
 
 
++) 고정형 오브젝트 Static 체크하는거 고려해봅시다.
+
++) 아이템이펙트, 아이템표식
++) AI 개성
 
 
 
+<배치정리>
+[Header("(Inspector 수정 불필요)")]
+[Header("(Inspector 연결) Unit → Stats 생성해서 넣기!")] 
 
+1. AI배치
+	- 연결
+		1) Unit - Stats 생성해서 적용시키기.
+		2) StageManager의 Stage 스크립트에 Ais에 AI 드래그 드랍으로 넣기.
+2. Stage 정보 구성
+	- 연결
+		1) Ais, Tucks, StartCamPos, StartCameLook
+3. ItemSpot / ParkingSpot : 스폰위치 심어두기.
 
+4. SaleStand : 
+	- 연결
+		1) Mesh : 투명화 시킬 MeshRenderer
+		2) Transparent : 위 mesh에 적용시킬 Transparent모드의 Material
 
-AiBehaviour : AiDance애니메이션함수
+5. Truck
+	- 연결
+		1) bodyMesh : BodyMesh에 차량 색에 해당하는 파츠의 MeshRenderer 연결
+		2) StageManager에 차량 4종 연결시키기.
+
+6. Front(정면입국 벽) - 다른맵 입구와도 공동으로 사용할 수 있을런지 모르겠음.
+	- 연결 
+		1) 모든 파츠들의 MeshRenderer와 Transparent용 Material을 연결한다.
 
 
 
 	새우에 새우추가
 
-Freeze
+cf) Freeze
 X만 프리즌
 오브젝트.rigidbody.constraints=RigidbodyConstraints.FreezePositionX;
-
 X, Z 프리즌하기
 오브젝트.rigidbody.constraints=RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
-
 X 빼고 프리즌하기
 오브젝트.rigidbody.constraints=RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+
+cf) Active Scene설정
+SceneManager.LoadScene("Scene2", LoadSceneMode.Additive); //씬불러오기
+출처: https://unitytip.tistory.com/49 [Unity Tip 모음 by dnrkckzk]
+ Additive모드로 씬을 불러오게 되면 원래 있던 씬이 Active Scene이 됩니다. (정확히는 Active Scene이던 게 계속 가는 거겠죠.) 이런 상황에서 Instatiate라든가 어떤 동적인 생성을 하게 되면 오브젝트들은 Active씬에 귀속되게 됩니다. 그래서 불려온 Scene이 되돌아가도 사라지지 않고 부른 씬에 남아있게 됩니다. 그런 상황을 방지하기 위해서는 Active Scene을 코드로 수정을 해줘야 합니다. 설정 방법은 간단합니다.
+SceneManager.SetActiveScene(SceneManager.GetSceneByName("Scene2"))
+ //이렇게 설정해주면 Active Scene을 불러온 씬으로 설정해주고 생성된 오브젝트들도 불려온 Scene에 귀속되게 됩니다.
+
+cf) 무료 사운드 에셋
+https://www.youtube.com/watch?v=UGJ6T1g1BZk&t=19s&ab_channel=%EA%B3%A8%EB%93%9C%EB%A9%94%ED%83%88
+
+cf) 3D 오브젝트  UI 이미지화 하기
+New Rendered Texture 만들고
+새 카메라에 TargetTExture에 방금 만든거 넣고
+RawImage에도 방금 만든거 넣고
+카메라 레이어를 3DUI로 지정하고
+기존카메라에서 3DUI 빼고

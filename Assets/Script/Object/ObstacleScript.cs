@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class ObstacleScript : MonoBehaviour
 {
-    private MeshRenderer mesh;
-    private Color originalColor;
-    private void Start()
+    private Material original;
+    [Header("(Inspector 모두 연결 필요)")]
+    public MeshRenderer mesh;
+    public Material transparent;
+    private void Awake()
     {
-        mesh = GetComponent<MeshRenderer>();
-        originalColor = mesh.material.color;
+        original = mesh.material;
     }
     private void Update()
     {
+        if (GameManager.GM.State != GameManager.GameState.Play)
+            return;
+
         var playerPos = GameManager.GM.player.transform.position;
         var playerViewport = Camera.main.WorldToViewportPoint(playerPos);
         Ray ray = Camera.main.ViewportPointToRay(playerViewport);
@@ -21,12 +25,11 @@ public class ObstacleScript : MonoBehaviour
         {
             if (hit.transform.gameObject == gameObject)
             {
-                var color = mesh.material.color;
-                color.a = 0.2f;
-                mesh.material.color = color;
+                mesh.material = transparent;
+                //Debug.Log("메테리얼 바뀜");
             }
             else
-                mesh.material.color = originalColor;
+                mesh.material = original;
         }
     }
 }
