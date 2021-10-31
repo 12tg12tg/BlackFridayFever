@@ -6,7 +6,8 @@ public enum Windows
 {
     Win,
     RewardPopUp,
-    Defeated
+    Defeated,
+
 }
 
 public class WindowManager : MonoBehaviour

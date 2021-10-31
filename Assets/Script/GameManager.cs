@@ -46,10 +46,10 @@ public class GameManager : MonoBehaviour
     }
 
     //UI
-    public Text score;
-    public Text money;
-    public Text stack;
-    public Text gauage;
+    //public Text score;
+    //public Text money;
+    //public Text stack;
+    //public Text gauage;
 
     //Player
     public GameObject player;
@@ -69,35 +69,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        //Debug.Log($"GameManager Awake : {Time.time}");
-        //싱글톤 및 상태 초기화 : 일단 Idle로 초기화 하지 않음. 
         instance = this;
-
     }
     private void Start()
     {
         State = GameState.Idle;
-
-        //Ai와 플레이어의 상호 연결
         StartLevel();
-        Debug.Log($"씬 준비 완료.");
-
-        //플레이어활성화
-        player.SetActive(true);
-
-        //트럭관련 Init
-        player.GetComponent<PlayerController>().Init();
-        for (int i = 0; i < curStageInfo.Ais.Length; i++)
-        {
-            curStageInfo.Ais[i].GetComponent<AiBehaviour>().Init();
-        }
-
-        //카메라 활성화
-        mainCam = Camera.main.GetComponent<CameraMove>();
-        mainCam.Init();
-
-        //게임매니저 상태 변경
-        State = GameState.Start;
     }
 
     private void Update()
@@ -127,6 +104,8 @@ public class GameManager : MonoBehaviour
 
     private void StartLevel()
     {
+        //Ai와 플레이어의 상호 연결
+
         //버튼이 눌리면, 해당 스테이지 시작.
         curStageInfo = GameObject.FindGameObjectWithTag("Stage").GetComponent<Stage>();
 
@@ -149,6 +128,25 @@ public class GameManager : MonoBehaviour
         {
             AIs[i].truck = trucks[i+1];
         }
+
+        Debug.Log($"씬 준비 완료.");
+
+        //플레이어활성화
+        player.SetActive(true);
+
+        //트럭관련 Init
+        player.GetComponent<PlayerController>().Init();
+        for (int i = 0; i < curStageInfo.Ais.Length; i++)
+        {
+            curStageInfo.Ais[i].GetComponent<AiBehaviour>().Init();
+        }
+
+        //카메라 활성화
+        mainCam = Camera.main.GetComponent<CameraMove>();
+        mainCam.Init();
+
+        //게임매니저 상태 변경
+        State = GameState.Start;
     }
 
     private void GoToMain()
@@ -221,7 +219,7 @@ public class GameManager : MonoBehaviour
         unit.getMoney(money.money);
         if (unit.tag == "Player")
         {
-            this.money.text = unit.money.ToString();
+            //this.money.text = unit.money.ToString();
         }
     }
 
@@ -241,10 +239,10 @@ public class GameManager : MonoBehaviour
 
             if (unit.tag == "Player")
             {
-                score.text = unit.score.ToString();
-                money.text = unit.money.ToString();
-                this.stack.text = unit.itemStack.ToString();
-                gauage.text = unit.score.ToString("P1");
+                //score.text = unit.score.ToString();
+                //money.text = unit.money.ToString();
+                //this.stack.text = unit.itemStack.ToString();
+                //gauage.text = unit.score.ToString("P1");
             }
             return true;
         }
