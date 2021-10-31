@@ -68,6 +68,7 @@ public class CameraMove : MonoBehaviour
         switch (GameManager.GM.State)
         {
             case GameManager.GameState.Idle:
+                break;
             case GameManager.GameState.Start:
                 //Debug.Log("몇번이나 갈까요?");
                 StartCoroutine(StartCameraMove());
