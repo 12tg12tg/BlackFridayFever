@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class MainWindows : MonoBehaviour
+public class MainWindows : GenericWindow
 {
     public MultiTouch mt;
     public Button prev1;
@@ -45,6 +45,7 @@ public class MainWindows : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
         SceneManager.LoadScene(invokeStageNum + 1, LoadSceneMode.Additive);
+        GameManager.isStage = true;
     }
 
     public void BackStage()

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
+    private Vector3 mainOffsetPos;
+    private Quaternion mainOffsetRot;
+
     public CharacterStats player;
     public float offsetZ;
     public float offsetY;
@@ -44,6 +47,12 @@ public class CameraMove : MonoBehaviour
     private CameraShake shakeInfo;
     private float shakeTimer;
     private float shakeCoolTimer;
+
+    private void Awake()
+    {
+        mainOffsetPos = transform.position;
+        mainOffsetRot = transform.rotation;
+    }
 
     public void Init()
     {

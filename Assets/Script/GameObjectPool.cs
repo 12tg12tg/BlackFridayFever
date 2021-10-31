@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum PoolTag
 {
+    RoamingAI,
     Ragdoll,
     Money,
     Box_Low,
@@ -21,8 +22,9 @@ public enum PoolTag
 
 public class GameObjectPool : MonoBehaviour
 {
-    private int poolCount = 30;
+    private int poolCount = 50;
     public static GameObjectPool Instance;
+    public GameObject roamingAI;
     public GameObject ragdollPrefab;
     public GameObject moneyPrefab;
     public GameObject lowBoxPrefab;
@@ -51,6 +53,7 @@ public class GameObjectPool : MonoBehaviour
         Instance = this;
 
         //ÇÁ¸®Æé
+        prefabs.Add(PoolTag.RoamingAI, roamingAI);
         prefabs.Add(PoolTag.Ragdoll, ragdollPrefab);
         prefabs.Add(PoolTag.Box_Low, lowBoxPrefab);
         prefabs.Add(PoolTag.Box_Mid, midBoxPrefab);
@@ -72,6 +75,7 @@ public class GameObjectPool : MonoBehaviour
         HighMax = (int)PoolTag.Item_High_Necklace;
 
         //Ç®
+        pool.Add(PoolTag.RoamingAI, new Queue<GameObject>());
         pool.Add(PoolTag.Ragdoll, new Queue<GameObject>());
         pool.Add(PoolTag.Box_Low, new Queue<GameObject>());
         pool.Add(PoolTag.Box_Mid, new Queue<GameObject>());

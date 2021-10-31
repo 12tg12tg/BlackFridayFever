@@ -15,5 +15,5 @@ MonoBehaviour:
   itemScore: 1
   itemName: Donut
   value: 0
-  poolTag: 5
+  poolTag: 6
   price: 1
