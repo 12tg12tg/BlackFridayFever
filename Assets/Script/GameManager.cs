@@ -67,6 +67,9 @@ public class GameManager : MonoBehaviour
     private float endUITimer;
     private bool endSceneAdded;
 
+    //Main or Stage
+    public static bool isStage;
+
     private void Awake()
     {
         instance = this;
@@ -74,7 +77,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         State = GameState.Idle;
-        StartLevel();
+        if (isStage)
+        {
+            StartLevel();
+        }
+        else
+        {
+            WindowManager.Instance.Init();
+        }
     }
 
     private void Update()
@@ -101,6 +111,14 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    private void StartMain()
+    {
+        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Stage0", LoadSceneMode.Additive);
+        GameManager.isStage = false;
+    }
+
 
     private void StartLevel()
     {
@@ -149,10 +167,6 @@ public class GameManager : MonoBehaviour
         State = GameState.Start;
     }
 
-    private void GoToMain()
-    {
-        SceneManager.LoadScene("main");
-    }
     private void GoNextLevel()
     {
 

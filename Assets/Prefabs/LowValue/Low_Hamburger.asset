@@ -15,5 +15,5 @@ MonoBehaviour:
   itemScore: 1
   itemName: Hamburger
   value: 0
-  poolTag: 6
+  poolTag: 7
   price: 1

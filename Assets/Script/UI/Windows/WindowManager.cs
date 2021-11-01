@@ -7,7 +7,7 @@ public enum Windows
     Win,
     RewardPopUp,
     Defeated,
-
+    Main,
 }
 
 public class WindowManager : MonoBehaviour
@@ -26,9 +26,8 @@ public class WindowManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        Init();
     }
-    private void Init()
+    public void Init()
     {
         for (int i = 0; i < windows.Length; ++i)
         {
