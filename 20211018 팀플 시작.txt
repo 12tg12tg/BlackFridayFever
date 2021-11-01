@@ -204,9 +204,9 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 
 
 <20211031 일>
-1. Main씬에서 쓸 주차장만들기 O
-2. 스킨선택UI 
-3. Game UI
+1. Main씬에서 쓸 주차장만들기		 O
+2. 스킨선택UI 				O			
+3. Game UI				O
 4. 흰색애들 벽충돌 및 선반 충돌 확인. 
 5. 선반이랑 벽이 부딫히도록 하는게 좋을듯. - 자식이라 안되는듯.
 6. AI 개성
@@ -232,6 +232,7 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 	이 객체를 통으로 저장하고, 갱신될때마다 여기다 쓰자.
 	스테택클레스 형태로 세이브/로드.
 3. 씬마다 Navigation 굽고싶은데 지금은 안구워지네요^^ - GAME씬에는 당연히 네비메시가 없는데 경고창이뜬다.
+	알아보고 알려주신대요 									O
 4. 게임씬에 오브젝트풀이있는데, 게임씬은 매번 다시 불러와야한다고하셨자나요.
 	유지되도록..
 	https://docs.unity3d.com/ScriptReference/Object.DontDestroyOnLoad.html
@@ -241,8 +242,8 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 6. 사진찍는 방법
 	별개의 공간에 스테이지를 만들어둔다생각하고, 카메라랑무대 세팅하고, 초상화로 찍고싶은애들을 바꿔가면서,
 	완성된 랜더 텍스쳐의 결과물을 처음로딩할 때 만들어두자.
-
 7. UI 애매합니다
+	유격설정 : Grid로 바둑판배열가고 Virtual안써버리기
 
 
 
@@ -263,7 +264,16 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 
 
 
+<광고연결되는 버튼>
+1. 저장소에서 랜덤오픈
+2. 게임끝나고 리워드 x3
+3. 게임 패배후 재시작
 
+<Save 할 정보>
+1. 보석개수
+2. 스테이지 진척
+3. 열린 스킨 리스트
+4. 열린 차량 스킨 리스트
 
 
 +) 고정형 오브젝트 Static 체크하는거 고려해봅시다.

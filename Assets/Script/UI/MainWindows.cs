@@ -91,4 +91,20 @@ public class MainWindows : GenericWindow
     {
         text.text = $"LEVEL {invokeStageNum.ToString("D2")}";
     }
+
+
+    public OpenWindowButton characterSkin;
+    public OpenWindowButton carSkin;
+    public void OpenSkinStorage()
+    {
+        if (characterSkin.haveNewItem)
+            characterSkin.HaveNewItem(false);
+        WindowManager.Instance.Open(Windows.SkinStorage);
+    }
+    public void OpenCarSkinStorage()
+    {
+        if (carSkin.haveNewItem)
+            carSkin.HaveNewItem(false);
+        WindowManager.Instance.Open(Windows.CarSkinStorage);
+    }
 }

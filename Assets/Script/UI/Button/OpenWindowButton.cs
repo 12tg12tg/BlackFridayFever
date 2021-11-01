@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class OpenWindowButton : MonoBehaviour
 {
-    private bool haveNewItem;
+    public bool haveNewItem;
     public Image img;
     private void Awake()
     {
@@ -18,7 +18,6 @@ public class OpenWindowButton : MonoBehaviour
     {
         if (haveNewItem)
             HaveNewItem(false);
-        Debug.Log("StoragePage");
     }
     public void HaveNewItem(bool isNew)
     {

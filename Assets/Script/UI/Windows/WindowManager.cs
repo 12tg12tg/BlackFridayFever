@@ -8,6 +8,8 @@ public enum Windows
     RewardPopUp,
     Defeated,
     Main,
+    SkinStorage,
+    CarSkinStorage,
 }
 
 public class WindowManager : MonoBehaviour

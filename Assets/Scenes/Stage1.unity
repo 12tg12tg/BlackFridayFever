@@ -3784,7 +3784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7309836810417919826, guid: bf51cac27507b2e4790f95affac43a73, type: 3}
       propertyPath: delay
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7309836810417919826, guid: bf51cac27507b2e4790f95affac43a73, type: 3}
       propertyPath: maxNum

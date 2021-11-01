@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum PoolTag
 {
@@ -115,6 +116,9 @@ public class GameObjectPool : MonoBehaviour
             obj.transform.position = Vector3.zero;
             obj.transform.rotation = Quaternion.identity;
             obj.SetActive(true);
+            var agent = obj.GetComponent<NavMeshAgent>();
+            if(agent != null)
+                agent.enabled = true;
             return obj;
         }
         else
@@ -122,6 +126,9 @@ public class GameObjectPool : MonoBehaviour
             var newObj = CreateNewObject(key);
             newObj.SetActive(true);
             newObj.transform.SetParent(null);
+            var agent = newObj.GetComponent<NavMeshAgent>();
+            if (agent != null)
+                agent.enabled = true;
             return newObj;
         }
     }
@@ -130,7 +137,9 @@ public class GameObjectPool : MonoBehaviour
         var queue = pool[key];
         go.transform.SetParent(transform);
         queue.Enqueue(go);
+        var agent = go.GetComponent<NavMeshAgent>();
+        if (agent != null)
+            agent.enabled = false;
         go.SetActive(false);
     }
-
 }

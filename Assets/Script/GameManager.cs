@@ -174,7 +174,10 @@ public class GameManager : MonoBehaviour
     private void GoEndUi()
     {
         //SceneManager.LoadScene("EndUi", LoadSceneMode.Additive);
-        WindowManager.Instance.Open(Windows.Win);
+        if(winner == player.GetComponent<CharacterStats>())
+            WindowManager.Instance.Open(Windows.Win);
+        else
+            WindowManager.Instance.Open(Windows.Defeated);
     }
 
     public void EndingScene(CharacterStats winner) //1»∏ »£√‚.
