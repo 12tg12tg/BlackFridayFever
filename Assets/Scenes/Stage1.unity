@@ -3787,7 +3787,15 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7309836810417919826, guid: bf51cac27507b2e4790f95affac43a73, type: 3}
+      propertyPath: maxNum
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309836810417919826, guid: bf51cac27507b2e4790f95affac43a73, type: 3}
       propertyPath: isForMain
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309836810417919826, guid: bf51cac27507b2e4790f95affac43a73, type: 3}
+      propertyPath: currentNum
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7309836810417919826, guid: bf51cac27507b2e4790f95affac43a73, type: 3}
