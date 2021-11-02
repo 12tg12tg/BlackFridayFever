@@ -10433,8 +10433,9 @@ MonoBehaviour:
   startCamLook:
   - {fileID: 1815199518}
   - {fileID: 391918619}
+  StageNum: 1
   scanTime: 2.5
-  toPlayerTime: 2.5
+  toPlayerTime: 1
   moneys: []
   LowItems: []
   MidItems: []

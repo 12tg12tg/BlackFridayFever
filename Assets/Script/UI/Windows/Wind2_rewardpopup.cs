@@ -18,6 +18,7 @@ public class Wind2_rewardpopup : GenericWindow
     }
     public void OK()
     {
+        SoundManager.Instance.PlayButtonClick();
         Debug.Log("»õ ½ºÅ² È¹µæ");
         Close();
     }

@@ -21,8 +21,8 @@ public class MainWindows : GenericWindow
     {
         /*저장공간에서 스테이지 정보 불러오기*/
 
-        //현재 스테이지 넘버 설정 (임시 : 5)
-        lastOpenedStage = 5;
+        //현재 스테이지 넘버 설정 (임시 : 1)
+        lastOpenedStage = 1;
         invokeStageNum = lastOpenedStage;
 
         //버튼 활성화여부 결정
@@ -53,6 +53,7 @@ public class MainWindows : GenericWindow
         invokeStageNum--;
         DetermineButtonOnOff();
         MakeText();
+        SoundManager.Instance.PlayButtonClick();
     }
 
     public void NextStage()
@@ -60,6 +61,7 @@ public class MainWindows : GenericWindow
         invokeStageNum++;
         DetermineButtonOnOff();
         MakeText();
+        SoundManager.Instance.PlayButtonClick();
     }
 
     public void BackFiveStage()
@@ -67,6 +69,7 @@ public class MainWindows : GenericWindow
         invokeStageNum -= 5;
         DetermineButtonOnOff();
         MakeText();
+        SoundManager.Instance.PlayButtonClick();
     }
 
     public void NextFiveStage()
@@ -74,6 +77,7 @@ public class MainWindows : GenericWindow
         invokeStageNum += 5;
         DetermineButtonOnOff();
         MakeText();
+        SoundManager.Instance.PlayButtonClick();
     }
 
     public void DetermineButtonOnOff()
@@ -100,11 +104,22 @@ public class MainWindows : GenericWindow
         if (characterSkin.haveNewItem)
             characterSkin.HaveNewItem(false);
         WindowManager.Instance.Open(Windows.SkinStorage);
+        SoundManager.Instance.PlayButtonClick();
     }
     public void OpenCarSkinStorage()
     {
         if (carSkin.haveNewItem)
             carSkin.HaveNewItem(false);
         WindowManager.Instance.Open(Windows.CarSkinStorage);
+        SoundManager.Instance.PlayButtonClick();
+    }
+
+    public void SetMute(bool isMute)
+    {
+        SoundManager.Instance.SetMute(isMute);
+    }
+    public void SetVibrate(bool noVibrate)
+    {
+        SoundManager.Instance.SetVibrate(noVibrate);
     }
 }

@@ -14,6 +14,8 @@ public class Stage : MonoBehaviour
     public Transform[] startCamPos;
     public Transform[] startCamLook;
 
+    public int StageNum;
+
     [Header("(Inspector 수정 불필요)")]
     public float scanTime = 2.5f;
     public float toPlayerTime = 2.5f;

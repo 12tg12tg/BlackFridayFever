@@ -81,7 +81,12 @@ public class CharacterStats : MonoBehaviour
             }
             removeItem.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             purchasedList.RemoveAt(0);
-            yield return new WaitForSeconds(0.2f);
+
+            //사운드재생
+            if(GameManager.GM.State==GameManager.GameState.End ||
+                stats.type == UnitType.Player)
+                SoundManager.Instance.PlayLoadTruck();
+            yield return new WaitForSeconds(0.15f);
         }
 
         itemStack = 0;

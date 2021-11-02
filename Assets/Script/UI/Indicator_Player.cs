@@ -15,6 +15,8 @@ public class Indicator_Player : MonoBehaviour
     public Color safeColor;
     public Color warnColor;
 
+    private float ratio;
+
     private void Update()
     {
         if (GameManager.GM.State == GameManager.GameState.Play)
@@ -37,7 +39,7 @@ public class Indicator_Player : MonoBehaviour
         var cur = stats.truck.currentScore
             + stats.score;
 
-        var ratio = cur / (float)total;
+        ratio = cur / (float)total;
         ratio = Mathf.Clamp01(ratio);
 
         progressImg.fillAmount = ratio;
@@ -59,6 +61,7 @@ public class Indicator_Player : MonoBehaviour
     private void ImageEnable(bool enable)
     {
         progressImg.enabled = enable;
-        backgroundImg.enabled = enable;
+        if(enable && ratio != 0f)
+            backgroundImg.enabled = enable;
     }
 }

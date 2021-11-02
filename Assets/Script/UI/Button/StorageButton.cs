@@ -22,6 +22,8 @@ public class StorageButton : MonoBehaviour
 
     public void OnClick()
     {
+        SoundManager.Instance.PlayButtonClick();
+
         if (isOpened)
         {
             buttonGroup.SelectedButtonReset(this);

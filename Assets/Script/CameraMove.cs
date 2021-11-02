@@ -17,7 +17,7 @@ public class CameraMove : MonoBehaviour
     public float scanTime;
     public float toPlayerTime;
     public float timer;
-    public bool lookPlayer;
+    //public bool lookPlayer;
 
     private bool isTruckSaveLoad;
     private float truckSaveCamTime = 1f;
@@ -47,6 +47,8 @@ public class CameraMove : MonoBehaviour
     private CameraShake shakeInfo;
     private float shakeTimer;
     private float shakeCoolTimer;
+
+    private Coroutine CoStartCameraMove;
 
     private void Awake()
     {
@@ -80,7 +82,8 @@ public class CameraMove : MonoBehaviour
                 break;
             case GameManager.GameState.Start:
                 //Debug.Log("몇번이나 갈까요?");
-                StartCoroutine(StartCameraMove());
+                if(CoStartCameraMove == null)
+                    CoStartCameraMove = StartCoroutine(StartCameraMove());
                 break;
             case GameManager.GameState.Play:
                 //카메라 위치
@@ -166,21 +169,19 @@ public class CameraMove : MonoBehaviour
 
     private IEnumerator StartCameraMove()
     {
-        yield return new WaitForSeconds(1.5f);
-        if (!lookPlayer && timer < scanTime)
+        yield return new WaitForSeconds(1.0f);
+
+        while (timer < scanTime)
         {
             timer += Time.deltaTime;
             iTween.PutOnPath(gameObject, camPos, timer / scanTime);
             var toward = iTween.PointOnPath(camLook, timer / scanTime); //위치반환값을 받아서 직접 대입.
             transform.rotation = Quaternion.LookRotation((toward - transform.position).normalized);
+            yield return null;
+        }
 
-        }
-        else
-        {
-            lookPlayer = true;
-            StartCoroutine(LerpToPlayerPos());
-            //GameManager.GM.State = GameManager.GameState.Play;
-        }
+        StartCoroutine(LerpToPlayerPos());
+        //GameManager.GM.State = GameManager.GameState.Play;
     }
 
     private IEnumerator LerpToPlayerPos()
@@ -202,7 +203,7 @@ public class CameraMove : MonoBehaviour
             yield return null;
         }
         GameManager.GM.State = GameManager.GameState.Play;
-        lookPlayer = false;
+        //lookPlayer = false;
         timer = 0f;
     }
 

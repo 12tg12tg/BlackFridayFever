@@ -18,12 +18,14 @@ public class DeafeatWindow : GenericWindow
     }
     public void Continue()
     {
+        SoundManager.Instance.PlayButtonClick();
         Debug.Log("컨티뉴");
         /*광고재생*/
     }
     public void NoThanks()
     {
+        SoundManager.Instance.PlayButtonClick();
         Debug.Log("노땡큐");
-        /*메인화면으로*/
+        GameManager.GM.StartMain();
     }
 }

@@ -88,6 +88,7 @@ public class StorageButtonGroup : GenericWindow
 
     public void BuySkin()
     {
+        SoundManager.Instance.PlayButtonClick();
         /*static 전역 Save 구조체에서 금액 확인 후 차감*/
         if (true/*금액 비교 구문*/)
         {
@@ -103,6 +104,8 @@ public class StorageButtonGroup : GenericWindow
 
     public void WatchAdForSkin()
     {
+        SoundManager.Instance.PlayButtonClick();
+
         /*광고 시청 구문*/
         Debug.Log("스킨 오픈을 위한 광고 시청");
         if(true/*광고 끝*/)
@@ -113,6 +116,9 @@ public class StorageButtonGroup : GenericWindow
 
     public void Back()
     {
+        Debug.Log("백");
+
+        SoundManager.Instance.PlayButtonClick();
         /*플레이어의 스킨을 현재 선택된 스킨으로 지정하는 구문*/
 
         //curSelectedButton.skinPrefab;

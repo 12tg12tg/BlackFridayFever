@@ -37,9 +37,11 @@ public class GameManager : MonoBehaviour
                 case GameState.Start:
                     break;
                 case GameState.Play:
+                    SoundManager.Instance.PlayGameBGM();
                     //문열기 - 취소
                     break;
                 case GameState.End:
+                    SoundManager.Instance.StopGameBGM();
                     break;
             }
         }
@@ -112,10 +114,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void StartMain()
+    public void StartMain()
     {
         SceneManager.LoadScene("Game");
         SceneManager.LoadScene("Stage0", LoadSceneMode.Additive);
+        GameManager.isStage = false;
+    }
+
+    public void GoNextLevel()
+    {
+        var nextStageNum = curStageInfo.StageNum + 1;
+        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene($"Stage{nextStageNum}", LoadSceneMode.Additive);
         GameManager.isStage = false;
     }
 
@@ -176,10 +186,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void GoNextLevel()
-    {
-
-    }
     private void GoEndUi()
     {
         //SceneManager.LoadScene("EndUi", LoadSceneMode.Additive);
@@ -216,6 +222,11 @@ public class GameManager : MonoBehaviour
     public void LetsDance()
     {
         winner.EndAnimation(true);
+
+        if (winner.stats.type == UnitType.Player)
+        {
+            SoundManager.Instance.PlayWinBgm();
+        }
     }
 
     public void LetsDeafeated()
@@ -227,6 +238,7 @@ public class GameManager : MonoBehaviour
         {
             playerStats.EndAnimation(false);
             playerStats.BoxUnFreeze();
+            SoundManager.Instance.PlayLoseBgm();
         }
         for (int i = 0; i < Ais.Length; i++)
         {
@@ -236,6 +248,7 @@ public class GameManager : MonoBehaviour
                 Ais[i].BoxUnFreeze();
             }
         }
+
     }
 
 
@@ -246,6 +259,7 @@ public class GameManager : MonoBehaviour
         if (unit.tag == "Player")
         {
             //this.money.text = unit.money.ToString();
+            SoundManager.Instance.PlayTakeMoney();
         }
     }
 
@@ -269,6 +283,7 @@ public class GameManager : MonoBehaviour
                 //money.text = unit.money.ToString();
                 //this.stack.text = unit.itemStack.ToString();
                 //gauage.text = unit.score.ToString("P1");
+                SoundManager.Instance.PlayTakeItem();
             }
             return true;
         }
@@ -288,8 +303,6 @@ public class GameManager : MonoBehaviour
             State = GameState.End;
 
             EndingScene(unit);
-
-
             return true;
         }
         return false;
@@ -335,7 +348,16 @@ public class GameManager : MonoBehaviour
             if(aStat.stats.type == UnitType.Player || bStat.stats.type == UnitType.Player)
             {
                 Camera.main.GetComponent<CameraMove>().ShakeCamera(1.5f, 0.4f, 0.2f);
-                //Debug.Log("흔들림을 지시함");
+
+                //사운드
+                if(aStat.stats.type == UnitType.Player)
+                {
+                    SoundManager.Instance.PlayCrushWin();
+                }
+                else if(bStat.stats.type == UnitType.Player)
+                {
+                    SoundManager.Instance.PlayCrushLose();
+                }
             }
         }
         else
@@ -346,7 +368,16 @@ public class GameManager : MonoBehaviour
             if (aStat.stats.type == UnitType.Player || bStat.stats.type == UnitType.Player)
             {
                 Camera.main.GetComponent<CameraMove>().ShakeCamera(1.5f, 0.4f, 0.2f);
-                //Debug.Log("흔들림을 지시함");
+                SoundManager.Instance.Vibrate();
+            }
+            //사운드
+            if (aStat.stats.type == UnitType.Player)
+            {
+                SoundManager.Instance.PlayCrushLose();
+            }
+            else if (bStat.stats.type == UnitType.Player)
+            {
+                SoundManager.Instance.PlayCrushWin();
             }
         }
 
