@@ -44,7 +44,7 @@ public class MainWindows : GenericWindow
     public void LoadStageScene()
     {
         SceneManager.LoadScene("Game");
-        SceneManager.LoadScene(invokeStageNum + 1, LoadSceneMode.Additive);
+        SceneManager.LoadScene($"Stage{invokeStageNum}", LoadSceneMode.Additive);
         GameManager.isStage = true;
     }
 

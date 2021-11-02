@@ -10,6 +10,7 @@ public enum Windows
     Main,
     SkinStorage,
     CarSkinStorage,
+    InGame,
 }
 
 public class WindowManager : MonoBehaviour

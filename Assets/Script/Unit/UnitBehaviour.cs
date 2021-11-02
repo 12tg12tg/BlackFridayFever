@@ -6,6 +6,7 @@ public class UnitBehaviour : MonoBehaviour
 {
     public Animator animator;
     public CharacterStats stats;
+    public Color meshColor;
     public void CrushInit() {
         animator.SetTrigger("Stumble");
     }

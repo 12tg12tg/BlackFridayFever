@@ -1,5 +1,5 @@
 {
-    "m_SelectedDeviceId": "R3CM903DF1H",
+    "m_SelectedDeviceId": "R3CRA0DWN2A",
     "m_SelectedPackage": {
         "deviceId": "",
         "name": "",
@@ -12,6 +12,24 @@
             "deviceId": "R3CM903DF1H",
             "name": "com.sec.android.app.launcher",
             "processId": 17122,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CRA0DWN2A",
+            "name": "com.sec.android.app.myfiles",
+            "processId": 29343,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CRA0DWN2A",
+            "name": "com.sec.android.app.launcher",
+            "processId": 22015,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CRA0DWN2A",
+            "name": "com.TeamSummit.BlackFridayFever",
+            "processId": 30288,
             "exited": false
         }
     ],

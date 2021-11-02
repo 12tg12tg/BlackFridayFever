@@ -165,6 +165,15 @@ public class GameManager : MonoBehaviour
 
         //게임매니저 상태 변경
         State = GameState.Start;
+
+        //게임씬 열기 - UI Indicator연결
+        var window = WindowManager.Instance.Open(Windows.InGame);
+        var inGmaeWindow = window as InGameWindow;
+        var indicators = inGmaeWindow.indicators;
+        for (int i = 0; i < 3; i++)
+        {
+            indicators[i].Init(curStageInfo.Ais[i].GetComponent<AiBehaviour>());
+        }
     }
 
     private void GoNextLevel()

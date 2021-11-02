@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1252465198}
   - component: {fileID: 1689547326721900686}
   - component: {fileID: 3058063900735574284}
-  m_Layer: 8
+  m_Layer: 20
   m_Name: AI_Roaming
   m_TagString: AI
   m_Icon: {fileID: 0}
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   stats: {fileID: 0}
+  meshColor: {r: 0, g: 0, b: 0, a: 0}
   isForMain: 0
   wayPoints: []
   moneys: []

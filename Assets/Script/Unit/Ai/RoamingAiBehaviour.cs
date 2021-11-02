@@ -123,12 +123,26 @@ public class RoamingAiBehaviour : UnitBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(!isKnockDown && collision.gameObject.tag == "Player" &&
-            collision.gameObject.GetComponent<CharacterStats>().itemStack > 5)
+        var playerController = collision.gameObject.GetComponentInParent<PlayerController>();
+        bool isPlayer = playerController != null;
+        CharacterStats stats;
+        bool isStrong;
+
+        if (isPlayer)
+        {
+            stats = playerController.stats;
+            isStrong = stats.itemStack > 5;
+        }
+        else
+            return;
+
+        if (!isKnockDown && isStrong)
         {
             isKnockDown = true;
 
-            var direction = transform.position - collision.transform.position;
+            var playerPos = playerController.transform.position;
+
+            var direction = transform.position - playerPos;
             direction = direction.normalized * 400;
             direction.y += 500f;
 

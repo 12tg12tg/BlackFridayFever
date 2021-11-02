@@ -85,7 +85,8 @@ public class AiBehaviour : UnitBehaviour
         State = AIState.Idle;
         prevState = AIState.FindMoney;
         transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
-        GetComponentInChildren<SkinnedMeshRenderer>().material.color = stats.truck.bodyColor;
+        meshColor = stats.truck.bodyColor;
+        GetComponentInChildren<SkinnedMeshRenderer>().material.color = meshColor;
 
         moneys = Stage.Instance.moneys;
         LowItems = Stage.Instance.LowItems;
