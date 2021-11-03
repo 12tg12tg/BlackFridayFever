@@ -5,24 +5,70 @@ using UnityEngine.UI;
 
 public class StorageButtonGroup : GenericWindow
 {
+    public Text diamondTxt;
+
     public StorageButton[] buttons;
     public Button AD_Link;
     public Button buy500;
 
-    public StorageButton curSelectedButton;
+    public int curSelectedButton;           //★
     public StorageButton curFocusButton;
 
     public int remainSkin;
 
+    public int openMask;
+    public int buyMask;
+
     private void Awake()
     {
+        remainSkin = buttons.Length;
+    }
+
+    public void Init(int openMask, int buyMask, int currentSelected)
+    {
+        /*로드구문*/
         for (int i = 0; i < buttons.Length; i++)
         {
-            if (!buttons[i].isOpened)
+            if((openMask >> i & 1) == 1)
+            {
+                buttons[i].isOpened = true;
+            }
+            else
+            {
+                buttons[i].isOpened = false;
                 remainSkin++;
+            }
+
+            if ((buyMask >> i & 1) == 1)
+            {
+                buttons[i].isBuy = true;
+            }
+            else
+            {
+                buttons[i].isBuy = false;
+            }
+
+            if(currentSelected == i)
+            {
+                buttons[i].isSelectedSkin = true;
+            }
+            else
+            {
+                buttons[i].isSelectedSkin = false;
+            }
         }
+
+        this.openMask = openMask;
+        this.buyMask = buyMask;
+        this.curSelectedButton = currentSelected;
         ADButtonOnOFF();
         buy500.interactable = false;
+    }
+
+    public override void Open()
+    {
+        base.Open();
+        diamondTxt.text = GameManager.GM.Diamond.ToString();
     }
 
     private void Update()
@@ -40,11 +86,11 @@ public class StorageButtonGroup : GenericWindow
                 buttons[i].isSelectedSkin = !buttons[i].isSelectedSkin;
                 if(buttons[i].isSelectedSkin)
                 {
-                    curSelectedButton = button;
+                    curSelectedButton = i;
                 }
                 else
                 {
-                    curSelectedButton = null;
+                    curSelectedButton = -1;
                 }
             }
             else
@@ -77,7 +123,7 @@ public class StorageButtonGroup : GenericWindow
     {
         if (curFocusButton != null)
         {
-            if (!curFocusButton.isOpened)
+            if (curFocusButton.isOpened && !curFocusButton.isBuy)
             {
                 buy500.interactable = true;
                 return;
@@ -90,16 +136,21 @@ public class StorageButtonGroup : GenericWindow
     {
         SoundManager.Instance.PlayButtonClick();
         /*static 전역 Save 구조체에서 금액 확인 후 차감*/
-        if (true/*금액 비교 구문*/)
+        if (GameManager.GM.Diamond >= 500)
         {
-            //금액이 충분하다면 차감하여 스킨얻기
-            curFocusButton.isOpened = true;
+            GameManager.GM.Diamond = GameManager.GM.Diamond - 300;
+            curFocusButton.isBuy = true;
+
+            /*리워드 프리펩을 제2의 카메라 위치로!*/
+            WindowManager.Instance.PopupWindow(Windows.RewardPopUp);
         }
         else
         {
             //금액이 모자라다면 아무일도 일어나지 않는다. (혹은, 보석 상자 진동)
 
         }
+
+        MakeSaveMask();
     }
 
     public void WatchAdForSkin()
@@ -110,8 +161,23 @@ public class StorageButtonGroup : GenericWindow
         Debug.Log("스킨 오픈을 위한 광고 시청");
         if(true/*광고 끝*/)
         {
-
+            var rand = Random.Range(0, remainSkin);
+            int count = -1;
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if (!buttons[i].isOpened)
+                {
+                    count++;
+                    if(count == rand)
+                    {
+                        buttons[i].isOpened = true;
+                        --remainSkin;
+                        break;
+                    }
+                }
+            }
         }
+        MakeSaveMask();
     }
 
     public void Back()
@@ -124,5 +190,25 @@ public class StorageButtonGroup : GenericWindow
         //curSelectedButton.skinPrefab;
 
         WindowManager.Instance.Open(Windows.Main);
+        GameManager.GM.SaveData();
+    }
+
+    public void MakeSaveMask()
+    {
+        openMask = 0;
+        buyMask = 0;
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if(buttons[i].isOpened)
+            {
+                openMask += 1 << i;
+
+                if(buttons[i].isBuy)
+                {
+                    buyMask += 1 << i;
+                }
+            }
+        }
     }
 }

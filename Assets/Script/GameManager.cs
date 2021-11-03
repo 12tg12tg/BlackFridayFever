@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
     public enum GameState
@@ -47,11 +46,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //UI
-    //public Text score;
-    //public Text money;
-    //public Text stack;
-    //public Text gauage;
+    //Reward
+    private int diamond;
+    public int Diamond
+    {
+        get => diamond;
+        set => diamond = value;
+    }
 
     //Player
     public GameObject player;
@@ -72,12 +73,25 @@ public class GameManager : MonoBehaviour
     //Main or Stage
     public static bool isStage;
 
+    //Save할 정보 인스턴스
+    [Header("저장을 위한 인스턴스")]
+    public MainWindows main;
+    public StorageButtonGroup skin;
+    public StorageButtonGroup car;
+    public SoundManager sound;
+
+    //MoneyUpdate
+    public InGameWindow inGame;
+
     private void Awake()
     {
         instance = this;
+
     }
     private void Start()
     {
+        GameManager.GM.LoadData();
+
         State = GameState.Idle;
         if (isStage)
         {
@@ -208,12 +222,48 @@ public class GameManager : MonoBehaviour
 
 
 
+    /*=========================저장용 함수=========================*/
+    public void SaveData()
+    {
+        SaveSystem.SaveInfo(main, skin, car, sound);
+    }
 
+    public void LoadData()
+    {
+        SaveData data = SaveSystem.LoadInfo();
 
+        if (data != null)
+        {
+            main.Init(data.openStage, data.isNewSkin, data.isNewCarSkin);
+            //main.lastOpenedStage = data.openStage;
+            //main.characterSkin.haveNewItem = data.isNewSkin;
+            //main.carSkin.haveNewItem = data.isNewCarSkin;
 
+            skin.Init(data.skinOpenMask, data.skinGetMask, data.curSkinIndex);
+            //skin.openMask = data.skinOpenMask;
+            //skin.buyMask = data.skinGetMask;
+            //skin.curSelectedButton = data.curSkinIndex;
 
+            car.Init(data.carSkinOpenMask, data.carSkinGetMask, data.curCarSkinIndex);
+            //car.openMask = data.carSkinOpenMask;
+            //car.buyMask = data.carSkinGetMask;
+            //car.curSelectedButton = data.curCarSkinIndex;
 
+            sound.SetMute(data.isMute);
+            sound.SetVibrate(data.nonVibrate);
 
+            Diamond = data.diamond;
+        }
+        else
+        {
+            main.Init(1, false, false);
+            skin.Init(0, 0, -1);
+            car.Init(0, 0, -1);
+            sound.SetMute(false);
+            sound.SetVibrate(false);
+            Diamond = 0;
+        }
+    }
 
 
 
@@ -258,7 +308,7 @@ public class GameManager : MonoBehaviour
         unit.getMoney(money.money);
         if (unit.tag == "Player")
         {
-            //this.money.text = unit.money.ToString();
+            inGame.SetMoneyText();
             SoundManager.Instance.PlayTakeMoney();
         }
     }
@@ -285,6 +335,8 @@ public class GameManager : MonoBehaviour
                 //gauage.text = unit.score.ToString("P1");
                 SoundManager.Instance.PlayTakeItem();
             }
+
+            inGame.SetMoneyText();
             return true;
         }
         return false;

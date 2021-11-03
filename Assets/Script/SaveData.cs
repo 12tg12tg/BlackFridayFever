@@ -5,18 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    //스테이지
-    public int stage;
+    //스테이지 - Main
+    public int openStage;
+    public bool isNewSkin;
+    public bool isNewCarSkin;
 
     //스킨
-    public int skinNum;
-    public int carSkinNum;
+    public int skinOpenMask;
+    public int carSkinOpenMask;
 
-    public bool[] isSkinOpen;
-    public bool[] isCarSkinOpen;
-
-    public bool[] isSkinGet;
-    public bool[] isCarSkinGet;
+    public int skinGetMask;
+    public int carSkinGetMask;
 
     public int curSkinIndex;
     public int curCarSkinIndex;
@@ -26,10 +25,29 @@ public class SaveData
     public bool isMute;
     public bool nonVibrate;
 
-    //생성자
-    public SaveData ()
-    {
+    //다이아
+    public int diamond;
 
+    //생성자
+    public SaveData(MainWindows main, StorageButtonGroup skin, StorageButtonGroup car, SoundManager sm)
+    {
+        openStage = main.lastOpenedStage;
+        isNewSkin = main.characterSkin.haveNewItem;
+        isNewCarSkin = main.carSkin.haveNewItem;
+
+        skinOpenMask = skin.openMask;
+        carSkinOpenMask = car.openMask;
+
+        skinGetMask = skin.buyMask;
+        carSkinGetMask = car.buyMask;
+
+        curSkinIndex = skin.curSelectedButton;
+        curCarSkinIndex = car.curSelectedButton;
+
+        isMute = sm.isMute;
+        nonVibrate = sm.noVibrate;
+
+        diamond = GameManager.GM.Diamond;
     }
 
 }

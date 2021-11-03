@@ -5,10 +5,16 @@ using UnityEngine;
 public class Money : MonoBehaviour
 {
     public int money;
+    public float rotToSec;
 
     private void Start()
     {
 
+    }
+    private void Update()
+    {
+        var rot = rotToSec * Time.deltaTime;
+        transform.rotation *= Quaternion.Euler(0f, rot, 0f);
     }
 
     private void OnTriggerEnter(Collider other)

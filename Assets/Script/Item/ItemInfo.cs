@@ -13,7 +13,6 @@ public enum ItemValue
 public class ItemInfo : ScriptableObject
 {
     public int itemScore;
-    public string itemName;
     public ItemValue value;
     public PoolTag poolTag;
     public int price;

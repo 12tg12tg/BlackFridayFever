@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    private bool isMute;
-    private bool noVibrate;
+    public bool isMute;
+    public bool noVibrate;
 
     private static SoundManager instance;
     public static SoundManager Instance
@@ -18,6 +18,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource takePlayer;
     public AudioSource playerPlayer;
     public AudioSource buttonPlayer;
+    public AudioSource ragdollPlayer;
 
     public AudioClip gameBgm;
     public AudioClip crushWin;
@@ -104,6 +105,11 @@ public class SoundManager : MonoBehaviour
     {
         if (!isMute)
             bgmPlayer.PlayOneShot(loseSound);
+    }
+    public void PlayAiCrush()
+    {
+        if (!ragdollPlayer.isPlaying)
+            ragdollPlayer.Play();
     }
     public void Vibrate()
     {

@@ -5,14 +5,10 @@ using UnityEngine.UI;
 
 public class ToggleScript : MonoBehaviour
 {
-    private Sprite originalImg;
+    public Sprite originalImg;
     public Sprite checkedImg;
-    private Toggle toggle;
-    private void Awake()
-    {
-        toggle = GetComponent<Toggle>();
-        originalImg = toggle.image.sprite;
-    }
+    public Toggle toggle;
+
     public void ChangeImage(bool isOn)
     {
         if (isOn)

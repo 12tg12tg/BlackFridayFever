@@ -22,8 +22,6 @@ public class RoamingAiBehaviour : UnitBehaviour
     public GameObject stickman;
     public AiRagdoll ragdoll;
 
-    private bool isKnockDown;
-
     private void Awake()
     {
         stats = GetComponent<CharacterStats>();
@@ -49,6 +47,7 @@ public class RoamingAiBehaviour : UnitBehaviour
             this.wayPoints = wayPoints;
         }
         setMoveAnimation();
+        isTarget = false;
     }
 
     private void Update()
@@ -136,10 +135,8 @@ public class RoamingAiBehaviour : UnitBehaviour
         else
             return;
 
-        if (!isKnockDown && isStrong)
+        if (isStrong)
         {
-            isKnockDown = true;
-
             var playerPos = playerController.transform.position;
 
             var direction = transform.position - playerPos;
@@ -156,6 +153,14 @@ public class RoamingAiBehaviour : UnitBehaviour
             {
                 item.isTrigger = true;
             }
+
+            //반환
+            GetComponentInParent<SpawnRoamingAI>().currentNum--;            //현재존재AI수 차감
+            GameObjectPool.Instance.ReturnObject(PoolTag.RoamingAI, gameObject); //오브젝트풀로 반환
+            
+            //효과
+            SoundManager.Instance.PlayAiCrush();
+            Camera.main.GetComponent<CameraMove>().ShakeCamera(0.7f, 0.2f, 0.1f);
 
             gameObject.SetActive(false);  //해제
         }

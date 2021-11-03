@@ -12,9 +12,11 @@ public class MainWindows : GenericWindow
     public Button next5;
     public Text text;
 
+    public Text diamondTxt;
+
     public int finalStage = 15;
 
-    public int invokeStageNum;
+    //public int invokeStageNum;
     public int lastOpenedStage;
 
     private void Awake()
@@ -23,19 +25,33 @@ public class MainWindows : GenericWindow
 
         //현재 스테이지 넘버 설정 (임시 : 1)
         lastOpenedStage = 1;
-        invokeStageNum = lastOpenedStage;
+        //invokeStageNum = lastOpenedStage;
 
         //버튼 활성화여부 결정
-        DetermineButtonOnOff();
+        //DetermineButtonOnOff();
 
         //중앙 텍스트 구성
-        MakeText();
+        //MakeText();
+    }
+
+    public void Init(int lastOpenStage, bool isNewSkin, bool isNewCarSkin)
+    {
+        this.lastOpenedStage = lastOpenStage;
+        characterSkin.HaveNewItem(isNewSkin);
+        carSkin.HaveNewItem(isNewCarSkin);
+    }
+
+    public override void Open()
+    {
+        base.Open();
+        diamondTxt.text = GameManager.GM.Diamond.ToString();
     }
 
     private void Update()
     {
         if(mt.Swipe.x > 0)
         {
+            GameManager.GM.SaveData();
             LoadStageScene();
         }
     }
@@ -44,56 +60,56 @@ public class MainWindows : GenericWindow
     public void LoadStageScene()
     {
         SceneManager.LoadScene("Game");
-        SceneManager.LoadScene($"Stage{invokeStageNum}", LoadSceneMode.Additive);
+        SceneManager.LoadScene($"Stage{lastOpenedStage}", LoadSceneMode.Additive);
         GameManager.isStage = true;
     }
 
     public void BackStage()
     {
-        invokeStageNum--;
-        DetermineButtonOnOff();
-        MakeText();
-        SoundManager.Instance.PlayButtonClick();
+        //invokeStageNum--;
+        //DetermineButtonOnOff();
+        //MakeText();
+        //SoundManager.Instance.PlayButtonClick();
     }
 
     public void NextStage()
     {
-        invokeStageNum++;
-        DetermineButtonOnOff();
-        MakeText();
-        SoundManager.Instance.PlayButtonClick();
+        //invokeStageNum++;
+        //DetermineButtonOnOff();
+        //MakeText();
+        //SoundManager.Instance.PlayButtonClick();
     }
 
     public void BackFiveStage()
     {
-        invokeStageNum -= 5;
-        DetermineButtonOnOff();
-        MakeText();
-        SoundManager.Instance.PlayButtonClick();
+        //invokeStageNum -= 5;
+        //DetermineButtonOnOff();
+        //MakeText();
+        //SoundManager.Instance.PlayButtonClick();
     }
 
     public void NextFiveStage()
     {
-        invokeStageNum += 5;
-        DetermineButtonOnOff();
-        MakeText();
-        SoundManager.Instance.PlayButtonClick();
+        //invokeStageNum += 5;
+        //DetermineButtonOnOff();
+        //MakeText();
+        //SoundManager.Instance.PlayButtonClick();
     }
 
     public void DetermineButtonOnOff()
     {
-        prev1.interactable = invokeStageNum >= 2;
+        //prev1.interactable = invokeStageNum >= 2;
 
-        prev5.interactable = invokeStageNum >= 6;
+        //prev5.interactable = invokeStageNum >= 6;
 
-        next1.interactable = invokeStageNum <= lastOpenedStage - 1;
+        //next1.interactable = invokeStageNum <= lastOpenedStage - 1;
 
-        next5.interactable = invokeStageNum <= lastOpenedStage - 5;
+        //next5.interactable = invokeStageNum <= lastOpenedStage - 5;
     }
 
     public void MakeText()
     {
-        text.text = $"LEVEL {invokeStageNum.ToString("D2")}";
+        //text.text = $"LEVEL {invokeStageNum.ToString("D2")}";
     }
 
 

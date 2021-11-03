@@ -10,6 +10,7 @@ public class StorageButton : MonoBehaviour
     public Sprite secreteSprite;
     public Sprite nonSelectedSprite;
     public Sprite selectedSprite;
+    public Sprite redSprite;
 
     public GameObject skinPrefab;
     public Image skinImg;
@@ -17,6 +18,7 @@ public class StorageButton : MonoBehaviour
 
     public bool isOpened;
     public bool isSelectedSkin;
+    public bool isBuy;
 
     public StorageButtonGroup buttonGroup;
 
@@ -26,7 +28,14 @@ public class StorageButton : MonoBehaviour
 
         if (isOpened)
         {
-            buttonGroup.SelectedButtonReset(this);
+            if (isBuy)
+            {
+                buttonGroup.SelectedButtonReset(this);
+            }
+            else
+            {
+                buttonGroup.FocusedButtonReset(this);
+            }
         }
         else
         {
@@ -47,13 +56,20 @@ public class StorageButton : MonoBehaviour
     {
         if(isOpened)
         {
-            if(isSelectedSkin)
+            if(isBuy)
             {
-                button.image.sprite = selectedSprite;
+                if (isSelectedSkin)
+                {
+                    button.image.sprite = selectedSprite;
+                }
+                else
+                {
+                    button.image.sprite = nonSelectedSprite;
+                }
             }
             else
             {
-                button.image.sprite = nonSelectedSprite;
+                button.image.sprite = redSprite;
             }
         }
         else

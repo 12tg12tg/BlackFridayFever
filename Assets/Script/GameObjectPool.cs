@@ -23,7 +23,7 @@ public enum PoolTag
 
 public class GameObjectPool : MonoBehaviour
 {
-    private int poolCount = 50;
+    private int poolCount = 40;
     public static GameObjectPool Instance;
     public GameObject roamingAI;
     public GameObject ragdollPrefab;
@@ -49,6 +49,10 @@ public class GameObjectPool : MonoBehaviour
     //Dictionary로 풀 관리
     public Dictionary<PoolTag, Queue<GameObject>> pool = new Dictionary<PoolTag, Queue<GameObject>>();
     public Dictionary<PoolTag, GameObject> prefabs = new Dictionary<PoolTag, GameObject>();
+
+    //특별히 렉돌의 부모
+    public Transform unuseableRagdolls;
+
     private void Awake()
     {
         Instance = this;
@@ -77,7 +81,7 @@ public class GameObjectPool : MonoBehaviour
 
         //풀
         pool.Add(PoolTag.RoamingAI, new Queue<GameObject>());
-        pool.Add(PoolTag.Ragdoll, new Queue<GameObject>());
+        //pool.Add(PoolTag.Ragdoll, new Queue<GameObject>());
         pool.Add(PoolTag.Box_Low, new Queue<GameObject>());
         pool.Add(PoolTag.Box_Mid, new Queue<GameObject>());
         pool.Add(PoolTag.Box_High, new Queue<GameObject>());
@@ -98,7 +102,15 @@ public class GameObjectPool : MonoBehaviour
                 pool[key].Enqueue(CreateNewObject(key));
             }
         }
+
+        FindUnuseableRagdoll();
     }
+    private void FindUnuseableRagdoll()
+    {
+        if(unuseableRagdolls == null)
+            unuseableRagdolls = GameObject.FindGameObjectWithTag("unuseableRagdolls").transform;
+    }
+
     private GameObject CreateNewObject(PoolTag key)
     {
         var newGo = Instantiate(prefabs[key]);
@@ -108,38 +120,55 @@ public class GameObjectPool : MonoBehaviour
     }
     public GameObject GetObject(PoolTag key)
     {
-        var queue = pool[key];
-        if (queue.Count > 0)
+        if (key == PoolTag.Ragdoll)
         {
-            var obj = queue.Dequeue();
-            obj.transform.SetParent(null);
-            obj.transform.position = Vector3.zero;
-            obj.transform.rotation = Quaternion.identity;
-            obj.SetActive(true);
-            var agent = obj.GetComponent<NavMeshAgent>();
-            if(agent != null)
-                agent.enabled = true;
-            return obj;
+            var ragdoll = Instantiate(prefabs[key]);
+            return ragdoll;
         }
         else
         {
-            var newObj = CreateNewObject(key);
-            newObj.SetActive(true);
-            newObj.transform.SetParent(null);
-            var agent = newObj.GetComponent<NavMeshAgent>();
-            if (agent != null)
-                agent.enabled = true;
-            return newObj;
+            var queue = pool[key];
+            if (queue.Count > 0)
+            {
+                var obj = queue.Dequeue();
+                obj.transform.SetParent(null);
+                obj.transform.position = Vector3.zero;
+                obj.transform.rotation = Quaternion.identity;
+                obj.SetActive(true);
+                var agent = obj.GetComponent<NavMeshAgent>();
+                if (agent != null)
+                    agent.enabled = true;
+                return obj;
+            }
+            else
+            {
+                var newObj = CreateNewObject(key);
+                newObj.SetActive(true);
+                newObj.transform.SetParent(null);
+                var agent = newObj.GetComponent<NavMeshAgent>();
+                if (agent != null)
+                    agent.enabled = true;
+                return newObj;
+            }
         }
     }
     public void ReturnObject(PoolTag key, GameObject go)
     {
-        var queue = pool[key];
-        go.transform.SetParent(transform);
-        queue.Enqueue(go);
-        var agent = go.GetComponent<NavMeshAgent>();
-        if (agent != null)
-            agent.enabled = false;
-        go.SetActive(false);
+        if (key == PoolTag.Ragdoll)
+        {
+            go.SetActive(false);
+            FindUnuseableRagdoll();
+            go.transform.SetParent(unuseableRagdolls);
+        }
+        else
+        {
+            var queue = pool[key];
+            go.transform.SetParent(transform);
+            queue.Enqueue(go);
+            var agent = go.GetComponent<NavMeshAgent>();
+            if (agent != null)
+                agent.enabled = false;
+            go.SetActive(false);
+        }
     }
 }
