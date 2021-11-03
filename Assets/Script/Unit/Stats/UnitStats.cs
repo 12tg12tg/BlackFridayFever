@@ -5,13 +5,15 @@ using UnityEngine;
 public enum UnitType
 {
     Ai,
-    Player
+    Ai_Money,
+    Player,
+    Ai_Tank,
+    Ai_Tank2
 }
 
 [CreateAssetMenu(fileName = "UnitStats.asset", menuName = "Unit/Stats")]
 public class UnitStats : ScriptableObject
 {
-
     public UnitType type;
     public float speed;
     public float stunTime;

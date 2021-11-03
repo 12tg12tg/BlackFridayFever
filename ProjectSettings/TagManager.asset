@@ -16,6 +16,7 @@ TagManager:
   - NoMoney
   - ParentParticle
   - unuseableRagdolls
+  - Skin
   layers:
   - Default
   - TransparentFX

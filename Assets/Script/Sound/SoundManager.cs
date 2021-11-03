@@ -108,12 +108,16 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayAiCrush()
     {
-        if (!ragdollPlayer.isPlaying)
-            ragdollPlayer.Play();
+        if (!isMute)
+            if (!ragdollPlayer.isPlaying)
+                ragdollPlayer.Play();
     }
     public void Vibrate()
     {
-        if(!noVibrate)
+        if (!noVibrate)
+        {
             Handheld.Vibrate();
+            Debug.Log("진동울림");
+        }
     }
 }

@@ -10,6 +10,7 @@ public enum AIState
     FindItem,
     GoTruck,
     Stuned,
+    GoCrush,
 }
 
 public class AiBehaviour : UnitBehaviour
@@ -32,6 +33,14 @@ public class AiBehaviour : UnitBehaviour
     public AIState prevState;
 
     private float timer;
+
+    private bool isGameOver;
+
+    public List<CharacterStats> unitList;
+    public List<CharacterStats> weakList;
+    public CharacterStats tankTarget;
+    public bool isCrush;
+    public bool isPlayerChase;
 
     public AIState State
     {
@@ -68,9 +77,16 @@ public class AiBehaviour : UnitBehaviour
                 case AIState.Stuned:
                     timer = 0f;
                     break;
+                case AIState.GoCrush:
+                    isCrush = false;
+                    agent.isStopped = false;
+                    break;
             }
         }  
     }
+
+    //색배정
+    public SkinnedMeshRenderer skin;
 
     private void Awake()
     {
@@ -78,6 +94,16 @@ public class AiBehaviour : UnitBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = stats.stats.speed;
         animator = GetComponentInChildren<Animator>();
+
+        var skins = GetComponentsInChildren<SkinnedMeshRenderer>();
+        for (int i = 0; i < skins.Length; i++)
+        {
+            if (skins[i].tag == "Skin")
+            {
+                skin = skins[i];
+                break;
+            }
+        }
     }
 
     public override void Init()
@@ -86,12 +112,17 @@ public class AiBehaviour : UnitBehaviour
         prevState = AIState.FindMoney;
         transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
         meshColor = stats.truck.bodyColor;
-        GetComponentInChildren<SkinnedMeshRenderer>().material.color = meshColor;
+        skin.material.color = meshColor;
 
         moneys = Stage.Instance.moneys;
         LowItems = Stage.Instance.LowItems;
         MidItems = Stage.Instance.MidItems;
         HighItems = Stage.Instance.HighItems;
+
+        if(stats.stats.type == UnitType.Ai_Tank)
+        {
+            InitTankTarget();
+        }
     }
 
     private void Update()
@@ -105,10 +136,14 @@ public class AiBehaviour : UnitBehaviour
                 StateUpdate();
                 break;
             case GameManager.GameState.End:
+                if (!isGameOver && GameManager.GM.winner != stats)
+                {
+                    isGameOver = true;
+                    agent.destination = transform.position;
+                    setIdleAnimation();
+                }
                 break;
         }
-
-        //Debug.Log($"{state}, {prevState}");
 
         //애니메이션
         animator.SetInteger("Stack", stats.itemStack);
@@ -130,14 +165,14 @@ public class AiBehaviour : UnitBehaviour
             case AIState.FindItem:
                 FindItemUpdate();
                 break;
-            //case AIState.Standby:
-            //    StanbyUpdate();
-            //    break;
             case AIState.GoTruck:
                 GoTruckUpdate();
                 break;
             case AIState.Stuned:
                 SutnedUpdate();
+                break;
+            case AIState.GoCrush:
+                TankUpdate();
                 break;
         }
     }
@@ -148,7 +183,31 @@ public class AiBehaviour : UnitBehaviour
         timer += Time.deltaTime;
         if (timer > 0.1f)
         {
-            State = prevState;
+            if (stats.stats.type == UnitType.Ai_Tank ||
+                stats.stats.type == UnitType.Ai_Tank2)
+            {
+                var prop = Random.Range(0, 1);
+                if(prop < 0.5f)
+                {
+                    if(TankTarget())
+                    {
+                        State = AIState.GoCrush;
+                        agent.destination = tankTarget.transform.position;
+                    }
+                    else
+                    {
+                        State = prevState;
+                    }
+                }
+                else
+                {
+                    State = prevState;
+                }
+            }
+            else
+            {
+                State = prevState;
+            }
         }
     }
     public void FindMoneyUpdate()
@@ -206,7 +265,11 @@ public class AiBehaviour : UnitBehaviour
     {
         /*탈출조건*/
         //목표점수 이상 도달하면, 트럭으로.
-        if (stats.score > stats.stats.maximumScore)
+        if (stats.stats.type ==UnitType.Ai && stats.score > stats.stats.maximumScore)
+        {
+            State = AIState.GoTruck;
+        }
+        else if(stats.stats.type == UnitType.Ai_Money && stats.score + stats.truck.currentScore > GameManager.GM.curStageInfo.goalScore)
         {
             State = AIState.GoTruck;
         }
@@ -293,7 +356,11 @@ public class AiBehaviour : UnitBehaviour
         {
             State = AIState.GoTruck;
         }
-        else if (stats.money > stats.stats.maximumMoney)
+        else if (stats.stats.type == UnitType.Ai && stats.money > stats.stats.maximumMoney)
+        {
+            State = AIState.FindItem;
+        }
+        else if(stats.stats.type == UnitType.Ai_Money && stats.money >= 5)
         {
             State = AIState.FindItem;
         }
@@ -317,5 +384,83 @@ public class AiBehaviour : UnitBehaviour
         AIStop();
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Stumble"))
             base.SetDeafeatAnimation();
+    }
+
+    private void InitTankTarget()
+    {
+        var ais = GameManager.GM.curStageInfo.Ais;
+        //unitTargetList = new List<CharacterStats>();
+        for (int i = 0; i < ais.Length; i++)
+        {
+            if(ais[i] != this)
+            {
+                unitList.Add(ais[i]);
+            }
+        }
+        unitList.Add(GameManager.GM.player.GetComponent<CharacterStats>());
+    }
+
+    private bool TankTarget()
+    {
+        if (stats.stats.type == UnitType.Ai_Tank)
+        {
+            tankTarget = null;
+            weakList.Clear();
+            for (int i = 0; i < unitList.Count; i++)
+            {
+                if (unitList[i].itemStack != 0 && stats.itemStack > unitList[i].itemStack)
+                {
+                    weakList.Add(unitList[i]);
+                }
+            }
+            if (weakList.Count > 0)
+            {
+                tankTarget = weakList[Random.Range(0, weakList.Count)];
+                if (tankTarget.stats.type == UnitType.Player)
+                {
+                    isPlayerChase = true;
+                }
+                else
+                {
+                    isPlayerChase = false;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            var playerStat = GameManager.GM.player.GetComponent<CharacterStats>();
+            if (playerStat.itemStack != 0 && stats.itemStack > playerStat.itemStack)
+            {
+                tankTarget = playerStat;
+                isPlayerChase = true;
+                return true;
+            }
+            else
+            {
+                isPlayerChase = false;
+                return false;
+            }
+        }
+    }
+
+    private void TankUpdate()
+    {
+        agent.destination = tankTarget.transform.position;
+        if(tankTarget.itemStack >= stats.itemStack)
+        {
+            State = AIState.FindItem;
+        }
+        else
+        {
+            if(isCrush)
+            {
+                State = AIState.FindItem;
+            }
+        }
     }
 }

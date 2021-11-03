@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 128a3291bc25bdc40ae5086ac17e400f, type: 3}
-  m_Name: AI_baby
+  m_Name: AI_LowValue
   m_EditorClassIdentifier: 
   type: 0
-  speed: 7.5
+  speed: 8.5
   stunTime: 3
   maximumMoney: 15
   maximumScore: 15
-  lowValueProp: 0.6
-  midValueProp: 0.3
+  lowValueProp: 1
+  midValueProp: 0

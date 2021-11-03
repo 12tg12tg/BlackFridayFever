@@ -11,16 +11,29 @@ public class PlayerController : UnitBehaviour
     public float stunTimer;
     private Vector3 direction;
 
+    //»ö¹èÁ¤
+    public SkinnedMeshRenderer skin;
+
     private void Awake()
     {
         stats = GetComponent<CharacterStats>();
         animator = GetComponentInChildren<Animator>();
+
+        var skins = GetComponentsInChildren<SkinnedMeshRenderer>();
+        for (int i = 0; i < skins.Length; i++)
+        {
+            if(skins[i].tag == "Skin")
+            {
+                skin = skins[i];
+                break;
+            }
+        }
     }
 
     public override void Init()
     {
         transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
-        GetComponentInChildren<SkinnedMeshRenderer>().material.color = stats.truck.bodyColor;
+        skin.material.color = stats.truck.bodyColor;
     }
 
     private void Update()
@@ -47,6 +60,10 @@ public class PlayerController : UnitBehaviour
                 AnimationUpdate();
                 break;
             case GameManager.GameState.End:
+                if(GameManager.GM.winner != stats)
+                {
+                    setIdleAnimation();
+                }
                 break;
         }
     }

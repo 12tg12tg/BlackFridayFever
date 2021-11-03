@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public Stage curStageInfo;
 
     //엔딩씬
-    private CharacterStats winner;
+    public CharacterStats winner;
 
     //엔딩이후 UI
     private float endUITimer;
@@ -396,13 +396,19 @@ public class GameManager : MonoBehaviour
         {
             //b가 상자를 흘림
             //Debug.Log("a가 더 많다");
+            if(aStat.stats.type == UnitType.Ai_Tank || aStat.stats.type == UnitType.Ai_Tank2)
+            {
+                aStat.GetComponent<AiBehaviour>().isCrush = true;
+            }    
+
             bStat.DropItem(forceToB);
             if(aStat.stats.type == UnitType.Player || bStat.stats.type == UnitType.Player)
             {
                 Camera.main.GetComponent<CameraMove>().ShakeCamera(1.5f, 0.4f, 0.2f);
+                SoundManager.Instance.Vibrate();
 
                 //사운드
-                if(aStat.stats.type == UnitType.Player)
+                if (aStat.stats.type == UnitType.Player)
                 {
                     SoundManager.Instance.PlayCrushWin();
                 }
@@ -416,20 +422,26 @@ public class GameManager : MonoBehaviour
         {
             //a가 상자를 흘림.
             //Debug.Log("b가 더 많다");
+            if (bStat.stats.type == UnitType.Ai_Tank || bStat.stats.type == UnitType.Ai_Tank2)
+            {
+                bStat.GetComponent<AiBehaviour>().isCrush = true;
+            }
+
             aStat.DropItem(forceToA);
             if (aStat.stats.type == UnitType.Player || bStat.stats.type == UnitType.Player)
             {
                 Camera.main.GetComponent<CameraMove>().ShakeCamera(1.5f, 0.4f, 0.2f);
                 SoundManager.Instance.Vibrate();
-            }
-            //사운드
-            if (aStat.stats.type == UnitType.Player)
-            {
-                SoundManager.Instance.PlayCrushLose();
-            }
-            else if (bStat.stats.type == UnitType.Player)
-            {
-                SoundManager.Instance.PlayCrushWin();
+
+                //사운드
+                if (aStat.stats.type == UnitType.Player)
+                {
+                    SoundManager.Instance.PlayCrushLose();
+                }
+                else if (bStat.stats.type == UnitType.Player)
+                {
+                    SoundManager.Instance.PlayCrushWin();
+                }
             }
         }
 

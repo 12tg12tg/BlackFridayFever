@@ -1023,7 +1023,7 @@ GameObject:
   - component: {fileID: 3149641192322125788}
   m_Layer: 0
   m_Name: Hat
-  m_TagString: Untagged
+  m_TagString: Skin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

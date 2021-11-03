@@ -5,6 +5,10 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
     public CharacterStats stats;
+    private void Awake()
+    {
+        stats = GetComponentInParent<CharacterStats>();
+    }
     public void CheckGameOver() //애니메이션태그다이거;
     {
         var AiScript = GetComponentInParent<AiBehaviour>();

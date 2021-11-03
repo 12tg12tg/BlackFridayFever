@@ -219,7 +219,7 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 7. 이펙트 O / 사운드 O / 아이템회전 O / 아웃라인 X		O
 8. 저장정보 : 보유 스킨 / 보유 차량 / 스테이지 진도	 	O		
 
-9. 사진찍는것 고민해보기 : 인벤토리 스킨 아이콘. GAME UI 캐릭터 초상화.	 
+9. 사진찍는것 고민해보기 : 인벤토리 스킨 아이콘. GAME UI 캐릭터 초상화.	 	
 	- 유니티 포토모드 또는 스크린샷찍어서 유니티에셋추가
 	- 랜더링된 픽셀
 
@@ -235,7 +235,7 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 +) 외곽충돌해결
 
 <질문>
-1. 어플 자체적으로 저장해야하는 데이터들은 어떻게 관리해야할까요 
+1. 어플 자체적으로 저장해야하는 데이터들은 어떻게 관리해야할까요 				O
 	1) 스테이지진행정도
 	2) 해금된 스킨 목록
 	- 파일입출력 : C#으로. 유니티에서 제공하는 경로. 구조체만들어서, 바이너리상태로 저장.
@@ -243,7 +243,7 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 		https://www.youtube.com/watch?v=XOjd_qU2Ido
 		https://parksh86.tistory.com/141
 		
-2. 현재 Game씬과 Stage씬 두가지가 함께 오픈되서 게임이 진행되는데,
+2. 현재 Game씬과 Stage씬 두가지가 함께 오픈되서 게임이 진행되는데,				O
 　만약 스테이지가 클리어되면, 스테이지 진행정도를 저장시켜줘야하는데 어떡계 연결지을까
 	Save라는 클래스에 모든 저장정보를 저장한다.
 	이 객체를 통으로 저장하고, 갱신될때마다 여기다 쓰자.
@@ -262,19 +262,47 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 	https://dhkvmf88.tistory.com/8         <=== 코드그대로쓸껀데, RGB만 ARGB로 바꿔서 쓰자. 
 						카메라는 nonclear로하고, 레이어마스크만 알아서 만들어서 쓰자.
 	
-
 7. UI 애매합니다
-	유격설정 : Grid로 바둑판배열가고 Virtual안써버리기
-
+	유격설정 : Grid로 바둑판배열가고 virtical안써버리기	O
 --------------------------------------------------------------------------------------------------------------------------------------------
-
 8. Indicator 
 	WorldToScreenPoint 또는 WorldToVeiwport는 카메라뒤쪽 오브젝트에 대해서 정교하지못한느낌.
 	오차가 갑자기 확벌어지게되는데, 어떻게 해결하면 좋을까.		O
-
 --------------------------------------------------------------------------------------------------------------------------------------------
+9. 진동구현		O
 
-9. 진동구현
+
+
+
+<20211103 수>
+1. AI 개성				O
+	배치시 주의사항 : 			O
+2. 사진찍기
+3. 맵 : 네비메시, 충돌구역, 투명화
+4. 몸색바꾸기	- SKin Tag를 적절히 지정해주면 됨.			O
+5. 트럭에 짐 쌓기
+6. 팀로고 & 듀토리얼 & 페이드인아웃
+7. 판서 오늘 날짜 숙제
+8. 박스 문에 걸리기
+9. 2초안에 상자넣기 끝내자.
+10. 돈디스트로이
+
+
+
+저장경로 : C:\Users\12tg\AppData\LocalLow\TeamSummit\BlackFridayFever
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -288,6 +316,15 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 5. 스케일 4 4 4 
 6. 파티클(이펙트) 벨류에 맞게 추가
 
+
+<AAB빌드하기 GooglePlay용>
+1. 빌드세팅에서 Build App Bundle(Google Play) 체크하기
+2. 회사명 입력하고, 그 아래 Other Settins에서 Identification항목에 Target API Level을 Andrioid 11.0 (API level 30)
+　(원래는 Automatic (highest installed)였음.)
+3. 그아래에서는 Configuration 항목에서 
+	Scripting Backend : IL2CPP로 (원래는 Mono였음)
+	ARM64 체크하기 (원래는 체크안됬었음)
+	
 
 
 <광고연결되는 버튼>
