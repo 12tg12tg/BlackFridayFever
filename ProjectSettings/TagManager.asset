@@ -3,20 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Money
-  - LowItem
-  - MidItem
-  - HighItem
-  - AI
-  - Door
-  - Purchased
-  - Truck
-  - Stage
-  - NoMoney
-  - ParentParticle
-  - unuseableRagdolls
-  - Skin
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -26,19 +13,19 @@ TagManager:
   - UI
   - 
   - 
-  - Unit
-  - Purchased
-  - Money
-  - Door
-  - Tray
-  - Item
-  - Front
-  - JustMouseRay
-  - Truck
-  - Ragdoll
-  - 3DUI
-  - Wall
-  - RoamingAI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
