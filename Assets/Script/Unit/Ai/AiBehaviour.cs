@@ -110,7 +110,7 @@ public class AiBehaviour : UnitBehaviour
     {
         State = AIState.Idle;
         prevState = AIState.FindMoney;
-        transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
+        transform.position = stats.truck.dokingSpot.position + transform.forward * 2f;
         meshColor = stats.truck.bodyColor;
         skin.material.color = meshColor;
 

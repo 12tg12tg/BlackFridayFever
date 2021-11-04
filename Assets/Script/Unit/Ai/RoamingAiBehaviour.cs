@@ -26,6 +26,8 @@ public class RoamingAiBehaviour : UnitBehaviour
     {
         stats = GetComponent<CharacterStats>();
         agent = GetComponent<NavMeshAgent>();
+        agent.updateUpAxis = true;
+
         agent.speed = stats.stats.speed;
         animator = GetComponentInChildren<Animator>();
         animator.SetInteger("Stack", 0);

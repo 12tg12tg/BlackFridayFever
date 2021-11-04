@@ -287,7 +287,8 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 9. 2초안에 상자넣기 끝내자.
 10. 돈디스트로이
 11. 조이스틱 감도
-
+12. 2스테이지 에스컬레이터 해결합시다.
+13. 광고연결합시다
 
 
 저장경로 : C:\Users\12tg\AppData\LocalLow\TeamSummit\BlackFridayFever

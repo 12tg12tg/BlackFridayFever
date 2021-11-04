@@ -32,7 +32,7 @@ public class PlayerController : UnitBehaviour
 
     public override void Init()
     {
-        transform.position = stats.truck.dokingSpot.position + transform.forward * 3f;
+        transform.position = stats.truck.dokingSpot.position + transform.forward * 2f;
         skin.material.color = stats.truck.bodyColor;
     }
 

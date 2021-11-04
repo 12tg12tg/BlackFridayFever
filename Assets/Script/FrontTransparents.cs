@@ -10,6 +10,28 @@ public class FrontTransparents : MonoBehaviour
     public Material shopTransparent;
     public Material logoOriginal;
     public Material logoTransparent;
+
+    private void Awake()
+    {
+        if (aboutShops.Length != 0)
+            return;
+        var meshs = GetComponentsInChildren<MeshRenderer>();
+        MeshRenderer[] shops = new MeshRenderer[meshs.Length - 2];
+        int index = 0;
+        for (int i = 0; i < meshs.Length; i++)
+        {
+            if (meshs[i] == buildingLogo[0] || meshs[i] == buildingLogo[1])
+            {
+
+            }
+            else
+            {
+                shops[index++] = meshs[i];
+            }
+        }
+        aboutShops = shops;
+    }
+
     void Update()
     {
         var playerPos = GameManager.GM.player.transform.position;
