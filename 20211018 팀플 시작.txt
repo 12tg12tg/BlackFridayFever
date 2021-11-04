@@ -301,8 +301,9 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 	+) 자바 환경변수 추가함.	https://hyoje420.tistory.com/7
 
 2. 광고붙이기(애드몹)
+	예스예스인에이블
 		
-
+OnAdLoaded/OnAdFailedToLoad/OnAdOpening/OnAdClosed
 
 
 
