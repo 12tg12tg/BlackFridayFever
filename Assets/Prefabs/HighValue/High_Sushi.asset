@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: High_Sushi
   m_EditorClassIdentifier: 
   itemScore: 7
+<<<<<<< HEAD
+=======
+  itemName: Sushi
+>>>>>>> 조현준
   value: 2
   poolTag: 0
   price: 5
