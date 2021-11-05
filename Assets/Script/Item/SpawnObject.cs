@@ -38,13 +38,13 @@ public class SpawnObject : MonoBehaviour
                 curType = PoolTag.Money;
                 break;
             case "LowItem":
-                curType = (PoolTag)Random.Range(GameObjectPool.Instance.LowMin, GameObjectPool.Instance.LowMax + 1);
+                curType = Stage.Instance.RandLow;
                 break;
             case "MidItem":
-                curType = (PoolTag)Random.Range(GameObjectPool.Instance.MidMin, GameObjectPool.Instance.MidMax + 1);
+                curType = Stage.Instance.RandMid;
                 break;
             case "HighItem":
-                curType = (PoolTag)Random.Range(GameObjectPool.Instance.HighMin, GameObjectPool.Instance.HighMax + 1);
+                curType = Stage.Instance.RandHigh;
                 break;
         }
 

@@ -19,6 +19,8 @@ public class StorageButtonGroup : GenericWindow
     public int openMask;
     public int buyMask;
 
+    public MainScript main;
+
     public GameObject currentSkin
     {
         get
@@ -205,6 +207,13 @@ public class StorageButtonGroup : GenericWindow
 
         WindowManager.Instance.Open(Windows.Main);
         GameManager.GM.SaveData();
+
+        if(main == null)
+        {
+            var mainCenter = GameObject.Find("mainCenter");
+            main = mainCenter?.GetComponent<MainScript>();
+        }
+        main?.SetSkin();
     }
 
     public void MakeSaveMask()

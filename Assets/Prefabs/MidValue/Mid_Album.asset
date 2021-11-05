@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Mid_Album
   m_EditorClassIdentifier: 
   itemScore: 4
-  itemName: Album
   value: 1
-  poolTag: 0
+  poolTag: 13
   price: 3

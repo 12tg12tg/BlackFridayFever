@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: High_Monitor
   m_EditorClassIdentifier: 
   itemScore: 7
-  itemName: 
   value: 2
-  poolTag: 0
+  poolTag: 21
   price: 5

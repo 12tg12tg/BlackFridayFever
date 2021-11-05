@@ -18,6 +18,7 @@ TagManager:
   - unuseableRagdolls
   - Skin
   - itemspot
+  - MainCharacterSkinParent
   layers:
   - Default
   - TransparentFX

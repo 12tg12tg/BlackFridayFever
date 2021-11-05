@@ -14,19 +14,30 @@ public enum PoolTag
     Box_High,
     Item_Low_Donut,
     Item_Low_Hamburger,
+    Item_Low_Burrito,
+    Item_Low_Pizza,
+    Item_Low_Shoe,
     Item_Mid_Dog,
     Item_Mid_Cat,
+    Item_Mid_Album,
+    Item_Mid_Banana,
+    Item_Mid_Cake,
+    Item_Mid_Pineapple,
+    Item_Mid_Shoe,
     Item_High_Ring,
     Item_High_Necklace,
+    Item_High_Guitar,
+    Item_High_Monitor,
+    Item_High_Sushi,
 
 }
 
-public class GameObjectPool : MonoBehaviour
+public class GameObjectPool : Singleton<GameObjectPool>
 {
     private int poolCount = 40;
-    private static bool alreadyCreatePool = false;
 
-    public static GameObjectPool Instance;
+    //public static GameObjectPool Instance;
+
     public GameObject roamingAI;
     public GameObject ragdollPrefab;
     public GameObject moneyPrefab;
@@ -35,18 +46,21 @@ public class GameObjectPool : MonoBehaviour
     public GameObject highBoxPrefab;
     public GameObject item_Low_Donut_Prefab;
     public GameObject item_Low_Hamburger_Prefab;
+    public GameObject item_Low_Burrito_Prefab;
+    public GameObject item_Low_Pizza_Prefab;
+    public GameObject item_Low_Shoe_Prefab;
     public GameObject item_Mid_Dog_Prefab;
     public GameObject item_Mid_Cat_Prefab;
+    public GameObject item_Mid_Album_Prefab;
+    public GameObject item_Mid_Banana_Prefab;
+    public GameObject item_Mid_Cake_Prefab;
+    public GameObject item_Mid_Pineapple_Prefab;
+    public GameObject item_Mid_Shoe_Prefab;
     public GameObject item_High_Ring_Prefab;
     public GameObject item_High_Necklace_Prefab;
-
-    //Low, Mid, High Range
-    public int LowMin;
-    public int LowMax;
-    public int MidMin;
-    public int MidMax;
-    public int HighMin;
-    public int HighMax;
+    public GameObject item_High_Guitar_Prefab;
+    public GameObject item_High_Monitor_Prefab;
+    public GameObject item_High_Sushi_Prefab;
 
     //Dictionary로 풀 관리
     public Dictionary<PoolTag, Queue<GameObject>> pool = new Dictionary<PoolTag, Queue<GameObject>>();
@@ -55,12 +69,33 @@ public class GameObjectPool : MonoBehaviour
     //특별히 렉돌의 부모
     public Transform unuseableRagdolls;
 
-    private void Awake()
+    public void Init(StartGame sg)
     {
-        if (alreadyCreatePool) return;
+        roamingAI = sg.roamingAI;
+        ragdollPrefab = sg.ragdollPrefab;
+        moneyPrefab = sg.moneyPrefab;
+        lowBoxPrefab = sg.lowBoxPrefab;
+        midBoxPrefab = sg.midBoxPrefab;
+        highBoxPrefab = sg.highBoxPrefab;
+        item_Low_Donut_Prefab = sg.item_Low_Donut_Prefab;
+        item_Low_Hamburger_Prefab = sg.item_Low_Hamburger_Prefab;
+        item_Low_Burrito_Prefab = sg.item_Low_Burrito_Prefab;
+        item_Low_Pizza_Prefab = sg.item_Low_Pizza_Prefab;
+        item_Low_Shoe_Prefab = sg.item_Low_Shoe_Prefab;
+        item_Mid_Dog_Prefab = sg.item_Mid_Dog_Prefab;
+        item_Mid_Cat_Prefab = sg.item_Mid_Cat_Prefab;
+        item_Mid_Album_Prefab = sg.item_Mid_Album_Prefab;
+        item_Mid_Banana_Prefab = sg.item_Mid_Banana_Prefab;
+        item_Mid_Cake_Prefab = sg.item_Mid_Cake_Prefab;
+        item_Mid_Pineapple_Prefab = sg.item_Mid_Pineapple_Prefab;
+        item_Mid_Shoe_Prefab = sg.item_Mid_Shoe_Prefab;
+        item_High_Ring_Prefab = sg.item_High_Ring_Prefab;
+        item_High_Necklace_Prefab = sg.item_High_Necklace_Prefab;
+        item_High_Guitar_Prefab = sg.item_High_Guitar_Prefab;
+        item_High_Monitor_Prefab = sg.item_High_Monitor_Prefab;
+        item_High_Sushi_Prefab = sg.item_High_Sushi_Prefab;
 
-        alreadyCreatePool = true;
-        Instance = this;
+        //Instance = this;
 
         //프리펩
         prefabs.Add(PoolTag.RoamingAI, roamingAI);
@@ -69,20 +104,26 @@ public class GameObjectPool : MonoBehaviour
         prefabs.Add(PoolTag.Box_Mid, midBoxPrefab);
         prefabs.Add(PoolTag.Box_High, highBoxPrefab);
         prefabs.Add(PoolTag.Money, moneyPrefab);
+
         prefabs.Add(PoolTag.Item_Low_Donut, item_Low_Donut_Prefab);
         prefabs.Add(PoolTag.Item_Low_Hamburger, item_Low_Hamburger_Prefab);
+        prefabs.Add(PoolTag.Item_Low_Burrito, item_Low_Burrito_Prefab);
+        prefabs.Add(PoolTag.Item_Low_Pizza, item_Low_Pizza_Prefab);
+        prefabs.Add(PoolTag.Item_Low_Shoe, item_Low_Shoe_Prefab);
+
         prefabs.Add(PoolTag.Item_Mid_Dog, item_Mid_Dog_Prefab);
         prefabs.Add(PoolTag.Item_Mid_Cat, item_Mid_Cat_Prefab);
+        prefabs.Add(PoolTag.Item_Mid_Album, item_Mid_Album_Prefab);
+        prefabs.Add(PoolTag.Item_Mid_Banana, item_Mid_Banana_Prefab);
+        prefabs.Add(PoolTag.Item_Mid_Cake, item_Mid_Cake_Prefab);
+        prefabs.Add(PoolTag.Item_Mid_Pineapple, item_Mid_Pineapple_Prefab);
+        prefabs.Add(PoolTag.Item_Mid_Shoe, item_Mid_Shoe_Prefab);
+
         prefabs.Add(PoolTag.Item_High_Ring, item_High_Ring_Prefab);
         prefabs.Add(PoolTag.Item_High_Necklace, item_High_Necklace_Prefab);
-
-        //For Range
-        LowMin = (int)PoolTag.Item_Low_Donut;
-        LowMax = (int)PoolTag.Item_Low_Hamburger;
-        MidMin = (int)PoolTag.Item_Mid_Dog;
-        MidMax = (int)PoolTag.Item_Mid_Cat;
-        HighMin = (int)PoolTag.Item_High_Ring;
-        HighMax = (int)PoolTag.Item_High_Necklace;
+        prefabs.Add(PoolTag.Item_High_Guitar, item_High_Guitar_Prefab);
+        prefabs.Add(PoolTag.Item_High_Monitor, item_High_Monitor_Prefab);
+        prefabs.Add(PoolTag.Item_High_Sushi, item_High_Sushi_Prefab);
 
         //풀
         pool.Add(PoolTag.RoamingAI, new Queue<GameObject>());
@@ -91,12 +132,26 @@ public class GameObjectPool : MonoBehaviour
         pool.Add(PoolTag.Box_Mid, new Queue<GameObject>());
         pool.Add(PoolTag.Box_High, new Queue<GameObject>());
         pool.Add(PoolTag.Money, new Queue<GameObject>());
+
         pool.Add(PoolTag.Item_Low_Donut, new Queue<GameObject>());
         pool.Add(PoolTag.Item_Low_Hamburger, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_Low_Burrito, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_Low_Pizza, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_Low_Shoe, new Queue<GameObject>());
+
         pool.Add(PoolTag.Item_Mid_Dog, new Queue<GameObject>());
         pool.Add(PoolTag.Item_Mid_Cat, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_Mid_Album, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_Mid_Banana, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_Mid_Cake, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_Mid_Pineapple, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_Mid_Shoe, new Queue<GameObject>());
+
         pool.Add(PoolTag.Item_High_Ring, new Queue<GameObject>());
         pool.Add(PoolTag.Item_High_Necklace, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_High_Guitar, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_High_Monitor, new Queue<GameObject>());
+        pool.Add(PoolTag.Item_High_Sushi, new Queue<GameObject>());
 
 
         //생성
@@ -110,13 +165,13 @@ public class GameObjectPool : MonoBehaviour
 
         FindUnuseableRagdoll();
 
-        //삭제 ㄴㄴ
-        DontDestroyOnLoad(gameObject);
+        ////삭제 ㄴㄴ
+        //DontDestroyOnLoad(gameObject);
     }
     private void FindUnuseableRagdoll()
     {
         if(unuseableRagdolls == null)
-            unuseableRagdolls = GameObject.FindGameObjectWithTag("unuseableRagdolls").transform;
+            unuseableRagdolls = GameObject.FindGameObjectWithTag("unuseableRagdolls")?.transform;
     }
 
     private GameObject CreateNewObject(PoolTag key)
@@ -145,7 +200,11 @@ public class GameObjectPool : MonoBehaviour
                 obj.SetActive(true);
                 var agent = obj.GetComponent<NavMeshAgent>();
                 if (agent != null)
-                    agent.enabled = true;
+                {
+                    agent.enabled = false;
+                    //agent.isStopped = false;
+                    agent.velocity = Vector3.zero;
+                }
                 return obj;
             }
             else
@@ -155,7 +214,11 @@ public class GameObjectPool : MonoBehaviour
                 newObj.transform.SetParent(null);
                 var agent = newObj.GetComponent<NavMeshAgent>();
                 if (agent != null)
-                    agent.enabled = true;
+                {
+                    agent.enabled = false;
+                    //agent.isStopped = false;
+                    agent.velocity = Vector3.zero;
+                }
                 return newObj;
             }
         }
@@ -175,7 +238,11 @@ public class GameObjectPool : MonoBehaviour
             queue.Enqueue(go);
             var agent = go.GetComponent<NavMeshAgent>();
             if (agent != null)
+            {
+                agent.isStopped = true;
+                agent.velocity = Vector3.zero;
                 agent.enabled = false;
+            }
             go.SetActive(false);
         }
     }

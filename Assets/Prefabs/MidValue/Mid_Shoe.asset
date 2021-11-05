@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Mid_Shoe
   m_EditorClassIdentifier: 
   itemScore: 4
-  itemName: Shoe
   value: 1
-  poolTag: 0
+  poolTag: 17
   price: 3

@@ -18,7 +18,7 @@ public class Stage : MonoBehaviour
 
     [Header("(Inspector 수정 불필요)")]
     public float scanTime = 2.5f;
-    public float toPlayerTime = 2.5f;
+    public float toPlayerTime = 1f;
 
 
 
@@ -42,4 +42,31 @@ public class Stage : MonoBehaviour
         MidItems = GameObject.FindGameObjectsWithTag("MidItem");
         HighItems = GameObject.FindGameObjectsWithTag("HighItem");
     }
+
+    public PoolTag[] lowValues;
+    public PoolTag[] MidValues;
+    public PoolTag[] HighValues;
+
+    public PoolTag RandLow
+    {
+        get
+        {
+            return lowValues[Random.Range(0, lowValues.Length)];
+        }
+    }
+    public PoolTag RandMid
+    {
+        get
+        {
+            return MidValues[Random.Range(0, MidValues.Length)];
+        }
+    }
+    public PoolTag RandHigh
+    {
+        get
+        {
+            return HighValues[Random.Range(0, HighValues.Length)];
+        }
+    }
+
 }

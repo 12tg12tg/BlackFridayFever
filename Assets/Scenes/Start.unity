@@ -196,3 +196,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3a8ab302706614191648d02cf69d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roamingAI: {fileID: 1689547326721900679, guid: 74525b32e2e5cbe4a9e4a67493543ffa, type: 3}
+  ragdollPrefab: {fileID: 7623191390065364814, guid: 2b14045652937a049a7f96f13dc3caa4, type: 3}
+  moneyPrefab: {fileID: 5207489067787833718, guid: ca8ff08f4cc5bfb48b8fcb3c44689477, type: 3}
+  lowBoxPrefab: {fileID: 1050495249296263753, guid: 45b3769cc48cb224fa96ace7ad8e0e17, type: 3}
+  midBoxPrefab: {fileID: 2647770682899696638, guid: bf086279c4d91924cac3fe843701be71, type: 3}
+  highBoxPrefab: {fileID: 9144545601510063759, guid: a84be35c812724c4783c4504693317e8, type: 3}
+  item_Low_Donut_Prefab: {fileID: 1174550526422166440, guid: 596664bd23af1c24a98a6ce0998b1c47, type: 3}
+  item_Low_Hamburger_Prefab: {fileID: 6670506983347252201, guid: 920f8f7149f7f104391a7a6d3d8e6eae, type: 3}
+  item_Low_Burrito_Prefab: {fileID: 6805474836959964282, guid: 0a616f711aab62847b85b1b234a7fac7, type: 3}
+  item_Low_Pizza_Prefab: {fileID: 1792594639706365578, guid: faa6fce2e3d2a72429243092e1414a3d, type: 3}
+  item_Low_Shoe_Prefab: {fileID: 5576406320429408580, guid: fc7895c680b6a3f47acecf0c7b9372ad, type: 3}
+  item_Mid_Dog_Prefab: {fileID: 2711254026441277918, guid: 835c0a344e53233438786b79cb4686e2, type: 3}
+  item_Mid_Cat_Prefab: {fileID: 3625363094208366345, guid: 04560c29fccfe4f48ad09eff02476771, type: 3}
+  item_Mid_Album_Prefab: {fileID: 4040237913557239872, guid: 81dd737892d6f8c4b81e25326960f431, type: 3}
+  item_Mid_Banana_Prefab: {fileID: 3063260647930719193, guid: 370919aaa2e2c7349926e09c5d97c2f9, type: 3}
+  item_Mid_Cake_Prefab: {fileID: 4058630864027772569, guid: fee35790ddcbb5343bf12f8bd7cc3b3c, type: 3}
+  item_Mid_Pineapple_Prefab: {fileID: 6747441116403524799, guid: 8d8bfdc76a88216438b80e957e2a51ba, type: 3}
+  item_Mid_Shoe_Prefab: {fileID: 7501681810014714552, guid: f3929add2e41d2247a492430fd7958ca, type: 3}
+  item_High_Ring_Prefab: {fileID: 4712246608054615585, guid: cde00e8362c65384da3bf67c8007765a, type: 3}
+  item_High_Necklace_Prefab: {fileID: 5130976959297038082, guid: ebf3adabbd32560489d1d7dbe3c71006, type: 3}
+  item_High_Guitar_Prefab: {fileID: 9132927994218504771, guid: 253bb483cd996e34dba56a51af04f9cd, type: 3}
+  item_High_Monitor_Prefab: {fileID: 5502630686235070646, guid: ae79eee24b780b54c827bac7d1e59d70, type: 3}
+  item_High_Sushi_Prefab: {fileID: 762127801372953055, guid: fd8a8f6329b2ee64da456715fd433f71, type: 3}

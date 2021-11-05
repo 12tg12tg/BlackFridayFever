@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Mid_Cake
   m_EditorClassIdentifier: 
   itemScore: 4
-  itemName: Cake
   value: 1
-  poolTag: 0
+  poolTag: 15
   price: 3

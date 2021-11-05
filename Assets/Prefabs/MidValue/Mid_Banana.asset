@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Mid_Banana
   m_EditorClassIdentifier: 
   itemScore: 4
-  itemName: 
   value: 1
-  poolTag: 0
+  poolTag: 14
   price: 3

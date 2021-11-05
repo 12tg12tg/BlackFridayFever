@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: High_Guitar
   m_EditorClassIdentifier: 
   itemScore: 7
-  itemName: Guitar
   value: 2
-  poolTag: 0
+  poolTag: 20
   price: 5

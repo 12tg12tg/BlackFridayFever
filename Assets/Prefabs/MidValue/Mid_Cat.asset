@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Mid_Cat
   m_EditorClassIdentifier: 
   itemScore: 4
-  itemName: Cat
   value: 1
-  poolTag: 9
+  poolTag: 12
   price: 3

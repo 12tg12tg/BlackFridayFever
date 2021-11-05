@@ -24,7 +24,7 @@ public class MainWindows : GenericWindow
         /*저장공간에서 스테이지 정보 불러오기*/
 
         //현재 스테이지 넘버 설정 (임시 : 1)
-        lastOpenedStage = 1;
+        lastOpenedStage = 12;
         //invokeStageNum = lastOpenedStage;
 
         //버튼 활성화여부 결정

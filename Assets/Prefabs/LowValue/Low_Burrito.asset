@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Low_Burrito
   m_EditorClassIdentifier: 
   itemScore: 1
-  itemName: Burrito
   value: 0
-  poolTag: 0
+  poolTag: 8
   price: 1

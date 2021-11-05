@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Low_Pizza
   m_EditorClassIdentifier: 
   itemScore: 1
-  itemName: Pizza
   value: 0
-  poolTag: 0
+  poolTag: 9
   price: 1

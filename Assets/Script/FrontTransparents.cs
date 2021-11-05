@@ -35,19 +35,54 @@ public class FrontTransparents : MonoBehaviour
     void Update()
     {
         var playerPos = GameManager.GM.player.transform.position;
-        var playerViewport = Camera.main.WorldToViewportPoint(playerPos);
-        Ray ray = Camera.main.ViewportPointToRay(playerViewport);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 50))
+        if (playerPos.z > transform.position.z + 2f)
         {
-            if (hit.transform.gameObject == gameObject)
+            TurnOffMeshs();
+        }
+        else
+        {
+            TurnOnMeshs();
+
+            var playerViewport = Camera.main.WorldToViewportPoint(playerPos);
+            Ray ray = Camera.main.ViewportPointToRay(playerViewport);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 50))
             {
-                MakeTransparent();
+                if (hit.transform.gameObject == gameObject)
+                {
+                    MakeTransparent();
+                }
+                else
+                    TransparentOff();
             }
-            else
-                TransparentOff();
         }
     }
+
+    void TurnOffMeshs()
+    {
+        foreach (var item in aboutShops)
+        {
+            item.enabled = false;
+        }
+        foreach (var item in buildingLogo)
+        {
+            item.enabled = false;
+        }
+    }
+
+    void TurnOnMeshs()
+    {
+        foreach (var item in aboutShops)
+        {
+            item.enabled = true;
+        }
+        foreach (var item in buildingLogo)
+        {
+            item.enabled = true;
+        }
+    }
+
+
     void MakeTransparent()
     {
         foreach (var item in aboutShops)

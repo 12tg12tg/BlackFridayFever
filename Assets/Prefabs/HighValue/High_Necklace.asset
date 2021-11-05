@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d58c5032f1392749ab68514527ae418, type: 3}
   m_Name: High_Necklace
   m_EditorClassIdentifier: 
-  itemScore: 8
-  itemName: Necklace
+  itemScore: 7
   value: 2
-  poolTag: 11
+  poolTag: 19
   price: 5

@@ -49,6 +49,7 @@ public class RoamingAiBehaviour : UnitBehaviour
             this.wayPoints = wayPoints;
         }
         setMoveAnimation();
+        agent.destination = transform.position;
         isTarget = false;
     }
 
@@ -110,8 +111,12 @@ public class RoamingAiBehaviour : UnitBehaviour
                 //지정된 장소중 한군데를 목표로 삼기
                 target = wayPoints[Random.Range(0, wayPoints.Length)].transform;
             }
-            isTarget = true;
-            agent.destination = target.transform.position;
+
+            if (agent.enabled)
+            {
+                isTarget = true;
+                agent.destination = target.transform.position;
+            }
         }
         else
         {

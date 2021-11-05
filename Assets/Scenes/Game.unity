@@ -5300,6 +5300,7 @@ MonoBehaviour:
   remainSkin: 0
   openMask: 0
   buyMask: 0
+  main: {fileID: 0}
 --- !u!225 &729523426
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -11309,7 +11310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1691244850
 Transform:
   m_ObjectHideFlags: 0
@@ -11344,16 +11345,21 @@ MonoBehaviour:
   highBoxPrefab: {fileID: 9144545601510063759, guid: a84be35c812724c4783c4504693317e8, type: 3}
   item_Low_Donut_Prefab: {fileID: 1174550526422166440, guid: 596664bd23af1c24a98a6ce0998b1c47, type: 3}
   item_Low_Hamburger_Prefab: {fileID: 6670506983347252201, guid: 920f8f7149f7f104391a7a6d3d8e6eae, type: 3}
+  item_Low_Burrito_Prefab: {fileID: 6805474836959964282, guid: 0a616f711aab62847b85b1b234a7fac7, type: 3}
+  item_Low_Pizza_Prefab: {fileID: 1792594639706365578, guid: faa6fce2e3d2a72429243092e1414a3d, type: 3}
+  item_Low_Shoe_Prefab: {fileID: 5576406320429408580, guid: fc7895c680b6a3f47acecf0c7b9372ad, type: 3}
   item_Mid_Dog_Prefab: {fileID: 2711254026441277918, guid: 835c0a344e53233438786b79cb4686e2, type: 3}
   item_Mid_Cat_Prefab: {fileID: 3625363094208366345, guid: 04560c29fccfe4f48ad09eff02476771, type: 3}
+  item_Mid_Album_Prefab: {fileID: 4040237913557239872, guid: 81dd737892d6f8c4b81e25326960f431, type: 3}
+  item_Mid_Banana_Prefab: {fileID: 3063260647930719193, guid: 370919aaa2e2c7349926e09c5d97c2f9, type: 3}
+  item_Mid_Cake_Prefab: {fileID: 4058630864027772569, guid: fee35790ddcbb5343bf12f8bd7cc3b3c, type: 3}
+  item_Mid_Pineapple_Prefab: {fileID: 6747441116403524799, guid: 8d8bfdc76a88216438b80e957e2a51ba, type: 3}
+  item_Mid_Shoe_Prefab: {fileID: 7501681810014714552, guid: f3929add2e41d2247a492430fd7958ca, type: 3}
   item_High_Ring_Prefab: {fileID: 4712246608054615585, guid: cde00e8362c65384da3bf67c8007765a, type: 3}
   item_High_Necklace_Prefab: {fileID: 5130976959297038082, guid: ebf3adabbd32560489d1d7dbe3c71006, type: 3}
-  LowMin: 0
-  LowMax: 0
-  MidMin: 0
-  MidMax: 0
-  HighMin: 0
-  HighMax: 0
+  item_High_Guitar_Prefab: {fileID: 9132927994218504771, guid: 253bb483cd996e34dba56a51af04f9cd, type: 3}
+  item_High_Monitor_Prefab: {fileID: 5502630686235070646, guid: ae79eee24b780b54c827bac7d1e59d70, type: 3}
+  item_High_Sushi_Prefab: {fileID: 762127801372953055, guid: fd8a8f6329b2ee64da456715fd433f71, type: 3}
   unuseableRagdolls: {fileID: 1261897489}
 --- !u!1 &1707696666
 GameObject:
@@ -12034,6 +12040,7 @@ MonoBehaviour:
   remainSkin: 0
   openMask: 0
   buyMask: 0
+  main: {fileID: 0}
 --- !u!225 &1877743960
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -14211,7 +14218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1689547326721900684, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.7
+      value: 1.58
       objectReference: {fileID: 0}
     - target: {fileID: 1689547326721900684, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14219,7 +14226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1689547326721900684, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -49.25
+      value: -48.11
       objectReference: {fileID: 0}
     - target: {fileID: 1689547326721900684, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14261,6 +14268,10 @@ PrefabInstance:
       propertyPath: defaultSkin
       value: 
       objectReference: {fileID: 8592876449704463762, guid: f07b5485cba861e418222d17f8938c4d, type: 3}
+    - target: {fileID: 6506854241532881445, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
 --- !u!4 &1689547327892621718 stripped

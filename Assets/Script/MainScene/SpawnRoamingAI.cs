@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpawnRoamingAI : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class SpawnRoamingAI : MonoBehaviour
             var go = GameObjectPool.Instance.GetObject(PoolTag.RoamingAI);
             go.transform.SetParent(parent);
             go.transform.position = aiSpawnZone[Random.Range(0, aiSpawnZone.Length)].position;
-
+            go.GetComponent<NavMeshAgent>().enabled = true;
             go.GetComponent<RoamingAiBehaviour>().Init(isForMain, wayPoints);
         }
     }
