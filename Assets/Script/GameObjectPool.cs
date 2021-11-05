@@ -24,6 +24,8 @@ public enum PoolTag
 public class GameObjectPool : MonoBehaviour
 {
     private int poolCount = 40;
+    private static bool alreadyCreatePool = false;
+
     public static GameObjectPool Instance;
     public GameObject roamingAI;
     public GameObject ragdollPrefab;
@@ -55,6 +57,9 @@ public class GameObjectPool : MonoBehaviour
 
     private void Awake()
     {
+        if (alreadyCreatePool) return;
+
+        alreadyCreatePool = true;
         Instance = this;
 
         //«¡∏Æ∆È
@@ -104,6 +109,9 @@ public class GameObjectPool : MonoBehaviour
         }
 
         FindUnuseableRagdoll();
+
+        //ªË¡¶ §§§§
+        DontDestroyOnLoad(gameObject);
     }
     private void FindUnuseableRagdoll()
     {

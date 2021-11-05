@@ -62,12 +62,16 @@ public class CharacterStats : MonoBehaviour
             rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         }
 
+        var count = purchasedList.Count;
+        var foolTime = 2f;
+        var term = foolTime / (count - 1);
+
         //하나씩 저장(Pool로 되돌려주기)
         while (purchasedList.Count != 0)
         {
             var removeItem = purchasedList[0];
-
-            switch (removeItem.GetComponent<Box>().itemInfo.value)
+            var itemInfo = removeItem.GetComponent<Box>().itemInfo;
+            switch (itemInfo.value)
             {
                 case ItemValue.Low:
                     GameObjectPool.Instance.ReturnObject(PoolTag.Box_Low, removeItem.gameObject);
@@ -82,11 +86,13 @@ public class CharacterStats : MonoBehaviour
             removeItem.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             purchasedList.RemoveAt(0);
 
+            truck.GetComponentInChildren<LiftLoadTruck>().LiftPurchased(itemInfo);
+
             //사운드재생
             if(GameManager.GM.State==GameManager.GameState.End ||
                 stats.type == UnitType.Player)
                 SoundManager.Instance.PlayLoadTruck();
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(term);
         }
 
         itemStack = 0;

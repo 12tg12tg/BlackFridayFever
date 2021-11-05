@@ -164,11 +164,16 @@ public class GameManager : MonoBehaviour
             trucks[rnd] = temp;
         }
 
+        //트럭관련 Init
         player.GetComponent<CharacterStats>().truck = trucks[0]; //0번트럭은 플레이어, 1, 2, 3번은 AI
+        trucks[0].SkinInit(car.currentSkin);
+        player.GetComponent<PlayerController>().Init(skin.currentSkin);
 
         for (int i = 0; i < AIs.Length; i++)
         {
             AIs[i].truck = trucks[i+1];
+            trucks[i+1].SkinInit(null);
+            curStageInfo.Ais[i].GetComponent<AiBehaviour>().Init();
         }
 
         Debug.Log($"씬 준비 완료.");
@@ -176,12 +181,12 @@ public class GameManager : MonoBehaviour
         //플레이어활성화
         player.SetActive(true);
 
-        //트럭관련 Init
-        player.GetComponent<PlayerController>().Init();
-        for (int i = 0; i < curStageInfo.Ais.Length; i++)
-        {
-            curStageInfo.Ais[i].GetComponent<AiBehaviour>().Init();
-        }
+        ////트럭관련 Init
+        //player.GetComponent<PlayerController>().Init();
+        //for (int i = 0; i < curStageInfo.Ais.Length; i++)
+        //{
+        //    curStageInfo.Ais[i].GetComponent<AiBehaviour>().Init();
+        //}
 
         //카메라 활성화
         mainCam = Camera.main.GetComponent<CameraMove>();

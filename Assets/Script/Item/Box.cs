@@ -9,6 +9,9 @@ public class Box : MonoBehaviour
     private float disableTime = 5f;
 
     public ItemInfo itemInfo;
+
+    public static Transform itemParent;
+
     private void Update()
     {
         //시간 후 Pool로 보내기
@@ -24,6 +27,13 @@ public class Box : MonoBehaviour
                 //item 리스폰
                 var go = GameObjectPool.Instance.GetObject(itemInfo.poolTag);
                 go.transform.position = transform.position;
+
+                //리스폰아이템 부모지정
+                if(itemParent == null)
+                {
+                    itemParent = GameObject.FindGameObjectWithTag("itemspot").transform;
+                }
+                go.transform.SetParent(itemParent);
 
 
                 //Pool로 되돌리기

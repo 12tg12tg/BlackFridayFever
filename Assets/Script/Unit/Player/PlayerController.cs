@@ -11,29 +11,41 @@ public class PlayerController : UnitBehaviour
     public float stunTimer;
     private Vector3 direction;
 
-    //색배정
+    //스킨 및 색배정
+    public GameObject defaultSkin;
+    public Transform skinParent;
     public SkinnedMeshRenderer skin;
 
     private void Awake()
     {
         stats = GetComponent<CharacterStats>();
         animator = GetComponentInChildren<Animator>();
+    }
 
+    public void Init(GameObject skinPrefab)
+    {
+        //스킨 및 색
+        if(skinPrefab != null)
+        {
+            Instantiate(skinPrefab, skinParent);
+        }
+        else
+        {
+            Instantiate(defaultSkin, skinParent);
+        }
         var skins = GetComponentsInChildren<SkinnedMeshRenderer>();
         for (int i = 0; i < skins.Length; i++)
         {
-            if(skins[i].tag == "Skin")
+            if (skins[i].tag == "Skin")
             {
                 skin = skins[i];
                 break;
             }
         }
-    }
-
-    public override void Init()
-    {
-        transform.position = stats.truck.dokingSpot.position + transform.forward * 2f;
         skin.material.color = stats.truck.bodyColor;
+
+        //위치
+        transform.position = stats.truck.dokingSpot.position + transform.forward * 2f;
     }
 
     private void Update()

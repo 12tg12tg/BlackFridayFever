@@ -4,26 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using GoogleMobileAds.Api;
 
-public class GoogleMobileADTest : MonoBehaviour
+public static class GoogleMobileADTest
 {
-    public Button interstitialButton;
-    public Button rewardButton;
-    public Text reward;
-
     public static readonly string interstitial1Id = "ca-app-pub-1195551850458243/4490348779";
     public static readonly string reward1Id = "ca-app-pub-1195551850458243/5611858753";
 
-    private InterstitialAd interstitial;
-    private RewardedAd rewardedAd;
+    private static InterstitialAd interstitial;
+    private static RewardedAd rewardedAd;
 
-    private void Start()
-    {
-        interstitialButton.interactable = false;
-        rewardButton.interactable = false;
-    }
-
-
-    public void OnClickInit()
+    public static void Init()
     {
         List<string> deviceIds = new List<string>();
         deviceIds.Add("F8A4401AE01CD9E21F6423C24A1C0115");         //디바이스아이디 로그캣으로 확인해야함.
@@ -32,39 +21,51 @@ public class GoogleMobileADTest : MonoBehaviour
             .SetTestDeviceIds(deviceIds)
             .build();
         MobileAds.SetRequestConfiguration(requestConfiguration);            //여기까지 출시후엔 삭제해도되는코드
-        MobileAds.Initialize(initStatus => { });
+        MobileAds.Initialize(initStatus => {
+            RequestInterstitial();
+            RequestReward();
+        });
     }
 
     //전면광고요청
-    public void OnClickRequestInterstitial()
+    public static void RequestInterstitial()
     {
         if (interstitial != null)
         {
             interstitial.Destroy(); //먼저로드된 광고가 있다면 삭제
         }
         interstitial = new InterstitialAd(interstitial1Id);     //광고생성
-        this.interstitial.OnAdLoaded += HandleOnAdLoaded;       //광고관련 델리게이트 추가
-        this.interstitial.OnAdOpening += HandleOnAdOpened;
+        interstitial.OnAdLoaded += HandleOnAdLoaded;       //광고관련 델리게이트 추가
+        interstitial.OnAdOpening += HandleOnAdOpened;
+        interstitial.OnAdClosed += HandleOnAdClosed;
+        interstitial.OnAdFailedToLoad += OnAdFailedToLoad;
 
         AdRequest request = new AdRequest.Builder().Build();
         interstitial.LoadAd(request);
     }
 
-    public void HandleOnAdLoaded(object sender, EventArgs args)
+    public static void HandleOnAdLoaded(object sender, EventArgs args)
     {
-        MonoBehaviour.print("HandleAdLoaded event received");
-        interstitialButton.interactable = true;
+        //MonoBehaviour.print("HandleAdLoaded event received");
     }
 
-    public void HandleOnAdOpened(object sender, EventArgs args)
+    public static void HandleOnAdOpened(object sender, EventArgs args)
     {
-        MonoBehaviour.print("HandleAdOpened event received");
-        interstitialButton.interactable = false;
+        //MonoBehaviour.print("HandleAdOpened event received");
     }
 
+    public static void HandleOnAdClosed(object sender, EventArgs args)
+    {
+        RequestInterstitial();
+    }
+
+    public static void OnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
+
+    }
 
     //전면광고출력
-    public void OnClickInterstitial()
+    public static void OnClickInterstitial()
     {
         if (interstitial.IsLoaded())
         {
@@ -74,48 +75,51 @@ public class GoogleMobileADTest : MonoBehaviour
 
 
     //리워드광고요청
-    public void OnClickRequestReward()
+    public static void RequestReward()
     {
         if (rewardedAd != null)
         {
             rewardedAd.Destroy();
         }
-        this.rewardedAd = new RewardedAd(reward1Id);
-        this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
-        this.rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+        rewardedAd = new RewardedAd(reward1Id);
+        rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
+        rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+        rewardedAd.OnAdClosed += HandleRewardedOnAdClosed;
+        rewardedAd.OnAdFailedToLoad += OnAdFailedToLoad;
 
-        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
         AdRequest request = new AdRequest.Builder().Build();
-        this.rewardedAd.LoadAd(request);
+        rewardedAd.LoadAd(request);
     }
 
-    public void HandleRewardedAdLoaded(object sender, EventArgs args)
+    public static void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
-        MonoBehaviour.print("HandleRewardedAdLoaded event received");
-        rewardButton.interactable = true;
-        reward.text = "리워드 광고 출력";
+        //MonoBehaviour.print("HandleRewardedAdLoaded event received");
     }
 
-    public void HandleRewardedAdOpening(object sender, EventArgs args)
+    public static void HandleRewardedAdOpening(object sender, EventArgs args)
     {
-        MonoBehaviour.print("HandleRewardedAdOpening event received");
-        rewardButton.interactable = false;
+        //MonoBehaviour.print("HandleRewardedAdOpening event received");
+    }
+    public static void HandleRewardedOnAdClosed(object sender, EventArgs args)
+    {
+        RequestReward();
     }
 
 
     //리워드광고 출력
-    public void OnClickReward()
+    public static void OnClickReward()
     {
-        if (this.rewardedAd.IsLoaded())
+        if (rewardedAd.IsLoaded())
         {
-            this.rewardedAd.Show();
+            rewardedAd.Show();
         }
     }
 
-    public void HandleUserEarnedReward(object sender, Reward args)
+    public static void HandleUserEarnedReward(object sender, Reward args)
     {
         string type = args.Type;
         double amount = args.Amount;
-        reward.text = "received for " + amount.ToString() + " " + type;
+        //3배 리워드 팝업창 출력
     }
 }

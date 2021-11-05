@@ -576,6 +576,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 033b91cb385adae4da4ded50ca350c24, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
       value: 0
@@ -584,6 +600,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 6381262190758882814, guid: 1d866c19992fedd4da685bcf530c7c19, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 033b91cb385adae4da4ded50ca350c24, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -2883,11 +2907,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -20
+      value: -7.58406
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -25
+      value: -13.27446
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2895,7 +2919,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5
+      value: 3.4000113
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f88c8c9388f364c4793229ffd3ca6b3b, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
@@ -2905,6 +2945,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 2863259907266342101, guid: ed182337390b76a4ba6eb77bee882cd2, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f88c8c9388f364c4793229ffd3ca6b3b, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -3422,6 +3470,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483930919}
   m_CullTransparentMesh: 1
+--- !u!4 &489492118 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2664390989367447469, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
+  m_PrefabInstance: {fileID: 1689547327892621716}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &490213041
 GameObject:
   m_ObjectHideFlags: 0
@@ -3833,6 +3886,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e5d427ade0251cd4e80fb0cce6639174, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
       value: 0
@@ -3841,6 +3910,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 1406963981054583541, guid: 29b77ddb0e94a87488cae3ddb1bd2b4d, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e5d427ade0251cd4e80fb0cce6639174, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -4165,7 +4242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &599431512
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4674,6 +4751,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7ba6ebc1f8c10bb4b8a56fae9f73ff4f, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
       value: 0
@@ -4682,6 +4775,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 5104045228829540834, guid: 8025224cb27628847b840a99bf1abf3f, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7ba6ebc1f8c10bb4b8a56fae9f73ff4f, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -4940,6 +5041,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 77b51df226371b341a22ba651e407bd9, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
       value: 0
@@ -4948,6 +5065,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 5094338873722138906, guid: 8678e0f1a546da04990a89c02ca930c5, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 77b51df226371b341a22ba651e407bd9, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -5420,6 +5545,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9aee47bddcc52ce479cbd30c1b998f6a, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
       value: 0
@@ -5428,6 +5569,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 4579129612289218025, guid: a1854ec85b5b3984e824ca4a914477a5, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9aee47bddcc52ce479cbd30c1b998f6a, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -5595,11 +5744,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -20
+      value: -7.58406
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -25
+      value: -13.27446
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -5607,15 +5756,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5
+      value: 3.4000113
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3825112599ab53b4c9f218759bd4a642, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
@@ -5625,6 +5782,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 8684001632524818912, guid: 670292d3b5ae94e4b9c935684b7420db, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3825112599ab53b4c9f218759bd4a642, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -7929,6 +8094,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cfb1f53be5d31a94f8b4046d34e5e0a8, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
       value: 0
@@ -7937,6 +8118,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 7232361269074842908, guid: 90831b11c53b348409699f5461a6c5c0, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cfb1f53be5d31a94f8b4046d34e5e0a8, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -8184,11 +8373,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -20
+      value: -7.58406
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -25
+      value: -13.27446
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -8196,7 +8385,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5
+      value: 3.399994
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 127f715e817dbb943b74804fe8a4032e, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
@@ -8206,6 +8411,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 6947180492162182184, guid: 8198ca87745d48c49a3ff310648ab513, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 127f715e817dbb943b74804fe8a4032e, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -8815,6 +9028,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71c2606b5707f284baf4bf4dd46f5b94, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
       value: 0
@@ -8823,6 +9052,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 1534367169273514130, guid: 5d92402b1fcb75e41b6433fec88d6502, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71c2606b5707f284baf4bf4dd46f5b94, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -12358,6 +12595,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4eba32ceb33f2e34e8b2683bf35b0a6f, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
       value: 0
@@ -12366,6 +12619,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 6642933920388402481, guid: 3d1f99b4305b6134082829210a8758b8, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4eba32ceb33f2e34e8b2683bf35b0a6f, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -12684,10 +12945,10 @@ RectTransform:
   m_Father: {fileID: 2025815977}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 142.10529, y: -64.64255}
+  m_SizeDelta: {x: 284.21057, y: 129.2851}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2015154870
 GameObject:
@@ -12734,11 +12995,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -20
+      value: -7.58406
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -25
+      value: -13.27446
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -12746,7 +13007,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5
+      value: 3.4000113
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b0a9c595befe59d458670af1d6d75a13, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
@@ -12756,6 +13033,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 3723320790151221711, guid: 12f99fc048151a647947b64438454c74, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b0a9c595befe59d458670af1d6d75a13, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -13392,6 +13677,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 44d0cbc01b93b284b8d286e68f201993, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
       value: 0
@@ -13400,6 +13701,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 8968819855473483807, guid: 1b9b3f1c609681143a5968c9e9f0006e, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 44d0cbc01b93b284b8d286e68f201993, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -13673,11 +13982,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -20
+      value: -7.58406
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -25
+      value: -13.27446
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -13685,11 +13994,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5
+      value: 3.4000113
       objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ada914d2c11789e41b9a63ea4742a4ca, type: 3}
     - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
@@ -13699,6 +14020,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 3149641192327398066, guid: 1392e16d148b99e4daac5ae4c9b907e7, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ada914d2c11789e41b9a63ea4742a4ca, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 
@@ -13872,6 +14201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1689547326721900679, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1689547326721900684, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -13920,6 +14253,14 @@ PrefabInstance:
       propertyPath: multiTouch
       value: 
       objectReference: {fileID: 410981906}
+    - target: {fileID: 1689547326721900685, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
+      propertyPath: skinParent
+      value: 
+      objectReference: {fileID: 489492118}
+    - target: {fileID: 1689547326721900685, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
+      propertyPath: defaultSkin
+      value: 
+      objectReference: {fileID: 8592876449704463762, guid: f07b5485cba861e418222d17f8938c4d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a56a90b8e9d46c1438cefe7d949d2b97, type: 3}
 --- !u!4 &1689547327892621718 stripped
@@ -13936,11 +14277,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -20
+      value: -7.58406
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -25
+      value: -13.27446
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -13948,15 +14289,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936848, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5
+      value: 3.4000113
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2fabd41494aa13a4e8cb86b6bf0ebe4a, type: 3}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893806988419936849, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1893806988419936851, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: isOpened
@@ -13966,6 +14315,14 @@ PrefabInstance:
       propertyPath: redSprite
       value: 
       objectReference: {fileID: 21300000, guid: 09bb19175645a644488aacc0fd0e7428, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinPrefab
+      value: 
+      objectReference: {fileID: 1572377188662275008, guid: a341de92dfddf884ba23576a324558de, type: 3}
+    - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
+      propertyPath: skinSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2fabd41494aa13a4e8cb86b6bf0ebe4a, type: 3}
     - target: {fileID: 1893806990239999304, guid: 01df0de6e02eac941aabe0f6ba33c540, type: 3}
       propertyPath: buttonGroup
       value: 

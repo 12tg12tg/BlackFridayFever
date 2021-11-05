@@ -17,6 +17,7 @@ TagManager:
   - ParentParticle
   - unuseableRagdolls
   - Skin
+  - itemspot
   layers:
   - Default
   - TransparentFX

@@ -43,20 +43,13 @@ public class StorageButton : MonoBehaviour
         }
     }
 
-    public void OpenSkinButton()
-    {
-        if (!isOpened)
-        {
-            isOpened = true;
-            buttonGroup.remainSkin--;
-        }
-    }
 
     private void Update()
     {
         if(isOpened)
         {
-            if(isBuy)
+            skinImg.enabled = true;
+            if (isBuy)
             {
                 if (isSelectedSkin)
                 {
@@ -74,6 +67,7 @@ public class StorageButton : MonoBehaviour
         }
         else
         {
+            skinImg.enabled = false;
             button.image.sprite = secreteSprite;
         }
     }

@@ -19,9 +19,19 @@ public class StorageButtonGroup : GenericWindow
     public int openMask;
     public int buyMask;
 
-    private void Awake()
+    public GameObject currentSkin
     {
-        remainSkin = buttons.Length;
+        get
+        {
+            if(curSelectedButton == -1)
+            {
+                return null;
+            }
+            else
+            {
+                return buttons[curSelectedButton].skinPrefab;
+            }
+        }
     }
 
     public void Init(int openMask, int buyMask, int currentSelected)
@@ -99,6 +109,7 @@ public class StorageButtonGroup : GenericWindow
             }
         }
         curFocusButton = null;
+        GameManager.GM.SaveData();
     }
 
     public void FocusedButtonReset(StorageButton button)
@@ -139,6 +150,7 @@ public class StorageButtonGroup : GenericWindow
         if (GameManager.GM.Diamond >= 500)
         {
             GameManager.GM.Diamond = GameManager.GM.Diamond - 300;
+            diamondTxt.text = GameManager.GM.Diamond.ToString();
             curFocusButton.isBuy = true;
 
             /*리워드 프리펩을 제2의 카메라 위치로!*/
@@ -151,6 +163,7 @@ public class StorageButtonGroup : GenericWindow
         }
 
         MakeSaveMask();
+        GameManager.GM.SaveData();
     }
 
     public void WatchAdForSkin()
@@ -178,6 +191,7 @@ public class StorageButtonGroup : GenericWindow
             }
         }
         MakeSaveMask();
+        GameManager.GM.SaveData();
     }
 
     public void Back()
