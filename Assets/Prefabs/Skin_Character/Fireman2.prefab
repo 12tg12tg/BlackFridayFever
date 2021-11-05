@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 6947180492152692610}
   - component: {fileID: -4839528942614969222}
   m_Layer: 0
-  m_Name: Fireman
+  m_Name: Fireman2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 6947180492148515140}
   m_Layer: 0
   m_Name: Stickman_heads_sphere_07
-  m_TagString: Untagged
+  m_TagString: Skin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1261,7 +1261,7 @@ GameObject:
   - component: {fileID: 6947180492148515136}
   m_Layer: 0
   m_Name: Helment
-  m_TagString: Skin
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1440,7 +1440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6947180492162478204
 Transform:
   m_ObjectHideFlags: 0
@@ -1614,4 +1614,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcc319497a601a4cb59b493e712195f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource: {fileID: 21300000, guid: 127f715e817dbb943b74804fe8a4032e, type: 3}
+  resource: {fileID: 21300000, guid: 4804a0f87792c004dbbb4b6b26037e94, type: 3}

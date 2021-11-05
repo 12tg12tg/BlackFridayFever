@@ -11,9 +11,11 @@ public class Indicator_AI : MonoBehaviour
     public RectTransform trans;
     public RectTransform progressTrans;
     public RectTransform characterPicTrans;
+    public RectTransform characterPrefabTrans;
     public Image indicateImg;
     public Image progressImg;
     public Image characterImg;
+    public Image characterPrefabImg;
 
     public Color safeColor;
     public Color warnColor;
@@ -23,6 +25,7 @@ public class Indicator_AI : MonoBehaviour
         myObject = ai.transform;
         var behavior =  ai as UnitBehaviour;
         indicateImg.color = behavior.meshColor;
+        characterPrefabImg.sprite = myObject.GetComponentInChildren<PrefabImage>().resource;
     }
 
     private void Update()
@@ -54,6 +57,7 @@ public class Indicator_AI : MonoBehaviour
 
         //È¸Àü
         progressTrans.rotation = Quaternion.identity;
+        characterPrefabTrans.rotation = Quaternion.identity;
 
         //»ö
         progressImg.color = Color.Lerp(safeColor, warnColor, ratio);
@@ -111,5 +115,6 @@ public class Indicator_AI : MonoBehaviour
         indicateImg.enabled = enable;
         progressImg.enabled = enable;
         characterImg.enabled = enable;
+        characterPrefabImg.enabled = enable;
     }
 }
