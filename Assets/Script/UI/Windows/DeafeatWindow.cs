@@ -22,6 +22,7 @@ public class DeafeatWindow : GenericWindow
         SoundManager.Instance.PlayButtonClick();
         Debug.Log("컨티뉴");
         /*광고재생*/
+        GameManager.GM.ContinueLevel();
     }
     public void NoThanks()
     {

@@ -22,6 +22,7 @@ public class AiBehaviour : UnitBehaviour
     public GameObject[] HighItems;
 
     public NavMeshAgent agent;
+    public Rigidbody rigid;
 
     private float searchDistance = 8.5f;
     private bool isTarget = false;
@@ -94,6 +95,7 @@ public class AiBehaviour : UnitBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = stats.stats.speed;
         animator = GetComponentInChildren<Animator>();
+        rigid = GetComponent<Rigidbody>();
 
         var skins = GetComponentsInChildren<SkinnedMeshRenderer>();
         for (int i = 0; i < skins.Length; i++)
@@ -144,7 +146,10 @@ public class AiBehaviour : UnitBehaviour
                 }
                 break;
         }
-
+        //if(agent.enabled)
+        //{
+        //    rigid.velocity = Vector3.zero;
+        //}
         //애니메이션
         animator.SetInteger("Stack", stats.itemStack);
     }
@@ -339,6 +344,7 @@ public class AiBehaviour : UnitBehaviour
             stats.isStuned = false;
             //agent.destination = true;
             agent.enabled = true;
+            rigid.isKinematic = true;
             DecideState();
         }
     }
@@ -348,6 +354,7 @@ public class AiBehaviour : UnitBehaviour
         base.CrushInit();
         State = AIState.Stuned;
         agent.enabled = false;
+        rigid.isKinematic = false;
     }
 
     public void DecideState()

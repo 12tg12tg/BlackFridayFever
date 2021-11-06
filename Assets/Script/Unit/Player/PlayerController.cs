@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : UnitBehaviour
 {
@@ -15,11 +16,17 @@ public class PlayerController : UnitBehaviour
     public GameObject defaultSkin;
     public Transform skinParent;
     public SkinnedMeshRenderer skin;
+    public NavMeshAgent agent;
+    public Rigidbody rigid;
 
     private void Awake()
     {
         stats = GetComponent<CharacterStats>();
         animator = GetComponentInChildren<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        rigid = GetComponent<Rigidbody>();
+        //agent.updatePosition = false;
+        //agent.updateRotation = false;
     }
 
     public void Init(GameObject skinPrefab)
@@ -67,6 +74,8 @@ public class PlayerController : UnitBehaviour
                     {
                         stunTimer = 0f;
                         stats.isStuned = false;
+                        agent.enabled = true;
+                        rigid.isKinematic = true;
                     }
                 }
                 AnimationUpdate();
@@ -78,7 +87,20 @@ public class PlayerController : UnitBehaviour
                 }
                 break;
         }
+
+        //if(agent.enabled)
+        //{
+        //    rigid.velocity = Vector3.zero;
+        //}
     }
+
+    public new void CrushInit()
+    {
+        base.CrushInit();
+        agent.enabled = false;
+        rigid.isKinematic = false;
+    }
+
     public void Move()
     {
         //이동 및 회전
@@ -92,6 +114,10 @@ public class PlayerController : UnitBehaviour
             //var lerp = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(direction);
         }
+        //else
+        //{
+
+        //}
     }
     public void AnimationUpdate()
     {

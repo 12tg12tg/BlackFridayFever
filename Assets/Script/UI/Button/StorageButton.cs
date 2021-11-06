@@ -12,6 +12,7 @@ public class StorageButton : MonoBehaviour
     public Sprite selectedSprite;
     public Sprite redSprite;
 
+    public Skin3DCameraPrifab skinEnum;
     public GameObject skinPrefab;
     public Image skinImg;
     public Sprite skinSprite;

@@ -47,7 +47,7 @@ public class SaveData
         isMute = sm.isMute;
         nonVibrate = sm.noVibrate;
 
-        diamond = GameManager.GM.Diamond;
+        diamond = 5000;//GameManager.GM.Diamond;
     }
 
 }

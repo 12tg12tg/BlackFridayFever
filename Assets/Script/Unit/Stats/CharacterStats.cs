@@ -47,6 +47,7 @@ public class CharacterStats : MonoBehaviour
         //점수반영
         truck.SavePurchased(score);
         score = 0;
+        itemStack = 0;
 
         //종료인지 검사
         GameManager.GM.IsEnd(GetComponent<CharacterStats>());
@@ -94,8 +95,7 @@ public class CharacterStats : MonoBehaviour
                 SoundManager.Instance.PlayLoadTruck();
             yield return new WaitForSeconds(term);
         }
-
-        itemStack = 0;
+        //itemStack = 0;
     }
 
     public void DropItem(Vector3 forceFoward)

@@ -24,17 +24,22 @@ public class Win1Window : GenericWindow
 
         /*광고끝나면*/
         GameManager.GM.Diamond = GameManager.GM.Diamond + 300;
+
+        GameManager.GM.main.lastOpenedStage++;
         GameManager.GM.SaveData();
         /*다음스테이지로*/
+        GameManager.GM.GoNextLevel();
     }
     public void Skip()
     {
         SoundManager.Instance.PlayButtonClick();
-        GameManager.GM.GoNextLevel();
-        //Debug.Log("다음 스테이지로");
 
         GameManager.GM.Diamond = GameManager.GM.Diamond + 100;
 
+        GameManager.GM.main.lastOpenedStage++;
         GameManager.GM.SaveData();
+
+        GameManager.GM.GoNextLevel();
+        //Debug.Log("다음 스테이지로");
     }
 }

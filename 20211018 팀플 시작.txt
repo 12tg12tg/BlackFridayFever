@@ -230,7 +230,7 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 13. 판서 오늘날짜에다가 뭐하나올려놧는데
 14. 몸색깔바꾸기
 15. 트럭쌓기
-
+16. IsKinematic On/Off
 
 +) 외곽충돌해결
 
@@ -295,7 +295,7 @@ https://www.youtube.com/watch?v=G_uBFM3YUF4
 8. 박스 문에 걸리기					
 17. 아이템 테마				O	
 
-저장경로 : C:\Users\12tg\AppData\LocalLow\TeamSummit\BlackFridayFever
+저장경로 : C:\Users\12tg\AppData\LocalLow\Kyungil\BlackFridayFever
 
 <네비메시문제> - 해결! 포지션먼저설정 그다음 네비에이전트활성화.
 1) 샘플포지션				X
@@ -330,15 +330,18 @@ OnAdLoaded/OnAdFailedToLoad/OnAdOpening/OnAdClosed
 
 
 <20211106 토>
-1. 맵깔기
+1. 맵깔기			O
 	1맵 클리어
 	2맵 0 118 -51 
 2. 팀로고 & 튜토리얼 & 페이드인 아웃
 3. 광고연결
-4. 새 스킨 획득
+4. 새 스킨 획득		O
 5. 이펙트
 6. 문충돌
 7. 인디케이터 경고! 및 주차장화살표
+8. 다음스테이지 O 및 랜덤스테이지(랜덤AI) 구현. 스테이지마다 스킨보상 구현.
+	컨티뉴 O
+	17스테이지 이후 컨티뉴에서는 AI나 맵정보가 바뀌어선 안될듯? 이걸 어떻게 저장해둿다가 구현할것인가.
 
 
 <구현정보>

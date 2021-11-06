@@ -19,6 +19,8 @@ public class MainScript : MonoBehaviour
     public GameObject target1;
     public GameObject target2;
 
+    public RuntimeAnimatorController animationController;
+
     private void Start()
     {
         SetSkin();
@@ -46,13 +48,15 @@ public class MainScript : MonoBehaviour
                 curSkin = Instantiate(skin, playerSkinParent);
                 defalutPlayerSkin.SetActive(false);
                 var animator = curSkin.GetComponentInChildren<Animator>();
-                animator.SetTrigger("Lean");
+                //animator.SetTrigger("Lean");
+                animator.runtimeAnimatorController = animationController;
             }
             else
             {
                 defalutPlayerSkin.SetActive(true);
                 var animator = defalutPlayerSkin.GetComponentInChildren<Animator>();
-                animator.SetTrigger("Lean");
+                //animator.SetTrigger("Lean");
+                animator.runtimeAnimatorController = animationController;
             }
 
             if(car != null)

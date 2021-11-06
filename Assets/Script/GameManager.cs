@@ -140,7 +140,14 @@ public class GameManager : MonoBehaviour
         var nextStageNum = curStageInfo.StageNum + 1;
         SceneManager.LoadScene("Game");
         SceneManager.LoadScene($"Stage{nextStageNum}", LoadSceneMode.Additive);
-        GameManager.isStage = false;
+        GameManager.isStage = true;
+    }
+
+    public void ContinueLevel()
+    {
+        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene($"Stage{curStageInfo.StageNum}", LoadSceneMode.Additive);
+        GameManager.isStage = true;
     }
 
 

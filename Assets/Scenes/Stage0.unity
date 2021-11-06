@@ -4625,6 +4625,7 @@ MonoBehaviour:
   curSkin: {fileID: 0}
   target1: {fileID: 230549802}
   target2: {fileID: 858308357}
+  animationController: {fileID: 9100000, guid: 31256ca0944ccb44daa6b64ebe8dec80, type: 2}
 --- !u!1001 &778847349
 PrefabInstance:
   m_ObjectHideFlags: 0

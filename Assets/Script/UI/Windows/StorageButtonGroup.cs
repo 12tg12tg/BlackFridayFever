@@ -145,6 +145,7 @@ public class StorageButtonGroup : GenericWindow
         buy500.interactable = false;
     }
 
+    public Rotate3DUI UI3D;
     public void BuySkin()
     {
         SoundManager.Instance.PlayButtonClick();
@@ -156,7 +157,9 @@ public class StorageButtonGroup : GenericWindow
             curFocusButton.isBuy = true;
 
             /*리워드 프리펩을 제2의 카메라 위치로!*/
+            UI3D.SelectPrefab(curFocusButton.skinEnum);
             WindowManager.Instance.PopupWindow(Windows.RewardPopUp);
+
         }
         else
         {
