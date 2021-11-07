@@ -6,14 +6,19 @@ using UnityEngine.UI;
 public class Win1Window : GenericWindow
 {
     public Text diamondTxt;
+    public StageReward reward;
     public override void Open()
     {
         base.Open();
+
+        reward.DecideReward();
+
         diamondTxt.text = GameManager.GM.Diamond.ToString();
+        GameManager.GM.Diamond = GameManager.GM.Diamond + 100;
+        GameManager.GM.AfterClear();
     }
     public override void Close()
     {
-
 
         base.Close();
     }
@@ -23,23 +28,22 @@ public class Win1Window : GenericWindow
         Debug.Log("광고 영상 연결");
 
         /*광고끝나면*/
-        GameManager.GM.Diamond = GameManager.GM.Diamond + 300;
+        GameManager.GM.Diamond = GameManager.GM.Diamond + 200;
 
-        GameManager.GM.main.lastOpenedStage++;
-        GameManager.GM.SaveData();
         /*다음스테이지로*/
-        GameManager.GM.GoNextLevel();
+        GameManager.GM.StartScene();
     }
     public void Skip()
     {
         SoundManager.Instance.PlayButtonClick();
 
-        GameManager.GM.Diamond = GameManager.GM.Diamond + 100;
+        /*다음스테이지로*/
+        GameManager.GM.StartScene();
+    }
 
-        GameManager.GM.main.lastOpenedStage++;
-        GameManager.GM.SaveData();
-
-        GameManager.GM.GoNextLevel();
-        //Debug.Log("다음 스테이지로");
+    public void GoMain()
+    {
+        SoundManager.Instance.PlayButtonClick();
+        GameManager.GM.StartMain();
     }
 }

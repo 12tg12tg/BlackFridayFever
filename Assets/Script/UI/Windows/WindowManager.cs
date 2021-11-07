@@ -15,6 +15,7 @@ public enum Windows
 
 public class WindowManager : MonoBehaviour
 {
+    public FadeInOut fade;
     public GenericWindow[] windows;
     public Windows defaultWindowId; //처음열윈도우
     private Windows currentWindowId; //현재열린윈도우
@@ -45,6 +46,8 @@ public class WindowManager : MonoBehaviour
     }
     public GenericWindow Open(Windows id)
     {
+        //StartCoroutine(CoOpen(id));
+        //fade.FadeIn();
         windows[(int)currentWindowId].Close();
         currentWindowId = id;
         windows[(int)currentWindowId].Open();
@@ -57,4 +60,14 @@ public class WindowManager : MonoBehaviour
         windows[(int)additiveWindowId].Open();
         return windows[(int)additiveWindowId];
     }
+
+    //private IEnumerator CoOpen(Windows id)
+    //{
+    //    fade.FadeOut();
+    //    yield return new WaitUntil(() => fade.fadeEnd);
+    //    windows[(int)currentWindowId].Close();
+    //    currentWindowId = id;
+    //    windows[(int)currentWindowId].Open();
+    //    fade.FadeIn();
+    //}
 }

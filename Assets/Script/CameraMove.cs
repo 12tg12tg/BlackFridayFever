@@ -202,7 +202,7 @@ public class CameraMove : MonoBehaviour
             transform.rotation = lerpRot;
             yield return null;
         }
-        GameManager.GM.State = GameManager.GameState.Play;
+        GameManager.GM.CheckTutorialAndPlay();
         //lookPlayer = false;
         timer = 0f;
     }

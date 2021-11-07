@@ -20,6 +20,7 @@ public class StorageButtonGroup : GenericWindow
     public int buyMask;
 
     public MainScript main;
+    public OpenWindowButton rinkButton;
 
     public GameObject currentSkin
     {
@@ -152,13 +153,9 @@ public class StorageButtonGroup : GenericWindow
         /*static 전역 Save 구조체에서 금액 확인 후 차감*/
         if (GameManager.GM.Diamond >= 500)
         {
-            GameManager.GM.Diamond = GameManager.GM.Diamond - 300;
+            GameManager.GM.Diamond = GameManager.GM.Diamond - 500;
             diamondTxt.text = GameManager.GM.Diamond.ToString();
             curFocusButton.isBuy = true;
-
-            /*리워드 프리펩을 제2의 카메라 위치로!*/
-            UI3D.SelectPrefab(curFocusButton.skinEnum);
-            WindowManager.Instance.PopupWindow(Windows.RewardPopUp);
 
         }
         else
@@ -190,6 +187,10 @@ public class StorageButtonGroup : GenericWindow
                     {
                         buttons[i].isOpened = true;
                         --remainSkin;
+
+                        /*리워드 프리펩을 제2의 카메라 위치로!*/
+                        UI3D.SelectPrefab(buttons[i].skinEnum);
+                        WindowManager.Instance.PopupWindow(Windows.RewardPopUp);
                         break;
                     }
                 }

@@ -4,14 +4,14 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
-    public static void SaveInfo(MainWindows main, StorageButtonGroup skin, StorageButtonGroup car, SoundManager sm)
+    public static void SaveInfo(int stageIndex, MainWindows main, StorageButtonGroup skin, StorageButtonGroup car, SoundManager sm, RandomStageInfo randInfo)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + "/playInfo.fun";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        SaveData data = new SaveData(main, skin, car, sm);
+        SaveData data = new SaveData(stageIndex, main, skin, car, sm, randInfo);
 
         formatter.Serialize(stream, data);
         stream.Close();

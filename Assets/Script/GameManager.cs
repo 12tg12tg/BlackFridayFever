@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public struct RandomStageInfo
+{
+    public int randStageIndex;
+    public int[] randAiIndex;
+}
+
 public class GameManager : MonoBehaviour
 {
     public enum GameState
@@ -83,6 +89,11 @@ public class GameManager : MonoBehaviour
     //MoneyUpdate
     public InGameWindow inGame;
 
+    //Tutorial
+    public bool tutorialDone;
+
+
+
     private void Awake()
     {
         instance = this;
@@ -92,7 +103,7 @@ public class GameManager : MonoBehaviour
     {
         GameManager.GM.LoadData();
 
-        State = GameState.Idle;
+        State = GameState.Start;
         if (isStage)
         {
             StartLevel();
@@ -110,6 +121,10 @@ public class GameManager : MonoBehaviour
             case GameState.Idle:
                 break;
             case GameState.Start:
+                if (startSceneCoroutine == null)
+                {
+                    startSceneCoroutine = StartCoroutine(CoStartScene());
+                }
                 break;
             case GameState.Play:
                 break;
@@ -128,35 +143,139 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartMain()
+
+    public int finalStage = 17;
+    public int lastOpenedStage;
+    public bool IsRandStage
     {
-        SceneManager.LoadScene("Game");
-        SceneManager.LoadScene("Stage0", LoadSceneMode.Additive);
-        GameManager.isStage = false;
+        get => lastOpenedStage > finalStage;
     }
 
-    public void GoNextLevel()
+    public RandomStageInfo randStageInfo;
+
+    public void CreateRandomStageInfo()
     {
-        var nextStageNum = curStageInfo.StageNum + 1;
+        randStageInfo.randStageIndex = Random.Range(1, finalStage + 1);
+        randStageInfo.randAiIndex = Stage.Instance.RandAiIndexArr;
+    }
+
+    public void StartMain()
+    {
+        GameManager.isStage = false;
         SceneManager.LoadScene("Game");
-        SceneManager.LoadScene($"Stage{nextStageNum}", LoadSceneMode.Additive);
-        GameManager.isStage = true;
+        SceneManager.LoadScene("Stage0", LoadSceneMode.Additive);
+    }
+
+    public void StartScene()    //씬불러오기
+    {
+        isStage = true;
+        SaveData();     //다이아및 설정 저장
+
+        if (closeSceneCoroutine == null)
+            closeSceneCoroutine = StartCoroutine(CoCloseAndStartScene());
+
+        //if (IsRandStage)
+        //{
+        //    SceneManager.LoadScene("Game");
+        //    SceneManager.LoadScene($"Stage{randStageInfo.randStageIndex}", LoadSceneMode.Additive);
+        //}
+        //else
+        //{
+        //    SceneManager.LoadScene("Game");
+        //    SceneManager.LoadScene($"Stage{lastOpenedStage}", LoadSceneMode.Additive);
+        //}
+    }
+
+    private Coroutine closeSceneCoroutine;
+
+    private IEnumerator CoCloseAndStartScene()
+    {
+        var fade = WindowManager.Instance.fade;
+        fade.FadeOut();
+        yield return new WaitUntil(() => fade.fadeEnd);
+
+        if (IsRandStage)
+        {
+            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene($"Stage{randStageInfo.randStageIndex}", LoadSceneMode.Additive);
+        }
+        else
+        {
+            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene($"Stage{lastOpenedStage}", LoadSceneMode.Additive);
+        }
+    }
+
+    private Coroutine startSceneCoroutine;
+
+    private IEnumerator CoStartScene()
+    {
+        var fade = WindowManager.Instance.fade;
+        fade.FadeIn();
+        yield return new WaitUntil(() => fade.fadeEnd);
+    }
+
+    public void CheckTutorialAndPlay()
+    {
+        if(!tutorialDone)
+        {
+            Debug.Log("듀토리얼을 안했습니다. 시작해주시겠어요?");
+
+        }
+        else
+        {
+            //이미 했음
+            State = GameState.Play;
+        }
+    }
+    
+    private IEnumerator DoTutorial()
+    {
+
+        yield return new WaitUntil(()=> true);
+
+
+        tutorialDone = true;
+        SaveData();
+        State = GameState.Play;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public void AfterClear()
+    {
+        lastOpenedStage++;
+
+        if (IsRandStage)
+        {
+            CreateRandomStageInfo();
+        }
+
+        SaveData();
     }
 
     public void ContinueLevel()
     {
-        SceneManager.LoadScene("Game");
-        SceneManager.LoadScene($"Stage{curStageInfo.StageNum}", LoadSceneMode.Additive);
-        GameManager.isStage = true;
+        StartScene();
+        isStage = true;
     }
 
 
-    private void StartLevel()
+    private void StartLevel()   //게임준비
     {
         //Ai와 플레이어의 상호 연결
 
         //버튼이 눌리면, 해당 스테이지 시작.
         curStageInfo = GameObject.FindGameObjectWithTag("Stage").GetComponent<Stage>();
+        curStageInfo.Init();
 
         /*시작작업*/
         //Truck - Unit 연결.
@@ -237,7 +356,7 @@ public class GameManager : MonoBehaviour
     /*=========================저장용 함수=========================*/
     public void SaveData()
     {
-        SaveSystem.SaveInfo(main, skin, car, sound);
+        SaveSystem.SaveInfo(lastOpenedStage, main, skin, car, sound, randStageInfo);
     }
 
     public void LoadData()
@@ -246,7 +365,9 @@ public class GameManager : MonoBehaviour
 
         if (data != null)
         {
-            main.Init(data.openStage, data.isNewSkin, data.isNewCarSkin);
+            lastOpenedStage = data.openStage;
+
+            main.Init(data.isNewSkin, data.isNewCarSkin);
             //main.lastOpenedStage = data.openStage;
             //main.characterSkin.haveNewItem = data.isNewSkin;
             //main.carSkin.haveNewItem = data.isNewCarSkin;
@@ -265,15 +386,26 @@ public class GameManager : MonoBehaviour
             sound.SetVibrate(data.nonVibrate);
 
             Diamond = data.diamond;
+
+            randStageInfo.randStageIndex = data.randStageIndex;
+            randStageInfo.randAiIndex = data.randAiIndexs;
+
+            tutorialDone = data.tutorialDone;
         }
         else
         {
-            main.Init(1, false, false);
+            GameManager.GM.lastOpenedStage = 1;
+            main.Init(false, false);
             skin.Init(0, 0, -1);
             car.Init(0, 0, -1);
             sound.SetMute(false);
             sound.SetVibrate(false);
             Diamond = 0;
+
+            randStageInfo.randStageIndex = 0;
+            randStageInfo.randAiIndex = null;
+
+            tutorialDone = false;
         }
     }
 

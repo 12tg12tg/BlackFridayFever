@@ -2606,6 +2606,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2446236138982905276, guid: 3ab8233e7a04f7a40b323c2c22441b6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3448304655893592573, guid: 3ab8233e7a04f7a40b323c2c22441b6a, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2698,6 +2702,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 1.41
       objectReference: {fileID: 0}
+    - target: {fileID: 5326632777262516481, guid: 3ab8233e7a04f7a40b323c2c22441b6a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5326632777355533493, guid: 3ab8233e7a04f7a40b323c2c22441b6a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2773,6 +2781,18 @@ PrefabInstance:
     - target: {fileID: 5326632778545623541, guid: 3ab8233e7a04f7a40b323c2c22441b6a, type: 3}
       propertyPath: m_Name
       value: ParkingSpot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5891001405569662833, guid: 3ab8233e7a04f7a40b323c2c22441b6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5891001406570385050, guid: 3ab8233e7a04f7a40b323c2c22441b6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5891001407365753326, guid: 3ab8233e7a04f7a40b323c2c22441b6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6911084305890284336, guid: 3ab8233e7a04f7a40b323c2c22441b6a, type: 3}
       propertyPath: m_IsActive
@@ -8870,7 +8890,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1586703877481801372, guid: 6dd0e47c233a00145b8d38e39cc7a415, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1586703877481801372, guid: 6dd0e47c233a00145b8d38e39cc7a415, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13229,6 +13249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3988828232364994170, guid: 95cf679b0c4d6d14e83011be99a76d4e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8085030467261330642, guid: 95cf679b0c4d6d14e83011be99a76d4e, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -13908,6 +13932,10 @@ PrefabInstance:
     - target: {fileID: 5108543529074652112, guid: 81450130304c8f84fb103c726b9428be, type: 3}
       propertyPath: m_Name
       value: SaleStands (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108543529074652112, guid: 81450130304c8f84fb103c726b9428be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5108543529074652113, guid: 81450130304c8f84fb103c726b9428be, type: 3}
       propertyPath: m_RootOrder

@@ -190,6 +190,16 @@ MonoBehaviour:
   LowItems: []
   MidItems: []
   HighItems: []
+  lowValues: 
+  MidValues: 
+  HighValues: 
+  randomPrefAIs:
+  - {fileID: 1689547326721900679, guid: 07ace394f534664498e5061146373077, type: 3}
+  - {fileID: 1689547326721900679, guid: d0fbe34f34a9fb0418b875d98081064e, type: 3}
+  - {fileID: 1689547326721900679, guid: 29896fd03b91e63439e26169de1dc934, type: 3}
+  - {fileID: 1689547326721900679, guid: 1a0b3017a0078184f91a30ac236b2625, type: 3}
+  - {fileID: 1689547326721900679, guid: 6cfa2ccc99c56e84b88067e5793b7cdc, type: 3}
+  - {fileID: 1689547326721900679, guid: 84204149e4cf3e1429b69de0f5b1a46d, type: 3}
 --- !u!114 &2874389185615597901
 MonoBehaviour:
   m_ObjectHideFlags: 0

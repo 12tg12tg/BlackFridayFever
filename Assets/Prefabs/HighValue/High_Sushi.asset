@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: High_Sushi
   m_EditorClassIdentifier: 
   itemScore: 7
-  value: 0
+  value: 2
   poolTag: 22
   price: 5

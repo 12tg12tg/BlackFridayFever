@@ -6,18 +6,16 @@ using UnityEngine.SceneManagement;
 public class MainWindows : GenericWindow
 {
     public MultiTouch mt;
-    public Button prev1;
-    public Button prev5;
-    public Button next1;
-    public Button next5;
-    public Text text;
+    //public Button prev1;
+    //public Button prev5;
+    //public Button next1;
+    //public Button next5;
+    //public Text text;
 
     public Text diamondTxt;
 
-    public int finalStage = 17;
-
     //public int invokeStageNum;
-    public int lastOpenedStage;
+    //public int lastOpenedStage;
 
     private void Awake()
     {
@@ -34,9 +32,9 @@ public class MainWindows : GenericWindow
         //MakeText();
     }
 
-    public void Init(int lastOpenStage, bool isNewSkin, bool isNewCarSkin)
+    public void Init(/*int lastOpenStage,*/ bool isNewSkin, bool isNewCarSkin)
     {
-        this.lastOpenedStage = lastOpenStage;
+        //this.lastOpenedStage = lastOpenStage;
         characterSkin.HaveNewItem(isNewSkin);
         carSkin.HaveNewItem(isNewCarSkin);
     }
@@ -51,18 +49,21 @@ public class MainWindows : GenericWindow
     {
         if(mt.Swipe.x > 0)
         {
-            GameManager.GM.SaveData();
-            LoadStageScene();
+            GameManager.GM.StartScene();
+            //if (startScnenCoroutine == null)
+            //    startScnenCoroutine = StartCoroutine(CoStartScene());
         }
     }
 
+    //private Coroutine startScnenCoroutine;
+    //private IEnumerator CoStartScene()
+    //{
+    //    var fade = WindowManager.Instance.fade;
+    //    fade.FadeOut();
+    //    yield return new WaitUntil(() => fade.fadeEnd);
 
-    public void LoadStageScene()
-    {
-        SceneManager.LoadScene("Game");
-        SceneManager.LoadScene($"Stage{lastOpenedStage}", LoadSceneMode.Additive);
-        GameManager.isStage = true;
-    }
+    //    GameManager.GM.StartScene();
+    //}
 
     public void BackStage()
     {

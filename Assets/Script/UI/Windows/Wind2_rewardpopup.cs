@@ -6,9 +6,8 @@ public class Wind2_rewardpopup : GenericWindow
 {
     public override void Open()
     {
-
-
         base.Open();
+        SoundManager.Instance.PlayRewardGet();
     }
     public override void Close()
     {

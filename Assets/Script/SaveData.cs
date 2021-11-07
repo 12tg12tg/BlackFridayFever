@@ -28,10 +28,17 @@ public class SaveData
     //다이아
     public int diamond;
 
+    //랜덤스테정보
+    public int randStageIndex;
+    public int[] randAiIndexs;
+
+    //튜토리얼
+    public bool tutorialDone;
+
     //생성자
-    public SaveData(MainWindows main, StorageButtonGroup skin, StorageButtonGroup car, SoundManager sm)
+    public SaveData(int lastStageIndex, MainWindows main, StorageButtonGroup skin, StorageButtonGroup car, SoundManager sm, RandomStageInfo randStage)
     {
-        openStage = main.lastOpenedStage;
+        openStage = lastStageIndex;
         isNewSkin = main.characterSkin.haveNewItem;
         isNewCarSkin = main.carSkin.haveNewItem;
 
@@ -47,7 +54,12 @@ public class SaveData
         isMute = sm.isMute;
         nonVibrate = sm.noVibrate;
 
-        diamond = 5000;//GameManager.GM.Diamond;
+        diamond = GameManager.GM.Diamond;
+
+        randStageIndex = randStage.randStageIndex;
+        randAiIndexs = randStage.randAiIndex;
+
+        tutorialDone = GameManager.GM.tutorialDone;
     }
 
 }

@@ -21,8 +21,6 @@ public class Stage : MonoBehaviour
     public float toPlayerTime = 1f;
 
 
-
-
     private static Stage instance;
     public static Stage Instance
     {
@@ -41,6 +39,15 @@ public class Stage : MonoBehaviour
         LowItems = GameObject.FindGameObjectsWithTag("LowItem");
         MidItems = GameObject.FindGameObjectsWithTag("MidItem");
         HighItems = GameObject.FindGameObjectsWithTag("HighItem");
+
+    }
+    public void Init()
+    {
+        if (GameManager.GM.IsRandStage)
+        {
+            randomAiIndexArr = GameManager.GM.randStageInfo.randAiIndex;
+            DeleteAndResetAIs();
+        }
     }
 
     public PoolTag[] lowValues;
@@ -69,4 +76,32 @@ public class Stage : MonoBehaviour
         }
     }
 
+
+    public GameObject[] randomPrefAIs;
+
+    private int[] randomAiIndexArr;
+    public int[] RandAiIndexArr
+    {
+        get
+        {
+            int[] arr = new int[3];
+            for (int i = 0; i < 3; i++)
+            {
+                arr[i] = Random.Range(0, randomPrefAIs.Length);
+            }
+            return arr;
+        }
+    }
+
+    public void DeleteAndResetAIs()
+    {
+        for (int i = 0; i < Ais.Length; i++)
+        {
+            var prefab = randomPrefAIs[randomAiIndexArr[i]];
+            var newGo = Instantiate(prefab, transform);
+            newGo.name = $"(random){i}_{prefab.name}";
+            Ais[i].gameObject.SetActive(false);
+            Ais[i] = newGo.GetComponent<CharacterStats>();
+        }
+    }
 }

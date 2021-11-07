@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip loadTruck;
     public AudioClip winSound;
     public AudioClip loseSound;
+    public AudioClip rewardGetSound;
 
     public ToggleScript soundToggle;
     public ToggleScript vibrateToggle;
@@ -111,6 +112,11 @@ public class SoundManager : MonoBehaviour
         if (!isMute)
             if (!ragdollPlayer.isPlaying)
                 ragdollPlayer.Play();
+    }
+    public void PlayRewardGet()
+    {
+        if (!isMute)
+            buttonPlayer.PlayOneShot(rewardGetSound);
     }
     public void Vibrate()
     {
