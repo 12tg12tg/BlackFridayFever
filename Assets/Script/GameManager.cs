@@ -94,7 +94,10 @@ public class GameManager : MonoBehaviour
     //Tutorial
     public bool tutorialDone;
 
-
+    //±¤°í
+    public bool isInterstitialAdEnd;
+    public bool isRewardAdEnd;
+    public bool isRewardAdRewarded;
 
     private void Awake()
     {

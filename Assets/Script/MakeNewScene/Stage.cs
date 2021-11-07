@@ -26,6 +26,18 @@ public class Stage : MonoBehaviour
     {
         get { return instance; }
     }
+    public int ExtraGoalScore
+    {
+        get
+        {
+            var gap = GameManager.GM.lastOpenedStage - GameManager.GM.finalStage;
+            var extra5 = gap / 5;
+            var extraStage = (extra5 + 1) * 5;
+            var stageGoal = 25 + extraStage;
+            stageGoal = (stageGoal > 60) ? 60 : stageGoal;
+            return stageGoal;
+        }
+    }
 
     public GameObject[] moneys;
     public GameObject[] LowItems;
@@ -47,6 +59,7 @@ public class Stage : MonoBehaviour
         {
             randomAiIndexArr = GameManager.GM.randStageInfo.randAiIndex;
             DeleteAndResetAIs();
+            goalScore = ExtraGoalScore;
         }
     }
 

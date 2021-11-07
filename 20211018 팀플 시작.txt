@@ -351,10 +351,11 @@ OnAdLoaded/OnAdFailedToLoad/OnAdOpening/OnAdClosed
 
 
 <20211108 월>
-1. 광고연결
-2. 인디케이터 경고!  & 주차장 화살표 O & 돈없을 때 금액 팝업 
-3. 팀로고
+1. 광고연결 O
+2. 인디케이터 경고! O & 주차장 화살표 O & 돈없을 때 금액 팝업 
+3. 팀로고	O
 4. 이펙트 / 문충돌
+5. 스테이지 요구치 증가 O
 if(applicationInternetRichability)
 
 

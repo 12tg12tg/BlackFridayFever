@@ -25,13 +25,9 @@ public class Win1Window : GenericWindow
     public void GetX3()
     {
         SoundManager.Instance.PlayButtonClick();
-        Debug.Log("광고 영상 연결");
 
-        /*광고끝나면*/
-        GameManager.GM.Diamond = GameManager.GM.Diamond + 200;
+        StartCoroutine(WaitRewardAD());
 
-        /*다음스테이지로*/
-        GameManager.GM.StartScene();
     }
     public void Skip()
     {
@@ -44,6 +40,44 @@ public class Win1Window : GenericWindow
     public void GoMain()
     {
         SoundManager.Instance.PlayButtonClick();
+
+        StartCoroutine(WaitInterstitialAD());
+
+    }
+
+    private IEnumerator WaitInterstitialAD()
+    {
+        GameManager.GM.isInterstitialAdEnd = false;
+        GoogleMobileADTest.OnClickInterstitial();
+        yield return new WaitUntil(() => GameManager.GM.isInterstitialAdEnd);
+
+
+
+        GameManager.GM.isInterstitialAdEnd = false;
         GameManager.GM.StartMain();
     }
+
+    public IEnumerator WaitRewardAD()
+    {
+        GameManager.GM.isRewardAdEnd = false;
+        GameManager.GM.isRewardAdRewarded = false;
+        GoogleMobileADTest.OnClickReward();
+
+        yield return new WaitUntil(() => GameManager.GM.isRewardAdEnd || GameManager.GM.isRewardAdRewarded);
+
+        if(GameManager.GM.isRewardAdRewarded)
+        {
+            GameManager.GM.isRewardAdEnd = false;
+            GameManager.GM.isRewardAdRewarded = false;
+            GameManager.GM.Diamond = GameManager.GM.Diamond + 200;
+            GameManager.GM.StartScene();
+        }
+        else if(GameManager.GM.isRewardAdEnd)
+        {
+            GameManager.GM.isRewardAdEnd = false;
+            GameManager.GM.isRewardAdRewarded = false;
+            GameManager.GM.StartScene();
+        }
+    }
+
 }

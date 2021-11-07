@@ -172,32 +172,9 @@ public class StorageButtonGroup : GenericWindow
     {
         SoundManager.Instance.PlayButtonClick();
 
-        /*광고 시청 구문*/
-        Debug.Log("스킨 오픈을 위한 광고 시청");
-        if(true/*광고 끝*/)
-        {
-            var rand = Random.Range(0, remainSkin);
-            int count = -1;
-            for (int i = 0; i < buttons.Length; i++)
-            {
-                if (!buttons[i].isOpened)
-                {
-                    count++;
-                    if(count == rand)
-                    {
-                        buttons[i].isOpened = true;
-                        --remainSkin;
+        StartCoroutine(WaitRewardAD());
 
-                        /*리워드 프리펩을 제2의 카메라 위치로!*/
-                        UI3D.SelectPrefab(buttons[i].skinEnum);
-                        WindowManager.Instance.PopupWindow(Windows.RewardPopUp);
-                        break;
-                    }
-                }
-            }
-        }
-        MakeSaveMask();
-        GameManager.GM.SaveData();
+
     }
 
     public void Back()
@@ -236,6 +213,49 @@ public class StorageButtonGroup : GenericWindow
                     buyMask += 1 << i;
                 }
             }
+        }
+    }
+
+    public IEnumerator WaitRewardAD()
+    {
+        GameManager.GM.isRewardAdEnd = false;
+        GameManager.GM.isRewardAdRewarded = false;
+        GoogleMobileADTest.OnClickReward();
+
+        yield return new WaitUntil(() => GameManager.GM.isRewardAdEnd || GameManager.GM.isRewardAdRewarded);
+
+        if (GameManager.GM.isRewardAdRewarded)
+        {
+            GameManager.GM.isRewardAdEnd = false;
+            GameManager.GM.isRewardAdRewarded = false;
+
+            var rand = Random.Range(0, remainSkin);
+            int count = -1;
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if (!buttons[i].isOpened)
+                {
+                    count++;
+                    if (count == rand)
+                    {
+                        buttons[i].isOpened = true;
+                        --remainSkin;
+
+                        /*리워드 프리펩을 제2의 카메라 위치로!*/
+                        UI3D.SelectPrefab(buttons[i].skinEnum);
+                        WindowManager.Instance.PopupWindow(Windows.RewardPopUp);
+                        break;
+                    }
+                }
+            }
+            MakeSaveMask();
+            GameManager.GM.SaveData();
+        }
+        else if (GameManager.GM.isRewardAdEnd)
+        {
+            GameManager.GM.isRewardAdEnd = false;
+            GameManager.GM.isRewardAdRewarded = false;
+
         }
     }
 }

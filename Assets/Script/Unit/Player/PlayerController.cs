@@ -109,7 +109,8 @@ public class PlayerController : UnitBehaviour
 
         if (direction != Vector3.zero)
         {
-            direction = Vector3.Lerp(transform.forward, direction, 8.0f * Time.deltaTime);
+            //Debug.Log(30f * Time.deltaTime);
+            direction = Vector3.Lerp(transform.forward, direction, 25f * Time.deltaTime);
             transform.position += direction * stats.speed * Time.deltaTime;
             //var lerp = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(direction);

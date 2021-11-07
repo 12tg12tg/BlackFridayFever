@@ -61,26 +61,32 @@ public class AiBehaviour : UnitBehaviour
                     timer = 0f;
                     isTarget = false;
                     agent.isStopped = true;
+                    isPlayerChase = false;
                     setIdleAnimation();
                     break;
                 case AIState.FindMoney:
                     agent.isStopped = false;
+                    isPlayerChase = false;
                     setMoveAnimation();
                     break;
                 case AIState.FindItem:
                     agent.isStopped = false;
+                    isPlayerChase = false;
                     setMoveAnimation();
                     break;
                 case AIState.GoTruck:
                     agent.isStopped = false;
+                    isPlayerChase = false;
                     setMoveAnimation();
                     break;
                 case AIState.Stuned:
+                    isPlayerChase = false;
                     timer = 0f;
                     break;
                 case AIState.GoCrush:
                     isCrush = false;
                     agent.isStopped = false;
+                    setMoveAnimation();
                     break;
             }
         }  
@@ -458,7 +464,7 @@ public class AiBehaviour : UnitBehaviour
     private void TankUpdate()
     {
         agent.destination = tankTarget.transform.position;
-        if(tankTarget.itemStack >= stats.itemStack)
+        if(tankTarget.itemStack >= stats.itemStack || tankTarget.itemStack == 0)
         {
             State = AIState.FindItem;
         }

@@ -57,6 +57,8 @@ public static class GoogleMobileADTest
     public static void HandleOnAdClosed(object sender, EventArgs args)
     {
         RequestInterstitial();
+        GameManager.GM.isInterstitialAdEnd = true;
+        Debug.Log("Àü¸é±¤°í´ÝÈû");
     }
 
     public static void OnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
@@ -70,6 +72,11 @@ public static class GoogleMobileADTest
         if (interstitial.IsLoaded())
         {
             interstitial.Show();
+        }
+        else
+        {
+            //±¤°í ·Îµå¾ÈµÈ°æ¿ì
+            GameManager.GM.isInterstitialAdEnd = true;
         }
     }
 
@@ -104,6 +111,7 @@ public static class GoogleMobileADTest
     public static void HandleRewardedOnAdClosed(object sender, EventArgs args)
     {
         RequestReward();
+        GameManager.GM.isRewardAdEnd = true;
     }
 
 
@@ -114,6 +122,10 @@ public static class GoogleMobileADTest
         {
             rewardedAd.Show();
         }
+        else
+        {
+            GameManager.GM.isRewardAdEnd = true;
+        }
     }
 
     public static void HandleUserEarnedReward(object sender, Reward args)
@@ -121,5 +133,6 @@ public static class GoogleMobileADTest
         string type = args.Type;
         double amount = args.Amount;
         //3¹è ¸®¿öµå ÆË¾÷Ã¢ Ãâ·Â
+        GameManager.GM.isRewardAdRewarded = true;
     }
 }

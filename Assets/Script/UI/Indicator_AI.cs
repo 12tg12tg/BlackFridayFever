@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 
 public class Indicator_AI : MonoBehaviour
@@ -12,13 +13,17 @@ public class Indicator_AI : MonoBehaviour
     public RectTransform progressTrans;
     public RectTransform characterPicTrans;
     public RectTransform characterPrefabTrans;
+    public RectTransform exclamationMarkTrans;
     public Image indicateImg;
     public Image progressImg;
     public Image characterImg;
     public Image characterPrefabImg;
+    public Image exclamationMark;
 
     public Color safeColor;
     public Color warnColor;
+
+    public bool isEnable;
 
     public void Init(AiBehaviour ai)
     {
@@ -34,12 +39,65 @@ public class Indicator_AI : MonoBehaviour
         {
             IndicateUpdate();
             ProgressUpdate();
+            ExclamationMarkUpdate();
         }
         else
         {
             ImageEnable(false);
         }
     }
+
+    private Coroutine exclamationMarkCycle;
+    private void ExclamationMarkUpdate()
+    {
+        //회전
+        exclamationMarkTrans.rotation = Quaternion.identity;
+
+        //스케일
+        if(exclamationMarkCycle == null)
+            exclamationMarkCycle = StartCoroutine(CoSizeShrink());
+
+        //활성화유무
+        if (myObject.GetComponent<AiBehaviour>().isPlayerChase && isEnable)
+        {
+            exclamationMark.enabled = true;
+        }
+        else
+        {
+            exclamationMark.enabled = false;
+        }
+
+    }
+    private IEnumerator CoSizeShrink()
+    {
+        float timer = 0f;
+        while (timer < 0.5f)
+        {
+            timer += Time.deltaTime;
+            var lerpScale = Mathf.Lerp(1f, 1.5f, timer / 0.5f);
+            var scale = exclamationMarkTrans.localScale;
+            scale.x = lerpScale;
+            scale.y = lerpScale;
+            exclamationMarkTrans.localScale = scale;
+            yield return null;
+        }
+
+        timer = 0f;
+
+        while (timer < 0.5f)
+        {
+            timer += Time.deltaTime;
+            var lerpScale = Mathf.Lerp(1.5f, 1f, timer / 0.5f);
+            var scale = exclamationMarkTrans.localScale;
+            scale.x = lerpScale;
+            scale.y = lerpScale;
+            exclamationMarkTrans.localScale = scale;
+            yield return null;
+        }
+
+        exclamationMarkCycle = null;
+    }
+
 
     private void ProgressUpdate()
     {
@@ -116,5 +174,7 @@ public class Indicator_AI : MonoBehaviour
         progressImg.enabled = enable;
         characterImg.enabled = enable;
         characterPrefabImg.enabled = enable;
+        exclamationMark.enabled = enable;
+        isEnable = enable;
     }
 }

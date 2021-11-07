@@ -20,14 +20,51 @@ public class DeafeatWindow : GenericWindow
     public void Continue()
     {
         SoundManager.Instance.PlayButtonClick();
-        Debug.Log("ÄÁÆ¼´º");
-        /*±¤°íÀç»ý*/
-        GameManager.GM.ContinueLevel();
+
+        StartCoroutine(WaitRewardAD());
     }
     public void NoThanks()
     {
         SoundManager.Instance.PlayButtonClick();
-        Debug.Log("³ë¶¯Å¥");
+
+        StartCoroutine(WaitInterstitialAD());
+
+    }
+
+
+    private IEnumerator WaitInterstitialAD()
+    {
+        GameManager.GM.isInterstitialAdEnd = false;
+        GoogleMobileADTest.OnClickInterstitial();
+        yield return new WaitUntil(() => GameManager.GM.isInterstitialAdEnd);
+
+
+        GameManager.GM.isInterstitialAdEnd = false;
         GameManager.GM.StartMain();
+    }
+
+
+    public IEnumerator WaitRewardAD()
+    {
+        GameManager.GM.isRewardAdEnd = false;
+        GameManager.GM.isRewardAdRewarded = false;
+        GoogleMobileADTest.OnClickReward();
+
+        yield return new WaitUntil(() => GameManager.GM.isRewardAdEnd || GameManager.GM.isRewardAdRewarded);
+
+        if (GameManager.GM.isRewardAdRewarded)
+        {
+            GameManager.GM.isRewardAdEnd = false;
+            GameManager.GM.isRewardAdRewarded = false;
+
+            GameManager.GM.ContinueLevel();
+        }
+        else if (GameManager.GM.isRewardAdEnd)
+        {
+            GameManager.GM.isRewardAdEnd = false;
+            GameManager.GM.isRewardAdRewarded = false;
+
+            GameManager.GM.ContinueLevel();
+        }
     }
 }

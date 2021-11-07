@@ -12,4 +12,6 @@ public class GenericWindow : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+
 }
