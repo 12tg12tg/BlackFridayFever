@@ -49,6 +49,7 @@ public class CameraMove : MonoBehaviour
     private float shakeCoolTimer;
 
     private Coroutine CoStartCameraMove;
+    private Stage curStageInfo;
 
     private void Awake()
     {
@@ -58,13 +59,15 @@ public class CameraMove : MonoBehaviour
 
     public void Init()
     {
+        curStageInfo = GameManager.GM.curStageInfo;
+
         //시작 카메라 iTween 좌표 받아오기
-        camPos = GameManager.GM.curStageInfo.startCamPos;
-        camLook = GameManager.GM.curStageInfo.startCamLook;
+        camPos = curStageInfo.startCamPos;
+        camLook = curStageInfo.startCamLook;
 
         //시간관련 수치 받아오기
-        scanTime = GameManager.GM.curStageInfo.scanTime;
-        toPlayerTime = GameManager.GM.curStageInfo.toPlayerTime;
+        scanTime = curStageInfo.scanTime;
+        toPlayerTime = curStageInfo.toPlayerTime;
 
         //초기카메라위치설정
         transform.position = camPos[0].position;
@@ -82,7 +85,7 @@ public class CameraMove : MonoBehaviour
                 break;
             case GameManager.GameState.Start:
                 //Debug.Log("몇번이나 갈까요?");
-                if(CoStartCameraMove == null)
+                if(CoStartCameraMove == null && curStageInfo != null)
                     CoStartCameraMove = StartCoroutine(StartCameraMove());
                 break;
             case GameManager.GameState.Play:

@@ -331,7 +331,7 @@ OnAdLoaded/OnAdFailedToLoad/OnAdOpening/OnAdClosed
 
 <20211106 토>
 1. 맵깔기			O
-2. 팀로고 & 튜토리얼 & 페이드인 아웃O
+2. 팀로고 & 튜토리얼 O & 페이드인 아웃O
 3. 광고연결
 4. 새 스킨 획득		O
 5. 이펙트
@@ -348,6 +348,18 @@ OnAdLoaded/OnAdFailedToLoad/OnAdOpening/OnAdClosed
 3. 차량 옆구리가 뚫림 (캐릭터들이 차량 안으로 이동함)	O
 4. 스시 아이템 충돌범위 늘리기			O
 
+
+
+<20211108 월>
+1. 광고연결
+2. 인디케이터 경고!  & 주차장 화살표 O & 돈없을 때 금액 팝업 
+3. 팀로고
+4. 이펙트 / 문충돌
+if(applicationInternetRichability)
+
+
+
+
 <구현정보>
 1. 카메라쉐이크 및 진동 -> 타격감
 2. 멀티씬
@@ -355,6 +367,7 @@ OnAdLoaded/OnAdFailedToLoad/OnAdOpening/OnAdClosed
 4. PNG 저장
 5. 이슈(네비메시가 긁으면서 온다)
 6. 레이캐스트 투명화
+7. 인디케이터 등지고있는경우
 
 
 

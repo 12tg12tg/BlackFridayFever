@@ -12,6 +12,8 @@ public struct RandomStageInfo
 
 public class GameManager : MonoBehaviour
 {
+    public ParkingIndicator parking_indicator_ui;
+
     public enum GameState
     {
         Idle,   //시작 UI 예정
@@ -219,8 +221,8 @@ public class GameManager : MonoBehaviour
     {
         if(!tutorialDone)
         {
-            Debug.Log("듀토리얼을 안했습니다. 시작해주시겠어요?");
-
+            //Debug.Log("듀토리얼을 안했습니다. 시작해주시겠어요?");
+            StartCoroutine(DoTutorial());
         }
         else
         {
@@ -228,15 +230,15 @@ public class GameManager : MonoBehaviour
             State = GameState.Play;
         }
     }
-    
+
+    public Tutorial tutorial;
     private IEnumerator DoTutorial()
     {
-
-        yield return new WaitUntil(()=> true);
-
+        tutorial.Open1();
+        yield return new WaitUntil(()=> tutorial.isDone);
 
         tutorialDone = true;
-        SaveData();
+        //SaveData();
         State = GameState.Play;
     }
 
@@ -329,6 +331,8 @@ public class GameManager : MonoBehaviour
         {
             indicators[i].Init(curStageInfo.Ais[i].GetComponent<AiBehaviour>());
         }
+
+        parking_indicator_ui.Init();
     }
 
     private void GoEndUi()
